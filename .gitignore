@@ -1,0 +1,8 @@
+# ignore databases since those are too large
+.db
+
+# ignore .joblib files since they are generated
+.joblib
+
+database/
+results/

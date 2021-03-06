@@ -1,0 +1,19 @@
+version: "3.0"
+
+services:
+  genmat:
+    build: genmat/
+    container_name: genmat
+    environment:
+      - TIME_FRAME=30
+    volumes:
+      - ./database:/code/database:ro
+      - ./results:/code/results
+
+  dash:
+    build: dash/
+    container_name: dash
+    volumes:
+      - ./results:/code/results:ro
+    ports:
+      - "8050:8050"
