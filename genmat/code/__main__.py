@@ -3,6 +3,7 @@ import pandas as pd
 import math as math
 import os
 import joblib
+import time
 from drain3.drain import Drain
 from datetime import timedelta
 from genmat.database_methods import create_connection
@@ -105,5 +106,8 @@ def main():
     joblib.dump(dd, "/code/results/drain_dict.joblib")
     print("... saving complete!")
 
+
 if __name__ == '__main__':
+    start = time.time()
     main()
+    print(f"Runtime: {time.time()-start}")
