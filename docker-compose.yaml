@@ -5,7 +5,8 @@ services:
     build: genmat/
     container_name: genmat
     environment:
-      - TIME_FRAME=30
+      - TIME_FRAME=5
+      - DB_PATH=database/tanner_logs.db
     volumes:
       - ./database:/code/database:ro
       - ./results:/code/results
