@@ -8,6 +8,7 @@ from genmat.mod_drain.drain import Drain
 from datetime import timedelta
 from collections import namedtuple
 from genmat.database_methods import database_builder
+from tabulate import tabulate
 
 
 def genmat(df: pd.DataFrame, tf: timedelta):
@@ -34,6 +35,19 @@ def genmat(df: pd.DataFrame, tf: timedelta):
     forbidden_containers = {'solr'}
     considered_containers = all_containers - forbidden_containers
 
+    # the goal here is to make a drain model for each container that has clusters for all observations
+    # from all collections so that we may see which receive messages during specific collection runs
+
+    dd = {container: Drain() for container in considered_containers}
+
+    total_number_of_logs = 0
+    for log in df.itertuples():
+        if log.container_name not in forbidden_containers:
+            dd[log.container_name].add_log_message(log.log)
+            total_number_of_logs += 1
+
+    # now that we have these drain models we can analyze each collection:
+
     # pd.DataFrame with True in the index where a label has changed and false otherwise
     transitions = df['label'] != df['label'].shift(axis=0)
 
@@ -46,25 +60,25 @@ def genmat(df: pd.DataFrame, tf: timedelta):
     ce.append(len(df.index))
     n_collections = len(ce)
 
-    # the goal here is to make a drain model for each container that has clusters for all observations
-    # from all collections so that we may see which receive messages during specific collection runs
-
-    dd = {container: Drain() for container in considered_containers}
-
-    for log in df.itertuples():
-        if log.container_name not in forbidden_containers:
-            dd[log.container_name].add_log_message(log.log)
-
-    # now that we have these drain models we can analyze each collection:
-
     # split the dataframe into sub-dataframes by collection
-    dfs = {idx: df.iloc[ce[idx] + 1:ce[idx + 1] + 1, :].sort_values(by='timestamp') for idx in range(n_collections - 2)}
+    dfs = {idx: df.iloc[ce[idx] + 1:ce[idx + 1] + 1, :].sort_values(by='timestamp') for idx in range(n_collections - 1)}
 
-    plot_h = []
+
+    col_lens = []
+    col_count = 0 
+    total_number_of_logs = 0
     for df in dfs.values():
-        plot_h.append(len(df.index))
+        col_count += 1
+        col_lens.append([col_count, len(df.index)])
+        total_number_of_logs += len(df[df['container_name'] !='solr'].index)
 
-    print(plot_h)
+    headers = [['Collection', '#(logs)']]
+    col_lens = headers + col_lens
+    col_lens += [['########','########']]
+    col_lens += [['Total', total_number_of_logs]]
+
+
+    print(tabulate(col_lens, headers=("firstrow"), missingval="-"))
 
     # build the cluster count dictionary
     had = {idx: {label: {container: np.array for container in considered_containers} for label in labels}
@@ -74,8 +88,7 @@ def genmat(df: pd.DataFrame, tf: timedelta):
           for idx in dfs.keys()}
 
 
-    for idx in dfs.keys():
-        di = dfs[idx]
+    for idx, di in dfs.items():
         for label in labels:
             dl = di[di['label'] == label]
             start_time = dl['timestamp'].iloc[0]
@@ -92,13 +105,35 @@ def genmat(df: pd.DataFrame, tf: timedelta):
                     time_stamp = log.timestamp
                     # instead of iterating over each time period we can calculate which period the log arrived
                     col = math.floor((time_stamp - start_time) / tf)
-                    cluster, update_type = drain_model.add_log_message(log.log)
-                    if update_type == "none":
+                    cluster = drain_model.find_cluster(log.log)
+                    if not cluster is None:
                         counter_array[cluster.cluster_id - 1, col] += 1
+                    else:
+                        print(f'Could not find matching cluster for log: {log.log}')
                     if cluster not in hd[idx][label][container].keys():
                         hd[idx][label][container][cluster] = [cluster.cluster_id, 0]
                     hd[idx][label][container][cluster][1] += 1
                 had[idx][label][container] = counter_array
+
+    empty_cluster = False
+    total_number_of_hits = 0 
+    num_of_empty_clusters = 0
+    for idx in dfs.keys():
+        for label in labels:
+            for container in considered_containers:
+                for cluster_vec in hd[idx][label][container].values():
+                    if cluster_vec[1] == 0:
+                        empty_cluster = True 
+                        num_of_empty_clusters += 1
+                    total_number_of_hits += cluster_vec[1]
+
+    if empty_cluster:
+        print('Empty clusters found!')
+        print(f'Number of empty clusters: {num_of_empty_clusters}')
+    else:
+        print('No empty clusters found!')    
+    
+    print(f'Number of total cluster hits: {total_number_of_hits}')
 
     return labels, considered_containers, dfs.keys(), had, hd, dd
 

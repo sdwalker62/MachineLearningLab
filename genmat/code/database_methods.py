@@ -11,9 +11,10 @@ def database_builder(path: str) -> pd.DataFrame():
     sql_query = 'SELECT * FROM logs'
     data = []
     for f in files:
-        conn = create_connection(head + f)
-        d = pd.read_sql_query(sql_query, conn)
-        data.append(d)
+        if '.db' in f:
+            conn = create_connection(head + f)
+            d = pd.read_sql_query(sql_query, conn)
+            data.append(d)
     print('...construction complete!')
     return pd.concat(data)
 
@@ -27,7 +28,8 @@ def create_connection(path: str) -> sql.Connection:
         a connection to the database
     """
     try:
-        conn = sql.connect(path)
+        conn = sql.connect(path) 
+        print('Connected to database at ' + path)
         return conn
     except sql.Error as e:
         print(e)
