@@ -4,6 +4,10 @@
 # ignore .joblib files since they are generated
 .joblib
 
-database/
-results/
+database/*
+results/*
+
+!database/.gitkeep
+!results/.gitkeep
+
 /venv/

@@ -4,10 +4,10 @@ import math as math
 import os
 import joblib
 import time
-from drain3.drain import Drain
+from genmat.mod_drain.drain import Drain
 from datetime import timedelta
 from collections import namedtuple
-from genmat.database_methods import create_connection
+from genmat.database_methods import database_builder
 
 
 def genmat(df: pd.DataFrame, tf: timedelta):
@@ -60,6 +60,12 @@ def genmat(df: pd.DataFrame, tf: timedelta):
     # split the dataframe into sub-dataframes by collection
     dfs = {idx: df.iloc[ce[idx] + 1:ce[idx + 1] + 1, :].sort_values(by='timestamp') for idx in range(n_collections - 2)}
 
+    plot_h = []
+    for df in dfs.values():
+        plot_h.append(len(df.index))
+
+    print(plot_h)
+
     # build the cluster count dictionary
     had = {idx: {label: {container: np.array for container in considered_containers} for label in labels}
            for idx in dfs.keys()}
@@ -67,7 +73,6 @@ def genmat(df: pd.DataFrame, tf: timedelta):
     hd = {idx: {label: {container: {} for container in considered_containers} for label in labels}
           for idx in dfs.keys()}
 
-    Tally = namedtuple('Tally', ['idx', 'count'])
 
     for idx in dfs.keys():
         di = dfs[idx]
@@ -92,20 +97,18 @@ def genmat(df: pd.DataFrame, tf: timedelta):
                         counter_array[cluster.cluster_id - 1, col] += 1
                     if cluster not in hd[idx][label][container].keys():
                         hd[idx][label][container][cluster] = [cluster.cluster_id, 0]
-                    hd[idx][label][container][cluster].count += 1
+                    hd[idx][label][container][cluster][1] += 1
                 had[idx][label][container] = counter_array
 
     return labels, considered_containers, dfs.keys(), had, hd, dd
 
 
 def main():
-    db_path = 'database/tanner_logs.db'
-    db_conn = create_connection(os.environ["DB_PATH"])
+    path = os.environ["DB_PATH"]
+    epoch = os.environ["TIME_FRAME"]
 
-    # make dataframe and sort by timestamp
-    sql_query = 'SELECT * FROM logs'
-    df = pd.read_sql_query(sql_query, db_conn)
-    tf = timedelta(seconds=int(os.environ["TIME_FRAME"])*60)
+    df = database_builder(path)
+    tf = timedelta(minutes=int(epoch))
 
     print("Starting matrix creation...")
     labels, containers, collections, had, hd, dd = genmat(df, tf)

@@ -1,4 +1,21 @@
 import sqlite3 as sql
+import pandas as pd
+import os
+
+
+def database_builder(path: str) -> pd.DataFrame():
+    print('Constructing main DataFrame...')
+    (_, _, files) = next(os.walk(path))
+    head = 'database/'
+    df = pd.DataFrame()
+    sql_query = 'SELECT * FROM logs'
+    data = []
+    for f in files:
+        conn = create_connection(head + f)
+        d = pd.read_sql_query(sql_query, conn)
+        data.append(d)
+    print('...construction complete!')
+    return pd.concat(data)
 
 
 def create_connection(path: str) -> sql.Connection:
@@ -11,7 +28,7 @@ def create_connection(path: str) -> sql.Connection:
     """
     try:
         conn = sql.connect(path)
-        print('connection successful')
         return conn
     except sql.Error as e:
         print(e)
+

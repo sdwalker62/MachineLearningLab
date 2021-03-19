@@ -15,6 +15,7 @@ RUN mkdir -p code/database
 RUN mkdir -p code/results
 
 COPY code/ ./genmat
+COPY mod_drain ./genmat/mod_drain
 
 # command to run on container start
 CMD [ "python", "-u", "-m", "genmat" ]
