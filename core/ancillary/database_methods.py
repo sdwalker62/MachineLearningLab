@@ -16,7 +16,7 @@ def database_builder(path: str) -> pd.DataFrame():
     data = []
     for f in files:
         if '.db' in f:
-            conn = create_connection(path + '\\' + f)
+            conn = create_connection(path + '/' + f)
             d = pd.read_sql_query(sql_query, conn)
             data.append(d)
     logger.info('...complete!')

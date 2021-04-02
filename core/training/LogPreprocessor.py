@@ -61,5 +61,15 @@ class LogPreprocessor:
         self.clusters = self.Drain.drain.clusters
         self.n_clusters = len(self.Drain.drain.clusters)
 
-        return [cluster.get_template() for cluster in self.Drain.drain.clusters]
+        # cleaned_clusters = [re.sub(pattern=r'[^\w\s]',
+        #                            repl=' ',
+        #                            string=cluster.get_template())
+        #                     for cluster in self.Drain.drain.clusters]
+
+        cleaned_clusters = [re.sub(pattern=r' +',
+                                   repl=' ',
+                                   string=cluster.get_template())
+                            for cluster in self.Drain.drain.clusters]
+
+        return cleaned_clusters
 
