@@ -5,9 +5,8 @@ services:
     build: core/
     container_name: core
     volumes:
-      - ./database:/LAT/database:ro
-      - ./results:/LAT/results
-      - ./core:/LAT/core
+      - ./database:/database:ro
+      - ./results:/results
 
   genmat:
     build: genmat/

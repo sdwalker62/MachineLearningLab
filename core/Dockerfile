@@ -11,7 +11,11 @@ WORKDIR /LAT
 
 RUN mkdir -p LAT/database
 RUN mkdir -p LAT/results
-RUN mkdir -p LAT/core
+RUN mkdir -p LAT/ancillary
+
+COPY /ancillary ./ancillary
+COPY /training ./training
+COPY drain3.ini /LAT/
 
 # command to run on container start
-CMD [ "python", "-u", "-m", "core" ]
+CMD [ "python", "-u", "-m", "training" ]

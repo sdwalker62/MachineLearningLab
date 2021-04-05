@@ -16,4 +16,5 @@ COPY code/ ./genmat
 COPY mod_drain ./genmat/mod_drain
 
 # command to run on container start
+RUN ls
 CMD [ "python", "-u", "-m", "genmat" ]
