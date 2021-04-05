@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 def database_builder(path: str) -> pd.DataFrame():
     logger.info('Building DataFrame ...')
     (_, _, files) = next(os.walk(path))
+    logger.info(files)
     sql_query = 'SELECT * FROM logs'
     data = []
     for f in files:

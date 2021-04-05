@@ -1,6 +1,14 @@
 version: "3.0"
 
 services:
+  core:
+    build: core/
+    container_name: core
+    volumes:
+      - ./database:/LAT/database:ro
+      - ./results:/LAT/results
+      - ./core:/LAT/core
+
   genmat:
     build: genmat/
     container_name: genmat

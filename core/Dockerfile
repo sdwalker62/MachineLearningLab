@@ -1,5 +1,5 @@
 # set base image (host OS)
-FROM python:3.9
+FROM python:3.8.6
 
 # copy the dependencies file to the working directory
 COPY requirements.txt requirements.txt
@@ -7,13 +7,11 @@ COPY requirements.txt requirements.txt
 # install dependencies
 RUN pip install -r requirements.txt
 
-WORKDIR /code
+WORKDIR /LAT
 
-RUN mkdir -p code/database
-RUN mkdir -p code/results
-
-COPY code/ ./genmat
-COPY mod_drain ./genmat/mod_drain
+RUN mkdir -p LAT/database
+RUN mkdir -p LAT/results
+RUN mkdir -p LAT/core
 
 # command to run on container start
-CMD [ "python", "-u", "-m", "genmat" ]
+CMD [ "python", "-u", "-m", "core" ]

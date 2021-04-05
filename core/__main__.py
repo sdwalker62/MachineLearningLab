@@ -1,12 +1,10 @@
 from core.ancillary.database_methods import database_builder
 from core.training.LogPreprocessor import LogPreprocessor
 
-import string
-
 if __name__ == '__main__':
 
     # collect logs from database into pandas dataframe
-    df = database_builder(r'/Users/dalton/PycharmProjects/log-analyzer/database')
+    df = database_builder('LAT/database')
 
     # create LogPreprocessor object and clean logs and generate templates
 
