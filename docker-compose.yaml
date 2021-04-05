@@ -1,9 +1,9 @@
 version: "3.0"
 
 services:
-  core:
-    build: core/
-    container_name: core
+  training:
+    build: training/
+    container_name: training
     volumes:
       - ./database:/database:ro
       - ./results:/results

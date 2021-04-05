@@ -20,7 +20,7 @@ from drain3.template_miner_config import TemplateMinerConfig
 
 logger = logging.getLogger(__name__)
 
-config_filename = 'drain3.ini'
+config_filename = 'mod_drain.ini'
 
 
 class TemplateMiner:
