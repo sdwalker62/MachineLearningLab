@@ -111,7 +111,7 @@ class TemplateMiner:
 
         return None
 
-    def add_log_message(self, log_message: str):
+    def add_log_message(self, log_message: str) -> dict:
         self.profiler.start_section("total")
 
         self.profiler.start_section("mask")
@@ -125,6 +125,7 @@ class TemplateMiner:
             "change_type": change_type,
             "cluster_id": cluster.cluster_id,
             "cluster_size": cluster.size,
+            "cluster_example": log_message,
             "template_mined": cluster.get_template(),
             "cluster_count": len(self.drain.clusters)
         }

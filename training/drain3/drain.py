@@ -14,12 +14,13 @@ param_str = '<*>'
 
 
 class LogCluster:
-    __slots__ = ["log_template_tokens", "cluster_id", "size"]
+    __slots__ = ["log_template_tokens", "cluster_id", "size", "example"]
 
     def __init__(self, log_template_tokens: list, cluster_id: int):
         self.log_template_tokens = tuple(log_template_tokens)
         self.cluster_id = cluster_id
         self.size = 1
+        self.example = ''
 
     def get_template(self):
         return ' '.join(self.log_template_tokens)
@@ -252,6 +253,7 @@ class Drain:
             self.print_node(token, child, depth + 1, file)
 
     def add_log_message(self, content: str):
+        in_str = content
         content = content.strip()
         for delimiter in self.extra_delimiters:
             content = content.replace(delimiter, " ")

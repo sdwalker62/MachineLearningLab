@@ -14,9 +14,10 @@ class LogPreprocessor:
 
     def __init__(self, logs: pd.DataFrame):
         self.logs = logs
-        self.Drain = TemplateMiner()
+        self.template_miner = TemplateMiner()
         self.cleaned_logs = pd.DataFrame
         self.clusters = {}
+        self.results = {}
         self.n_clusters = 0
 
     @staticmethod
@@ -48,17 +49,17 @@ class LogPreprocessor:
 
         return logs
 
-    def generate_clusters(self) -> list:
+    def generate_clusters(self):
         self.cleaned_logs = self.standardize(self.logs)
         logger.info('Generating Drain model ...')
 
-        for row in self.cleaned_logs.itertuples():
-            self.Drain.add_log_message(row.log)
+        for idx, row in enumerate(self.cleaned_logs.itertuples()):
+            self.results[idx] = self.template_miner.add_log_message(row.log)
 
         logger.info('...complete!')
 
-        self.clusters = self.Drain.drain.clusters
-        self.n_clusters = len(self.Drain.drain.clusters)
+        self.clusters = self.template_miner.drain.clusters
+        self.n_clusters = len(self.template_miner.drain.clusters)
 
         # cleaned_clusters = [re.sub(pattern=r'[^\w\s]',
         #                            repl=' ',
@@ -68,7 +69,8 @@ class LogPreprocessor:
         cleaned_clusters = [re.sub(pattern=r' +',
                                    repl=' ',
                                    string=cluster.get_template())
-                            for cluster in self.Drain.drain.clusters]
+                            for cluster in self.template_miner.drain.clusters]
 
-        return cleaned_clusters
+
+        return cleaned_clusters, self.template_miner.drain.clusters
 
