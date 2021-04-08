@@ -4,6 +4,10 @@ services:
   training:
     build: training/
     container_name: training
+    environment:
+      - GENERATE_NEW_DRAIN=no
+      - W2V_WINDOW_SIZE=2
+      - W2V_EMBED_SIZE=2
     volumes:
       - ./database:/database:ro
       - ./results:/results

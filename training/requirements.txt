@@ -1,3 +1,6 @@
 pandas
 jsonpickle
 cachetools
+tensorflow
+keras
+joblib

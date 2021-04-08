@@ -1,7 +1,10 @@
 import logging
 import pandas as pd
 import re
+import os
+import joblib
 
+from preprocessing.word2vec import Word2Vec
 from drain3 import TemplateMiner
 
 
@@ -19,6 +22,7 @@ class LogPreprocessor:
         self.clusters = {}
         self.results = {}
         self.n_clusters = 0
+        self.word_2_vec = Word2Vec()
 
     @staticmethod
     def clean_solr_logs(s: str) -> str:
@@ -51,12 +55,10 @@ class LogPreprocessor:
 
     def generate_clusters(self):
         self.cleaned_logs = self.standardize(self.logs)
-        logger.info('Generating Drain model ...')
+        logger.info('Generating log templates ...')
 
         for idx, row in enumerate(self.cleaned_logs.itertuples()):
             self.results[idx] = self.template_miner.add_log_message(row.log)
-
-        logger.info('...complete!')
 
         self.clusters = self.template_miner.drain.clusters
         self.n_clusters = len(self.template_miner.drain.clusters)
@@ -71,6 +73,18 @@ class LogPreprocessor:
                                    string=cluster.get_template())
                             for cluster in self.template_miner.drain.clusters]
 
-
+        logger.info('...complete!')
+        joblib.dump(cleaned_clusters, '/results/clean_clusters.joblib')
         return cleaned_clusters, self.template_miner.drain.clusters
+
+    def generate_word_embeddings(self):
+        logger.info('Generating Word Embeddings ...')
+        
+        if os.environ["GENERATE_NEW_DRAIN"] == "yes":
+            clusters, _ = self.generate_clusters()
+        else:
+            clusters = joblib.load('/results/clean_clusters.joblib')
+
+        self.word_2_vec.corpus = clusters
+        self.word_2_vec.generate_embeddings()
 
