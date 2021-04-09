@@ -1,13 +1,15 @@
 version: "3.0"
 
 services:
-  training:
-    build: training/
-    container_name: training
+  preprocessing:
+    build: preprocessing/
+    container_name: preprocessing
     environment:
       - GENERATE_NEW_DRAIN=no
-      - W2V_WINDOW_SIZE=2
-      - W2V_EMBED_SIZE=2
+      - W2V_WINDOW_SIZE=5
+      - W2V_EMBED_SIZE=300
+      - EPOCHS=50
+    runtime: nvidia
     volumes:
       - ./database:/database:ro
       - ./results:/results

@@ -5,12 +5,13 @@ FROM python:3.8.6
 COPY requirements.txt requirements.txt
 
 # install dependencies
+RUN /usr/local/bin/python -m pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-WORKDIR /training
+WORKDIR /preprocessing
 
-RUN mkdir -p training/database
-RUN mkdir -p training/results
+RUN mkdir -p preprocessing/database
+RUN mkdir -p preprocessing/results
 
 COPY . .
 

@@ -1,7 +1,5 @@
 from database_methods.database_methods import database_builder
-from preprocessing.LogPreprocessor import LogPreprocessor
-
-import re
+from LogPreprocessor import LogPreprocessor
 
 if __name__ == '__main__':
 

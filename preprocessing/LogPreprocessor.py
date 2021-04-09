@@ -4,7 +4,7 @@ import re
 import os
 import joblib
 
-from preprocessing.word2vec import Word2Vec
+from Word2Vec import Word2Vec
 from drain3 import TemplateMiner
 
 
