@@ -4,6 +4,7 @@ import os
 import re
 import tqdm
 import io
+import matplotlib.pyplot as plt
 
 from tensorflow.random import log_uniform_candidate_sampler as negative_skipgrams
 from tensorflow.keras.models import Model
@@ -14,9 +15,7 @@ from tensorflow.keras.preprocessing.sequence import skipgrams
 
 window_size = int(os.environ["W2V_WINDOW_SIZE"])
 embed_size = int(os.environ["W2V_EMBED_SIZE"])
-
-number_negative_sampling = 4
-
+num_neg_sampling = int(os.environ["NUM_NEG_SAMPLING"])
 
 # https://www.tensorflow.org/tutorials/text/word2vec#compile_all_steps_into_one_function
 class FullyConnectedNN(Model):
@@ -28,7 +27,7 @@ class FullyConnectedNN(Model):
                                           name="w2v_embedding")
         self.context_embedding = Embedding(vocab_size,
                                            embedding_dim,
-                                           input_length=number_negative_sampling + 1)
+                                           input_length=num_neg_sampling + 1)
         self.dots = Dot(axes=(3, 2))
         self.flatten = Flatten()
 
@@ -60,7 +59,6 @@ class Word2Vec:
         self.contexts = []
         self.labels = []
 
-        self.size = 1
         self.window_size = window
         self.embed_size = embed_size
 
@@ -74,6 +72,7 @@ class Word2Vec:
             word_set = list(set(words))
             for token in word_set:
                 if token not in self.vocabulary:
+                    self.word_list.append(token)
                     self.vocabulary[token] = idx
                     idx += 1
 
@@ -110,7 +109,7 @@ class Word2Vec:
                 negative_sampling_candidates, _, _ = negative_skipgrams(
                     true_classes=context_class,
                     num_true=1,
-                    num_sampled=number_negative_sampling,
+                    num_sampled=num_neg_sampling,
                     unique=True,
                     range_max=len(self.vocabulary),
                     seed=42,
@@ -122,7 +121,7 @@ class Word2Vec:
                 )
 
                 context = tf.concat([context_class, negative_sampling_candidates], 0)
-                label = tf.constant([1] + [0] * number_negative_sampling, dtype='int64')
+                label = tf.constant([1] + [0] * num_neg_sampling, dtype='int64')
 
                 self.targets.append(target_word)
                 self.contexts.append(context)
@@ -149,14 +148,32 @@ class Word2Vec:
         weights = nn.get_layer('w2v_embedding').get_weights()[0]
         #vocab = nn.vectorize_layer.get_vocabulary()
 
+        for word in self.word_list:
+            self.embeddings.update({
+                word: weights[self.vocabulary.get(word)]
+            })
+
         joblib.dump(weights, '/results/w2v_weights.joblib')
         #joblib.dump(vocab, '/results/w2v_vocab.joblib')
+
+    def plot_embedding_scatter(self):
+        plt.figure(figsize=(10,10))
+
+        for idx, word in enumerate(self.vocabulary.keys()):
+            if idx == 0:
+                continue # skip 0, it's padding.
+            coord = self.embeddings.get(word)
+            plt.scatter(coord[0], coord[1])
+            # plt.annotate(word[:6] + " ...", (coord[0], coord[1]))
+
+        plt.savefig('/results/embedded_scatter_no_annotation.png')
 
     def generate_embeddings(self):
         self.collect_vocabulary()
         self.vectorize_logs()
         self.find_word_context()
         self.train_embeddings()
+        # self.plot_embedding_scatter()
 
         weights = joblib.load('/results/w2v_weights.joblib')
         vocab = []

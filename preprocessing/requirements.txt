@@ -6,3 +6,4 @@ keras
 joblib
 tqdm
 tensorflow-gpu
+matplotlib

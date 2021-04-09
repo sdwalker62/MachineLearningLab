@@ -8,8 +8,9 @@ services:
       - GENERATE_NEW_DRAIN=no
       - W2V_WINDOW_SIZE=5
       - W2V_EMBED_SIZE=300
-      - EPOCHS=50
-    runtime: nvidia
+      - NUM_NEG_SAMPLING=4
+      - EPOCHS=400
+    # runtime: nvidia
     volumes:
       - ./database:/database:ro
       - ./results:/results
