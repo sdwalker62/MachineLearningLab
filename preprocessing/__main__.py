@@ -1,5 +1,9 @@
 from database_methods.database_methods import database_builder
 from LogPreprocessor import LogPreprocessor
+from WordEmbeddings import WordEmbeddings
+import os
+import joblib
+import time
 
 if __name__ == '__main__':
 
@@ -9,7 +13,18 @@ if __name__ == '__main__':
 
     # create LogPreprocessor object and clean logs and generate templates
     log_preprocessor = LogPreprocessor(df)
-    log_preprocessor.generate_word_embeddings()
+
+    if os.environ["GENERATE_NEW_DRAIN"] == "yes":
+        clusters, _ = log_preprocessor.generate_clusters()
+    else:
+        clusters = joblib.load('/results/clean_clusters.joblib')
+
+    word_embeddings = WordEmbeddings(clusters)
+    
+    embeddings = word_embeddings.generate_word_embeddings()
+
+    w2v = word_embeddings.word_2_vec
+
 
     # "change_type": change_type,
     # "cluster_id": cluster.cluster_id,

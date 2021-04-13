@@ -81,6 +81,9 @@ class Word2Vec:
 
         print(f'The vocabulary size is {len(self.vocabulary)}')
 
+    def vocab_size(self):
+        return len(self.vocabulary)
+
     def vectorize_logs(self):
         for log in self.corpus:
             words = re.split(r'[,\s]', log)

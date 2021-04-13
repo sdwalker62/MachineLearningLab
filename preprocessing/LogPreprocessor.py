@@ -4,7 +4,6 @@ import re
 import os
 import joblib
 
-from Word2Vec import Word2Vec
 from drain3 import TemplateMiner
 
 
@@ -22,7 +21,6 @@ class LogPreprocessor:
         self.clusters = {}
         self.results = {}
         self.n_clusters = 0
-        self.word_2_vec = Word2Vec()
 
     @staticmethod
     def clean_solr_logs(s: str) -> str:
