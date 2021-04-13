@@ -17,6 +17,9 @@ window_size = int(os.environ["W2V_WINDOW_SIZE"])
 embed_size = int(os.environ["W2V_EMBED_SIZE"])
 num_neg_sampling = int(os.environ["NUM_NEG_SAMPLING"])
 
+batch_size = 2048
+buffer_size = 10000
+
 # https://www.tensorflow.org/tutorials/text/word2vec#compile_all_steps_into_one_function
 class FullyConnectedNN(Model):
     def __init__(self, vocab_size, embedding_dim):
@@ -131,10 +134,8 @@ class Word2Vec:
                 self.labels.append(label)
 
     def train_embeddings(self):
-        nn = FullyConnectedNN(len(self.vocabulary), 10)
+        nn = FullyConnectedNN(len(self.vocabulary), embed_size)
 
-        batch_size = 1024
-        buffer_size = 10000
         dataset = tf.data.Dataset.from_tensor_slices(((self.targets, self.contexts), self.labels))
         dataset = dataset.shuffle(buffer_size).batch(batch_size, drop_remainder=True)
         dataset = dataset.cache().prefetch(buffer_size=tf.data.AUTOTUNE)
@@ -150,6 +151,8 @@ class Word2Vec:
 
         weights = nn.get_layer('w2v_embedding').get_weights()[0]
         #vocab = nn.vectorize_layer.get_vocabulary()
+
+        print(weights.shape)
 
         for word in self.word_list:
             self.embeddings.update({
@@ -184,6 +187,7 @@ class Word2Vec:
             vocab.append(word)
 
         joblib.dump(vocab, '/results/w2v_vocab.joblib')
+        joblib.dump(self.vocabulary, '/results/vocab_dict.joblib')
 
         out_v = io.open('/results/vectors.tsv', 'w', encoding='utf-8')
         out_m = io.open('/results/metadata.tsv', 'w', encoding='utf-8')

@@ -9,12 +9,7 @@ services:
       - W2V_WINDOW_SIZE=5
       - W2V_EMBED_SIZE=512
       - NUM_NEG_SAMPLING=4
-      - EPOCHS=1
-      - TRANSFORMER_LAYERS=6
-      - TRANSFORMER_DFF=2048
-      - TRANSFORMER_HEADS=8
-      - DROPOUT_RATE=0.1
-      - BATCH_SIZE=64
+      - EPOCHS=25
     # runtime: nvidia
     volumes:
       - ./database:/database:ro
@@ -33,6 +28,7 @@ services:
       - BATCH_SIZE=64
       - TRAINING=1
     volumes:
+      - ./database:/database:ro
       - ./results:/results
 
   genmat:

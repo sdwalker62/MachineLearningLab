@@ -27,7 +27,7 @@ class EncoderLayer(tf.keras.layers.Layer):
 
   def call(self, x, mask):
     # (1) - Attention Score
-    attn_output, _ = self.multi_headed_attention(x, x, x, mask)  # (batch_size, input_seq_len, d_model)
+    attn_output, attn_weights = self.multi_headed_attention(x, x, x, mask)  # (batch_size, input_seq_len, d_model)
     
     # (2) - Add & Normalize
     attn_output = self.dropout1(attn_output, training=training)
@@ -39,17 +39,18 @@ class EncoderLayer(tf.keras.layers.Layer):
     # (4) - Add & Normalize
     out2 = self.layernorm2(out1 + feed_forward_output)  # (batch_size, input_seq_len, d_model)
 
-    return out2
+    return out2, attn_weights
 
 class Encoder(tf.keras.layers.Layer):
 
   def __init__(self, 
                num_layers, 
                d_model, 
+               embedding_matrix,
                num_heads, 
                dff, 
                input_vocab_size,
-               maximum_position_encoding, 
+               max_seq_len,
                rate=0.1):
     
     super(Encoder, self).__init__()
@@ -57,7 +58,13 @@ class Encoder(tf.keras.layers.Layer):
     self.d_model = d_model
     self.num_layers = num_layers
 
-    self.embedding = tf.keras.layers.Embedding(input_vocab_size, d_model)
+    # self.embedding = tf.keras.layers.Embedding(input_vocab_size, d_model)
+    self.embedding = tf.keras.layers.Embedding(input_vocab_size,
+                                                d_model,
+                                                weights=[embedding_matrix],
+                                                input_length=max_seq_len,
+                                                trainable=True)
+
     self.pos_encoding = PositionalEncoding(batch_size, d_model)
     #self.pos_encoding = positional_encoding(maximum_position_encoding,
     #                                        self.d_model)
@@ -68,7 +75,7 @@ class Encoder(tf.keras.layers.Layer):
     self.dropout = tf.keras.layers.Dropout(rate)
 
   def call(self, x, mask):
-
+    # input_seq_len == max_seq_len
     seq_len = tf.shape(x)[1]
 
     # adding embedding and position encoding.
@@ -78,7 +85,8 @@ class Encoder(tf.keras.layers.Layer):
     x = self.pos_encoding(x)
     x = self.dropout(x, training=training)
 
+    attn_weights = None
     for i in range(self.num_layers):
-      x = self.enc_layers[i](x, mask)
+      x, attn_weights = self.enc_layers[i](x, mask)
 
-    return x  # (batch_size, input_seq_len, d_model)
+    return x, attn_weights  # (batch_size, input_seq_len, d_model)
