@@ -47,6 +47,7 @@ def train_step(inp, tar):
   # enc_padding_mask, combined_mask, dec_padding_mask = create_masks(inp, tar_inp)
   attn_weights = []
   with tf.GradientTape() as tape:
+    print(f'Sending in Matrix of size {inp.shape}')
     predictions, attn_scores = optimus_prime(inp, tar_inp,
                                   None, None, None)
 
@@ -61,30 +62,41 @@ def train_step(inp, tar):
   # train_loss(loss)
   # train_accuracy(accuracy_function(tar_real, predictions))
 
+def ProcessLogs(file_path, vocabulary, max_seq_len, override=False):
+  if os.path.exists(file_path) and override == False:
+    return joblib.load(file_path)
+  else:
+    dataset = tf.data.experimental.SqlDataset("sqlite", "/database/elastic_logs.db", "SELECT * FROM logs", (tf.string, tf.string, tf.string, tf.string))
+    batch_size = len(list(dataset.as_numpy_iterator()))
+    logs = np.zeros((batch_size, max_seq_len))
+
+    for log_idx, element in enumerate(dataset.as_numpy_iterator()):
+      for seq_idx, word in enumerate(element[2].split()):
+        if seq_idx > max_seq_len:
+          break
+        word = word.decode('UTF-8')
+        if word in vocabulary.keys():
+          logs[log_idx, seq_idx] = vocabulary[word]
+        else:
+          sequence.append(0)
+
+      if max_seq_len - len(sequence) > 0:
+        for seq_idx in range(len(sequence), max_seq_len):
+          logs[log_idx, seq_idx] = 0
+          
+    joblib.dump(logs, file_path)
+    return logs
+
+
 if __name__ == '__main__':
 
     word_embeddings = joblib.load("/results/w2v_weights.joblib")
     vocabulary = joblib.load("/results/vocab_dict.joblib")
-
-    dataset = tf.data.experimental.SqlDataset("sqlite", "/database/elastic_logs.db", "SELECT * FROM logs", (tf.string, tf.string, tf.string, tf.string))
-    logs = []
-
-    for element in dataset.as_numpy_iterator():
-      sequence = []
-      for word in element[2].split():
-        word = word.decode('UTF-8')
-        if word in vocabulary.keys():
-          sequence.append(vocabulary[word])
-        else:
-          sequence.append(0)
-
-      logs.append(sequence)
-
-    joblib.dump(logs, "/results/sequence_indices.joblib")
+    logs = ProcessLogs("/results/sequence_indices.joblib", vocabulary, True)
 
     vocab_size = len(vocabulary)
 
-    optimus_prime = Transformer(layers, d_model, heads, dff, vocab_size, 4, word_embeddings, 50)
+    optimus_prime = Transformer(layers, d_model, heads, dff, vocab_size, 4, word_embeddings, max_seq_len)
 
     learning_rate = CustomSchedule(d_model)
 
@@ -95,5 +107,9 @@ if __name__ == '__main__':
     # temp_input = tf.random.uniform((64, 38))
     # temp_target = tf.random.uniform((64, 4))
 
-    attn = train_step(logs, None)
+    logs = np.array(logs)
+    # logs = tf.convert_to_tensor(logs)
+    print(logs.shape)
+
+    # attn = train_step(logs, None)
     # print(attn)
