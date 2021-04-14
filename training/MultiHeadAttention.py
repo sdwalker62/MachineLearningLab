@@ -1,7 +1,7 @@
 import tensorflow as tf
 import os
 
-training = bool(os.environ["TRAINING"])
+training = bool(int(os.environ["TRAINING"]))
 
 def scaled_dot_product_attention(q, k, v, mask):
   """Calculate the attention weights.

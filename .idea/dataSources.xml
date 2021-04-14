@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="SQLite - tanner_logs.db" uuid="9cd31882-1d57-4e64-96ce-9e8fcf38e0be">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/database/tanner_logs.db</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="elastic_logs" uuid="da826fa7-a67a-47c0-adfe-bb458532818a">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\Samue\Dropbox\Work\LAT\database\elastic_logs.db</jdbc-url>
-      <libraries>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.34.0/sqlite-jdbc-3.34.0.jar</url>
-        </library>
-      </libraries>
-    </data-source>
-    <data-source source="LOCAL" name="elastic_logs [2]" uuid="d2aaf615-0ee9-4bac-9b51-1531c364e35d">
+    <data-source source="LOCAL" name="elastic_logs" uuid="cde9d6b2-9282-4e1f-b3a6-b8fd9aabdddc">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
