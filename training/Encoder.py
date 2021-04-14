@@ -65,7 +65,7 @@ class Encoder(tf.keras.layers.Layer):
                                                 input_length=max_seq_len,
                                                 trainable=True)
 
-    self.pos_encoding = PositionalEncoding(batch_size, d_model)
+    self.pos_encoding = PositionalEncoding(max_seq_len, d_model)
     #self.pos_encoding = positional_encoding(maximum_position_encoding,
     #                                        self.d_model)
 

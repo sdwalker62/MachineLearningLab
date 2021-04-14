@@ -135,7 +135,7 @@ if __name__ == '__main__':
     word_embeddings = joblib.load("/results/w2v_weights.joblib")
     vocabulary = joblib.load("/results/vocab_dict.joblib")
     dataset = database_builder('/database/')
-    max_seq_len = get_max_length_(dataset, 0.0)
+    max_seq_len = 512#get_max_length_(dataset, 0.0)
     vocab_size = len(vocabulary)
 
     logging.info('Processing logs for training')
