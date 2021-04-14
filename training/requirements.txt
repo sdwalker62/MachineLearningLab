@@ -9,3 +9,4 @@ matplotlib
 einops
 numpy
 pandas
+scikit-learn

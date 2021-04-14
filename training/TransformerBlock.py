@@ -1,7 +1,6 @@
 import tensorflow as tf
 import os
 from MultiHeadAttention import MultiHeadAttention
-from PositionalEncoder import PositionalEncoding
 
 batch_size = int(os.environ["BATCH_SIZE"])
 training = bool(int(os.environ["TRAINING"]))
@@ -41,7 +40,7 @@ class EncoderLayer(tf.keras.layers.Layer):
 
     return out2, attn_weights
 
-class Encoder(tf.keras.layers.Layer):
+class TransformerBlock(tf.keras.layers.Layer):
 
   def __init__(self, 
                num_layers, 
@@ -53,38 +52,15 @@ class Encoder(tf.keras.layers.Layer):
                max_seq_len,
                rate=0.1):
     
-    super(Encoder, self).__init__()
+    super(TransformerBlock, self).__init__()
 
     self.d_model = d_model
     self.num_layers = num_layers
 
-    # self.embedding = tf.keras.layers.Embedding(input_vocab_size, d_model)
-    self.embedding = tf.keras.layers.Embedding(input_vocab_size,
-                                                d_model,
-                                                weights=[embedding_matrix],
-                                                input_length=max_seq_len,
-                                                trainable=True)
-
-    self.pos_encoding = PositionalEncoding(max_seq_len, d_model)
-    #self.pos_encoding = positional_encoding(maximum_position_encoding,
-    #                                        self.d_model)
-
     self.enc_layers = [EncoderLayer(d_model, num_heads, dff, rate)
                        for _ in range(num_layers)]
 
-    self.dropout = tf.keras.layers.Dropout(rate)
-
   def call(self, x, mask):
-    # input_seq_len == max_seq_len
-    seq_len = tf.shape(x)[1]
-
-    # adding embedding and position encoding.
-    x = self.embedding(x)  # (batch_size, input_seq_len, d_model)
-    x *= tf.math.sqrt(tf.cast(self.d_model, tf.float32))
-    #x += self.pos_encoding[:, :seq_len, :]
-    x = self.pos_encoding(x)
-    x = self.dropout(x, training=training)
-
     attn_weights = None
     for i in range(self.num_layers):
       x, attn_weights = self.enc_layers[i](x, mask)

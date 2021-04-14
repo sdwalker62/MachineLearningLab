@@ -20,12 +20,12 @@ services:
     container_name: training
     environment:
       - W2V_EMBED_SIZE=512
-      - EPOCHS=1
+      - EPOCHS=5
       - TRANSFORMER_LAYERS=4
       - TRANSFORMER_DFF=2048
       - TRANSFORMER_HEADS=8
       - DROPOUT_RATE=0.1
-      - BATCH_SIZE=25
+      - BATCH_SIZE=50
       - TRAINING=1
     volumes:
       - ./database:/database:ro
