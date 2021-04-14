@@ -1,8 +1,9 @@
 from Transformer import Transformer
 from MultiHeadAttention import MultiHeadAttention
-
+from tqdm import tqdm
 from Metrics import loss_function
 from Metrics import accuracy_function
+
 
 import tensorflow as tf
 import os
@@ -104,24 +105,26 @@ def create_connection(path: str) -> sql.Connection:
         logger.warning(e)
 
 
-def get_max_length_(dataset: pd.DataFrame, buffer_size: int) -> int:
-    return (1 + buffer_size) * dataset['log'].str.len().max()
+def get_max_length_(dataset: pd.DataFrame, buffer_size: float) -> int:
+    return int((1 + buffer_size) * dataset['log'].str.len().max())
 
 
-def process_logs(file_path: str,
-                 dataset: pd.DataFrame,
-                 vocabulary: dict,
-                 max_seq_len: int,
-                 override=False) -> np.array:
+def process_batch(file_path: str,
+                  dataset: pd.DataFrame,
+                  vocabulary: dict,
+                  max_seq_len: int,
+                  idx: int,
+                  override=False) -> np.array:
+
     if os.path.exists(file_path) and not override:
         return joblib.load(file_path)
     else:
-        temp_batch_size = len(dataset.index)
-        logs = np.zeros((temp_batch_size, max_seq_len))
-
-        for log_idx, log in enumerate(dataset['log']):
+        logs = np.zeros((batch_size, max_seq_len))
+        start_window = idx * batch_size
+        end_window = (idx + 1) * batch_size
+        for log_idx, log in enumerate(dataset['log'][start_window:end_window]):
             for seq_idx, word in enumerate(log.split()):
-                logs[log_idx, seq_idx] = vocabulary[word] if word in vocabulary.keys else 0
+                logs[log_idx, seq_idx] = vocabulary[word] if word in vocabulary.keys() else 0
 
         joblib.dump(logs, file_path)
         return logs
@@ -131,28 +134,27 @@ if __name__ == '__main__':
     logging.info('Loading assets')
     word_embeddings = joblib.load("/results/w2v_weights.joblib")
     vocabulary = joblib.load("/results/vocab_dict.joblib")
-    dataset = database_builder('/training/database/')
-    max_seq_len = get_max_length_(dataset, 50)
+    dataset = database_builder('/database/')
+    max_seq_len = get_max_length_(dataset, 0.0)
     vocab_size = len(vocabulary)
 
     logging.info('Processing logs for training')
-    logs = process_logs("/results/sequence_indices.joblib", dataset, vocabulary, max_seq_len, True)
 
-    logging.info('Creating transformer and training')
-    optimus_prime = Transformer(layers, d_model, heads, dff, vocab_size, 4, word_embeddings, max_seq_len)
+    n_logs = len(dataset.index)
+    n_iter = n_logs // batch_size
+    remainder = n_logs % batch_size
 
-    learning_rate = CustomSchedule(d_model)
+    for idx in tqdm(range(n_iter)):
+        batch = process_batch("/results/sequence_indices.joblib", dataset, vocabulary, max_seq_len, idx, True)
 
-    custom_optimizer = tf.keras.optimizers.Adam(learning_rate, beta_1=0.9, beta_2=0.98, epsilon=1e-9)
+        logging.info('Creating transformer and training')
+        optimus_prime = Transformer(layers, d_model, heads, dff, vocab_size, 4, word_embeddings, max_seq_len)
 
-    optimus_prime.compile(optimizer=custom_optimizer, loss=loss_function)
+        learning_rate = CustomSchedule(d_model)
 
-    # temp_input = tf.random.uniform((64, 38))
-    # temp_target = tf.random.uniform((64, 4))
+        custom_optimizer = tf.keras.optimizers.Adam(learning_rate, beta_1=0.9, beta_2=0.98, epsilon=1e-9)
 
-    #logs = np.array(logs)
-    # logs = tf.convert_to_tensor(logs)
-    print(logs.shape)
+        optimus_prime.compile(optimizer=custom_optimizer, loss=loss_function)
 
-    # attn = train_step(logs, None)
-    # print(attn)
+        attn = train_step(batch, None)
+        print(attn)

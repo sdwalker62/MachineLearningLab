@@ -5,7 +5,7 @@ services:
     build: preprocessing/
     container_name: preprocessing
     environment:
-      - GENERATE_NEW_DRAIN=no
+      - GENERATE_NEW_DRAIN=yes
       - W2V_WINDOW_SIZE=5
       - W2V_EMBED_SIZE=512
       - NUM_NEG_SAMPLING=4
@@ -19,13 +19,13 @@ services:
     build: training/
     container_name: training
     environment:
-      - W2V_EMBED_SIZE=128
+      - W2V_EMBED_SIZE=512
       - EPOCHS=1
       - TRANSFORMER_LAYERS=4
-      - TRANSFORMER_DFF=512
+      - TRANSFORMER_DFF=2048
       - TRANSFORMER_HEADS=8
       - DROPOUT_RATE=0.1
-      - BATCH_SIZE=64
+      - BATCH_SIZE=25
       - TRAINING=1
     volumes:
       - ./database:/database:ro
