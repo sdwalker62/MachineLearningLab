@@ -16,21 +16,22 @@ import logging
 import sqlite3 as sql
 import time
 
-layers = int(os.environ["TRANSFORMER_LAYERS"])
+num_layers = int(os.environ["TRANSFORMER_LAYERS"])
 d_model = int(os.environ["W2V_EMBED_SIZE"])
 dff = int(os.environ["TRANSFORMER_DFF"])
-heads = int(os.environ["TRANSFORMER_HEADS"])
+num_heads = int(os.environ["TRANSFORMER_HEADS"])
 batch_size = int(os.environ["BATCH_SIZE"])
 training = bool(int(os.environ["TRAINING"]))
 epochs = int(os.environ["EPOCHS"])
 
+
 class CustomSchedule(tf.keras.optimizers.schedules.LearningRateSchedule):
-    def __init__(self, d_model, warmup_steps=4000):
+
+    def __init__(self, d_model: int, warmup_steps=4000):
         super(CustomSchedule, self).__init__()
 
         self.d_model = d_model
         self.d_model = tf.cast(self.d_model, tf.float32)
-
         self.warmup_steps = warmup_steps
 
     def __call__(self, step):
@@ -46,36 +47,33 @@ optimus_prime = None
 sgd_optimizer = tf.keras.optimizers.SGD(learning_rate=0.01)
 adm_optimizer = tf.keras.optimizers.Adam(learning_rate, beta_1=0.9, beta_2=0.98, epsilon=1e-9)
 
-# train_step_signature = [
-#     tf.TensorSpec(shape=(None, None), dtype=tf.int64),
-#     tf.TensorSpec(shape=(None, None), dtype=tf.int64)
-# ]
-
 train_loss = tf.keras.metrics.Mean(name='train_loss')
 train_accuracy = tf.keras.metrics.CategoricalAccuracy(name='train_accuracy')
 
+train_step_signature = [
+    tf.TensorSpec(shape=(batch_size, None), dtype=tf.int64),
+    tf.TensorSpec(shape=(batch_size, None), dtype=tf.int64)
+]
 
-# @tf.function(input_signature=train_step_signature)
-def train_step(inp, tar):
-    # tar_inp = tar[:, :-1]
-    tar_inp = None
-    # tar_real = tar[:, 1:]
 
-    # enc_padding_mask, combined_mask, dec_padding_mask = create_masks(inp, tar_inp)
+@tf.function(input_signature=train_step_signature,
+             experimental_follow_type_hints=True)
+def train_step(log_batch: tf.Tensor, labels: tf.Tensor) -> list:
     attn_weights = []
     with tf.GradientTape() as tape:
-        # print(f'Sending in Matrix of size {inp.shape}')
-        # attn_scores
-        predictions = optimus_prime(inp, tar_inp,
-                                    None, None, None)
+        transformer_input = tf.tuple([
+            log_batch,  # <tf.Tensor: shape=(batch_size, max_seq_len), dtype=uint32>
+            labels  # <tf.Tensor: shape=(batch_size, num_classes), dtype=uint32>
+        ])
+        predictions, attention = optimus_prime(transformer_input)
 
-        y_pred = predictions
+        # y_pred = predictions
         y_seq_pred = np.empty((batch_size, 4))
-        y_true = tar
+        # y_true = target_values
         cce = tf.keras.losses.CategoricalCrossentropy()
 
         for idx in range(batch_size):
-            seq_pred = y_pred[idx] # (max_seq_len, classifications)
+            seq_pred = y_pred[idx]  # (max_seq_len, classifications)
             seq_pred = np.array(seq_pred)
             y_seq_pred[idx] = seq_pred.mean(axis=0)
 
@@ -104,7 +102,7 @@ def database_builder(path: str) -> pd.DataFrame():
     data = []
     for f in files:
         if '.db' in f:
-            conn = create_connection(path + '/' + f)
+            conn = create_connection(path + f)
             d = pd.read_sql_query(sql_query, conn)
             data.append(d)
     logger.info('...complete!')
@@ -131,15 +129,15 @@ def get_max_length_(dataset: pd.DataFrame, buffer_size: float) -> int:
     return int((1 + buffer_size) * dataset['log'].str.len().max())
 
 
+@tf.function
 def process_batch(dataset: pd.DataFrame,
                   vocabulary: dict,
                   max_seq_len: int,
                   idx: int,
                   labels: dict,
-                  override=False) -> tuple:
-
+                  override=False) -> tf.tuple:
     logs = np.zeros((batch_size, max_seq_len))
-    y_true = np.empty((batch_size,4))
+    y_true = np.empty((batch_size, 4))
 
     start_window = idx * batch_size
     end_window = (idx + 1) * batch_size
@@ -148,19 +146,19 @@ def process_batch(dataset: pd.DataFrame,
             logs[log_idx, seq_idx] = vocabulary[word] if word in vocabulary.keys() else 0
         y_true[log_idx] = labels[dataset['label'][log_idx]]
 
-    return logs, y_true
+    return tf.convert_to_tensor(logs, dtype=tf.int64), tf.convert_to_tensor(y_true, dtype=tf.int64)
 
 
 if __name__ == '__main__':
+
     logging.info('Loading assets')
-    word_embeddings = joblib.load("/results/w2v_weights.joblib")
+    word_embedding_matrix = joblib.load("/results/w2v_weights.joblib")
     vocabulary = joblib.load("/results/vocab_dict.joblib")
     dataset = database_builder('/database/')
-    max_seq_len = 512#get_max_length_(dataset, 0.0)
+    max_seq_len = 512  # get_max_length_(dataset, 0.0)
     vocab_size = len(vocabulary)
 
     logging.info('Processing logs for training')
-
     label_unique = dataset['label'].unique()
     lbp = LabelBinarizer().fit(label_unique)
     binary_labels = lbp.transform(label_unique)
@@ -172,27 +170,47 @@ if __name__ == '__main__':
         })
 
     n_logs = len(dataset.index)
-    n_iter = 5 #n_logs // batch_size
+    n_iter = 5  # n_logs // batch_size
     remainder = n_logs % batch_size
     attns = []
-    for epoch in tqdm(range(epochs)):
-        
-        start = time.time()
+    num_classes = 4
 
+    optimus_prime = Transformer(
+        num_layers,
+        d_model,
+        num_heads,
+        dff,
+        vocab_size,
+        num_classes,
+        word_embedding_matrix,
+        max_seq_len,
+        rate=0.1)
+
+    optimizer = tf.keras.optimizers.Adam(learning_rate, beta_1=0.9, beta_2=0.98, epsilon=1e-9)
+
+    checkpoint_path = "./checkpoints/train"
+    checkpoint = tf.train.Checkpoint(transformer=optimus_prime, optimizer=optimizer)
+    checkpoint_manager = tf.train.CheckpointManager(checkpoint, checkpoint_path, max_to_keep=5)
+
+    # if a checkpoint exists, restore the latest checkpoint.
+    if checkpoint_manager.latest_checkpoint:
+        checkpoint.restore(checkpoint_manager.latest_checkpoint)
+        print('Latest checkpoint restored!!')
+
+    for epoch in tqdm(range(epochs)):
+
+        start = time.time()
         train_loss.reset_states()
         train_accuracy.reset_states()
 
         for idx in range(n_iter):
-            batch, y_true = process_batch(dataset, vocabulary, max_seq_len, idx, labels, True)
+            batch, labels = process_batch(dataset, vocabulary, max_seq_len, idx, labels, True)
 
-            optimus_prime = Transformer(layers, d_model, heads, dff, vocab_size, 4, word_embeddings, max_seq_len)
-
-            optimus_prime.compile(optimizer=adm_optimizer, loss=tf.keras.losses.CategoricalCrossentropy)
-
-            attn = train_step(batch, y_true)
+            attn = train_step(batch, labels)
             # attns.append(attn)
 
-            print(f'Epoch {epoch + 1} Batch {idx} Loss {train_loss.result():.4f} Accuracy {train_accuracy.result():.4f}')
+            print(
+                f'Epoch {epoch + 1} Batch {idx} Loss {train_loss.result():.4f} Accuracy {train_accuracy.result():.4f}')
 
     print(f'Epoch {epoch + 1} Loss {train_loss.result():.4f} Accuracy {train_accuracy.result():.4f}')
 
