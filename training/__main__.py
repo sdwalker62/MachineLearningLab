@@ -56,23 +56,24 @@ train_step_signature = [
     tf.TensorSpec(shape=(batch_size, None), dtype=tf.int64)
 ]
 
+
 @tf.function(input_signature=train_step_signature,
              experimental_follow_type_hints=True)
-def train_step(log_batch: tf.Tensor, labels: tf.Tensor) -> list:
+def train_step(log_batch: tf.Tensor, labels: tf.Tensor):
     transformer_input = tf.tuple([
         log_batch,  # <tf.Tensor: shape=(batch_size, max_seq_len), dtype=uint32>
         labels  # <tf.Tensor: shape=(batch_size, num_classes), dtype=uint32>
     ])
 
     # Collect Loss and Model Gradient Values
-    loss, grads = grad(optimus_prime, transformer_input)
+    loss, grads, y_pred = grad(optimus_prime, transformer_input)
 
     # Optimize the model
     adm_optimizer.apply_gradients(zip(grads, optimus_prime.trainable_variables))
 
     # Tracking Progress
-    epoch_loss.update_state(loss) # Adding Batch Loss
-    train_accuracy.update_state(y_true, y_seq_pred) 
+    epoch_loss.update_state(loss)  # Adding Batch Loss
+    epoch_accuracy.update_state(labels, y_pred)
 
 
 logging.basicConfig(format='%(asctime)s %(levelname)s | %(message)s',
@@ -114,13 +115,11 @@ def get_max_length_(dataset: pd.DataFrame, buffer_size: float) -> int:
     return int((1 + buffer_size) * dataset['log'].str.len().max())
 
 
-@tf.function
 def process_batch(dataset: pd.DataFrame,
                   vocabulary: dict,
                   max_seq_len: int,
                   idx: int,
-                  labels: dict,
-                  override=False) -> tuple:
+                  labels: dict) -> tuple:
     logs = np.zeros((batch_size, max_seq_len))
     y_true = np.empty((batch_size, 4))
 
@@ -132,6 +131,7 @@ def process_batch(dataset: pd.DataFrame,
         y_true[log_idx] = labels[dataset['label'][log_idx]]
 
     return tf.convert_to_tensor(logs, dtype=tf.int64), tf.convert_to_tensor(y_true, dtype=tf.int64)
+
 
 if __name__ == '__main__':
 
@@ -188,7 +188,7 @@ if __name__ == '__main__':
         # epoch_accuracy.reset_states()
 
         for idx in range(n_iter):
-            batch, labels = process_batch(dataset, vocabulary, max_seq_len, idx, labels, True)
+            batch, labels = process_batch(dataset, vocabulary, max_seq_len, idx, labels)
 
             attn = train_step(batch, labels)
             # attns.append(attn)
@@ -197,7 +197,7 @@ if __name__ == '__main__':
             # print(f'Epoch {epoch + 1} Batch {idx} Loss {epoch_loss.result():.4f} Accuracy {epoch_accuracy.result():.4f}')
 
     print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}".format(epoch,
-                                                                epoch_loss_avg.result(),
+                                                                epoch_loss.result(),
                                                                 epoch_accuracy.result()))
 
     print(f'Time taken for 1 epoch: {time.time() - start:.2f} secs\n')

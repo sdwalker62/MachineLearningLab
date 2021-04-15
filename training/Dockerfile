@@ -12,7 +12,13 @@ WORKDIR /training
 
 RUN mkdir -p training/results
 
-COPY . .
+COPY __main__.py .
+COPY LogSequenceEncoder.py .
+COPY Metrics.py .
+COPY MultiHeadAttention.py .
+COPY PositionalEncoder.py .
+COPY Transformer.py .
+COPY TransformerBlock.py .
 
 # command to run on container start
 CMD [ "python", "-u", "__main__.py" ]
