@@ -2,6 +2,7 @@ import tensorflow as tf
 from TransformerBlock import TransformerBlock
 from PositionalEncoder import PositionalEncoding
 import os
+import time
 
 training = bool(os.environ["TRAINING"])
 
@@ -22,7 +23,6 @@ class Transformer(tf.keras.Model):
 
         self.d_model = d_model
 
-        # self.embedding = tf.keras.layers.Embedding(input_vocab_size, d_model)
         self.embedding = tf.keras.layers.Embedding(
             input_vocab_size,
             d_model,
@@ -31,8 +31,6 @@ class Transformer(tf.keras.Model):
             trainable=True)
 
         self.pos_encoding = PositionalEncoding(max_seq_len, d_model)
-        # self.pos_encoding = positional_encoding(maximum_position_encoding,
-        #                                        self.d_model)
 
         self.log_transformer_block = TransformerBlock(
             num_layers,
@@ -54,27 +52,11 @@ class Transformer(tf.keras.Model):
             max_seq_len,
             rate)
 
-        # self.decoder = Decoder(num_layers, d_model, num_heads, dff,
-        #                        target_vocab_size, pe_target, rate)
-
-        # self.transformer = tf.keras.Sequential([
-        #   self.transformer_block,
-        #   self.transformer_block,
-        #   tf.keras.layers.Dense(target_vocab_size, activation='relu'),
-        #   tf.keras.layers.GlobalAveragePooling2D(data_format='channels_first'),
-        #   tf.keras.layers.Softmax()
+        # self.log_pooling_layer = tf.keras.Sequential([
+        #     tf.keras.layers.Dense(target_vocab_size, activation='relu'),
+        #     tf.keras.layers.AveragePooling1D(data_format='channels_last'),
+        #     tf.keras.layers.Softmax()
         # ])
-
-        # self.final_layer = tf.keras.Sequential([
-        #   tf.keras.layers.Dense(target_vocab_size),
-        #   tf.keras.layers.Softmax()
-        # ])
-
-        self.log_pooling_layer = tf.keras.Sequential([
-            tf.keras.layers.Dense(target_vocab_size, activation='relu'),
-            tf.keras.layers.AveragePooling1D(data_format='channels_last'),
-            tf.keras.layers.Softmax()
-        ])
 
         self.seq_pooling_layer = tf.keras.Sequential([
             tf.keras.layers.Dense(target_vocab_size, activation='relu'),
@@ -88,7 +70,7 @@ class Transformer(tf.keras.Model):
     #         look_ahead_mask, dec_padding_mask):
     def call(self, input_tuple: tf.tuple, **kwargs):
         log_batch = input_tuple[0]
-        encoding_padding_mask = input_tuple[1]
+        encoding_padding_mask = None # input_tuple[1]
 
         # adding embedding and position encoding.
         embedding_tensor = self.embedding(log_batch)  # (batch_size, input_seq_len, d_model)
@@ -99,12 +81,12 @@ class Transformer(tf.keras.Model):
 
         # Transformer Block #1
         # (batch_size, inp_seq_len, d_model), (batch_size, class, inp_seq_len, inp_seq_len)
-        enc_output, _ = self.transformer_block(embedding_tensor, encoding_padding_mask)
+        enc_output, _ = self.log_transformer_block(embedding_tensor, encoding_padding_mask)
 
         print(f"Shape Block 1: {enc_output.shape}")
 
         # Transformer Block #2 vv (takes the place of the Decoder)
-        fin_output, _ = self.transformer_block(enc_output, encoding_padding_mask)
+        fin_output, _ = self.seq_transformer_block(enc_output, encoding_padding_mask)
 
         print(f"Shape Block 2: {fin_output.shape}")
         # # dec_output.shape == (batch_size, tar_seq_len, d_model)
@@ -113,7 +95,7 @@ class Transformer(tf.keras.Model):
 
         # print(attention_weights.shape)
         # final_output = self.final_layer(enc_output)  # (batch_size, tar_seq_len, target_vocab_size)
-        final_output = self.pooling_layer(fin_output)  # (batch_size, max_seq_len, class)
+        final_output = self.seq_pooling_layer(fin_output)  # (batch_size, max_seq_len, class)
 
         print(f"Shape Block 3: {final_output.shape}")
         return final_output  # , attention_weights

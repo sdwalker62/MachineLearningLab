@@ -23,6 +23,7 @@ num_heads = int(os.environ["TRANSFORMER_HEADS"])
 batch_size = int(os.environ["BATCH_SIZE"])
 training = bool(int(os.environ["TRAINING"]))
 epochs = int(os.environ["EPOCHS"])
+max_seq_len = 512
 
 
 class CustomSchedule(tf.keras.optimizers.schedules.LearningRateSchedule):
@@ -63,21 +64,11 @@ def train_step(log_batch: tf.Tensor, labels: tf.Tensor) -> list:
         labels  # <tf.Tensor: shape=(batch_size, num_classes), dtype=uint32>
     ])
 
-    with tf.GradientTape() as tape:
-        predictions, attention = optimus_prime(transformer_input)
-
-        y_seq_pred = np.empty((batch_size, 4))
-
-        for idx in range(batch_size):
-            seq_pred = predictions[idx]  # (max_seq_len, classifications)
-            seq_pred = np.array(seq_pred)
-            y_seq_pred[idx] = seq_pred.mean(axis=0)
-
-        # Collect Loss and Model Gradient Values
-        loss, grads = grad(optimus_prime, labels, y_seq_pred)
+    # Collect Loss and Model Gradient Values
+    loss, grads = grad(optimus_prime, transformer_input)
 
     # Optimize the model
-    adm_optimizer.apply_gradients(zip(optimus_gradients, optimus_prime.trainable_variables))
+    adm_optimizer.apply_gradients(zip(grads, optimus_prime.trainable_variables))
 
     # Tracking Progress
     epoch_loss.update_state(loss) # Adding Batch Loss
@@ -129,7 +120,7 @@ def process_batch(dataset: pd.DataFrame,
                   max_seq_len: int,
                   idx: int,
                   labels: dict,
-                  override=False) -> tf.tuple:
+                  override=False) -> tuple:
     logs = np.zeros((batch_size, max_seq_len))
     y_true = np.empty((batch_size, 4))
 
@@ -141,7 +132,6 @@ def process_batch(dataset: pd.DataFrame,
         y_true[log_idx] = labels[dataset['label'][log_idx]]
 
     return tf.convert_to_tensor(logs, dtype=tf.int64), tf.convert_to_tensor(y_true, dtype=tf.int64)
-
 
 if __name__ == '__main__':
 
@@ -194,8 +184,8 @@ if __name__ == '__main__':
     for epoch in tqdm(range(epochs)):
 
         start = time.time()
-        train_loss.reset_states()
-        train_accuracy.reset_states()
+        # epoch_loss.reset_states()
+        # epoch_accuracy.reset_states()
 
         for idx in range(n_iter):
             batch, labels = process_batch(dataset, vocabulary, max_seq_len, idx, labels, True)
@@ -203,7 +193,8 @@ if __name__ == '__main__':
             attn = train_step(batch, labels)
             # attns.append(attn)
 
-            print(f'Epoch {epoch + 1} Batch {idx} Loss {epoch_loss.result():.4f} Accuracy {epoch_accuracy.result():.4f}')
+            print(f'Epoch {epoch + 1} Batch {idx + 1}')
+            # print(f'Epoch {epoch + 1} Batch {idx} Loss {epoch_loss.result():.4f} Accuracy {epoch_accuracy.result():.4f}')
 
     print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}".format(epoch,
                                                                 epoch_loss_avg.result(),
