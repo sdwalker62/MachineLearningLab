@@ -7,21 +7,23 @@ loss_object = tf.keras.losses.CategoricalCrossentropy(
 
 batch_size = int(os.environ["BATCH_SIZE"])
 
-
 def grad(model, x):
     with tf.GradientTape() as tape:
-        predictions = model(x)
+      predictions = model(x)
 
-        y_seq_pred = np.empty((batch_size, 4))
-        y_true = x[1]
+      y_seq_pred = np.empty((batch_size, 4))
+      y_true = x[1]
 
-        for idx in range(batch_size):
-            seq_pred = predictions[idx]  # (max_seq_len, classifications)
-            seq_pred = np.array(seq_pred)
-            y_seq_pred[idx] = tf.math.reduce_mean(seq_pred, axis=0)
-            # y_seq_pred[idx] = seq_pred.mean(axis=0)
+      for idx in range(batch_size):
+          seq_pred = predictions[idx]  # (max_seq_len, classifications)
+          # seq_pred = seq_pred.to_numpy_array()
+          # y_seq_pred[idx] = tf.math.reduce_mean(seq_pred)
+          # seq_pred = np.ar
+          onebyfour = tf.math.reduce_mean(seq_pred, axis=0)
+          print(onebyfour)
+          # y_seq_pred[idx] = tf.reduce_mean(seq_pred, axis=0)
 
-    loss = loss_function(y_true, y_seq_pred)
+    loss = loss_function(y_true, predictions)
     grads = tape.gradient(loss, model.trainable_variables)
 
     return loss, grads, y_seq_pred

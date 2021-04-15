@@ -2,6 +2,7 @@ from Transformer import Transformer
 from MultiHeadAttention import MultiHeadAttention
 from tqdm import tqdm
 from Metrics import grad
+from Metrics import loss_function
 from Metrics import accuracy_function
 from sklearn.linear_model import SGDClassifier
 from sklearn.preprocessing import LabelBinarizer
@@ -23,7 +24,7 @@ num_heads = int(os.environ["TRANSFORMER_HEADS"])
 batch_size = int(os.environ["BATCH_SIZE"])
 training = bool(int(os.environ["TRAINING"]))
 epochs = int(os.environ["EPOCHS"])
-max_seq_len = 512
+max_seq_len = 200
 
 
 class CustomSchedule(tf.keras.optimizers.schedules.LearningRateSchedule):
@@ -52,28 +53,28 @@ epoch_loss = tf.keras.metrics.Mean(name='train_loss')
 epoch_accuracy = tf.keras.metrics.CategoricalAccuracy(name='train_accuracy')
 
 train_step_signature = [
-    tf.TensorSpec(shape=(batch_size, None), dtype=tf.int64),
-    tf.TensorSpec(shape=(batch_size, None), dtype=tf.int64)
+    tf.TensorSpec(shape=(batch_size, max_seq_len), dtype=tf.int64),
+    tf.TensorSpec(shape=(batch_size, 4), dtype=tf.int64)
 ]
 
-
-@tf.function(input_signature=train_step_signature,
-             experimental_follow_type_hints=True)
+@tf.function(input_signature=train_step_signature)
 def train_step(log_batch: tf.Tensor, labels: tf.Tensor):
+
     transformer_input = tf.tuple([
         log_batch,  # <tf.Tensor: shape=(batch_size, max_seq_len), dtype=uint32>
         labels  # <tf.Tensor: shape=(batch_size, num_classes), dtype=uint32>
     ])
+    
+    # print("CALLING OP")
+    predictions = optimus_prime(transformer_input)
 
-    # Collect Loss and Model Gradient Values
-    loss, grads, y_pred = grad(optimus_prime, transformer_input)
+        # print((predictions))
 
-    # Optimize the model
-    adm_optimizer.apply_gradients(zip(grads, optimus_prime.trainable_variables))
 
-    # Tracking Progress
-    epoch_loss.update_state(loss)  # Adding Batch Loss
-    epoch_accuracy.update_state(labels, y_pred)
+        # print(type(predictions[0]))
+
+    return predictions
+
 
 
 logging.basicConfig(format='%(asctime)s %(levelname)s | %(message)s',
@@ -139,7 +140,7 @@ if __name__ == '__main__':
     word_embedding_matrix = joblib.load("/results/w2v_weights.joblib")
     vocabulary = joblib.load("/results/vocab_dict.joblib")
     dataset = database_builder('/database/')
-    max_seq_len = 512  # get_max_length_(dataset, 0.0)
+    max_seq_len = 200  # get_max_length_(dataset, 0.0)
     vocab_size = len(vocabulary)
 
     logging.info('Processing logs for training')
@@ -157,7 +158,6 @@ if __name__ == '__main__':
     n_iter = 5  # n_logs // batch_size
     remainder = n_logs % batch_size
     attns = []
-    num_classes = 4
 
     optimus_prime = Transformer(
         num_layers,
@@ -165,7 +165,6 @@ if __name__ == '__main__':
         num_heads,
         dff,
         vocab_size,
-        num_classes,
         word_embedding_matrix,
         max_seq_len,
         rate=0.1)
@@ -184,14 +183,30 @@ if __name__ == '__main__':
     for epoch in tqdm(range(epochs)):
 
         start = time.time()
-        # epoch_loss.reset_states()
-        # epoch_accuracy.reset_states()
 
         for idx in range(n_iter):
-            batch, labels = process_batch(dataset, vocabulary, max_seq_len, idx, labels)
+            log_batch, labels = process_batch(dataset, vocabulary, max_seq_len, idx, labels)
+            
+            with tf.GradientTape() as tape:
+                
+                # Returns Eager Tensor for Predictions
+                print("RUNNING TRAING STEP")
+                preds = train_step(log_batch, labels)
 
-            attn = train_step(batch, labels)
-            # attns.append(attn)
+                y_seq_pred = np.empty((batch_size, 4))
+                for idx in range(batch_size):
+                    seq_pred = preds[idx]  # (max_seq_len, classifications)
+                    y_seq_pred[idx] = tf.reduce_mean(seq_pred, axis=0)
+
+                loss = loss_function(labels, y_seq_pred)
+                grads = tape.gradient(loss, optimus_prime.trainable_variables)
+
+            # Optimize the model
+            adm_optimizer.apply_gradients(zip(grads, optimus_prime.trainable_variables))
+
+            # Tracking Progress
+            epoch_loss.update_state(loss)  # Adding Batch Loss
+            epoch_accuracy.update_state(labels, y_seq_pred)
 
             print(f'Epoch {epoch + 1} Batch {idx + 1}')
             # print(f'Epoch {epoch + 1} Batch {idx} Loss {epoch_loss.result():.4f} Accuracy {epoch_accuracy.result():.4f}')

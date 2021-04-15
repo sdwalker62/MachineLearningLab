@@ -1,6 +1,7 @@
 import tensorflow as tf
 import os
 from MultiHeadAttention import MultiHeadAttention
+# from tensorflow.keras.layers import MultiHeadAttention
 
 batch_size = int(os.environ["BATCH_SIZE"])
 training = bool(int(os.environ["TRAINING"]))
