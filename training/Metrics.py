@@ -1,16 +1,16 @@
 import tensorflow as tf
 
-loss_object = tf.keras.losses.SparseCategoricalCrossentropy(
-    from_logits=True, reduction='none')
+loss_object = tf.keras.losses.CategoricalCrossentropy(
+    from_logits=True)
+
+def grad(model, real, pred):
+    loss = loss_function(labels, y_seq_pred)
+    grads = tape.gradient(loss, model.trainable_variables)
+
+    return loss, grads
 
 def loss_function(real, pred):
-  mask = tf.math.logical_not(tf.math.equal(real, 0))
-  loss_ = loss_object(real, pred)
-
-  mask = tf.cast(mask, dtype=loss_.dtype)
-  loss_ *= mask
-
-  return tf.reduce_sum(loss_)/tf.reduce_sum(mask)
+  return loss_object(real, pred)
 
 
 def accuracy_function(real, pred):

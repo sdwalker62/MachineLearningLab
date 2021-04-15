@@ -1,7 +1,7 @@
 from Transformer import Transformer
 from MultiHeadAttention import MultiHeadAttention
 from tqdm import tqdm
-from Metrics import loss_function
+from Metrics import grad
 from Metrics import accuracy_function
 from sklearn.linear_model import SGDClassifier
 from sklearn.preprocessing import LabelBinarizer
@@ -47,47 +47,41 @@ optimus_prime = None
 sgd_optimizer = tf.keras.optimizers.SGD(learning_rate=0.01)
 adm_optimizer = tf.keras.optimizers.Adam(learning_rate, beta_1=0.9, beta_2=0.98, epsilon=1e-9)
 
-train_loss = tf.keras.metrics.Mean(name='train_loss')
-train_accuracy = tf.keras.metrics.CategoricalAccuracy(name='train_accuracy')
+epoch_loss = tf.keras.metrics.Mean(name='train_loss')
+epoch_accuracy = tf.keras.metrics.CategoricalAccuracy(name='train_accuracy')
 
 train_step_signature = [
     tf.TensorSpec(shape=(batch_size, None), dtype=tf.int64),
     tf.TensorSpec(shape=(batch_size, None), dtype=tf.int64)
 ]
 
-
 @tf.function(input_signature=train_step_signature,
              experimental_follow_type_hints=True)
 def train_step(log_batch: tf.Tensor, labels: tf.Tensor) -> list:
-    attn_weights = []
+    transformer_input = tf.tuple([
+        log_batch,  # <tf.Tensor: shape=(batch_size, max_seq_len), dtype=uint32>
+        labels  # <tf.Tensor: shape=(batch_size, num_classes), dtype=uint32>
+    ])
+
     with tf.GradientTape() as tape:
-        transformer_input = tf.tuple([
-            log_batch,  # <tf.Tensor: shape=(batch_size, max_seq_len), dtype=uint32>
-            labels  # <tf.Tensor: shape=(batch_size, num_classes), dtype=uint32>
-        ])
         predictions, attention = optimus_prime(transformer_input)
 
-        # y_pred = predictions
         y_seq_pred = np.empty((batch_size, 4))
-        # y_true = target_values
-        cce = tf.keras.losses.CategoricalCrossentropy()
 
         for idx in range(batch_size):
-            seq_pred = y_pred[idx]  # (max_seq_len, classifications)
+            seq_pred = predictions[idx]  # (max_seq_len, classifications)
             seq_pred = np.array(seq_pred)
             y_seq_pred[idx] = seq_pred.mean(axis=0)
 
-        loss = cce(y_true, y_seq_pred)
+        # Collect Loss and Model Gradient Values
+        loss, grads = grad(optimus_prime, labels, y_seq_pred)
 
-    # sgd_gradients = sgd_tape.gradient(loss, class_nn.trainable_variables)
-    # sgd_optimizer.apply_gradients(zip(sgd_gradients, class_nn.trainable_variables))
-
-    optimus_gradients = tape.gradient(loss, optimus_prime.trainable_variables)
+    # Optimize the model
     adm_optimizer.apply_gradients(zip(optimus_gradients, optimus_prime.trainable_variables))
 
-    train_loss(loss)
-    train_accuracy.update_state(y_true, y_seq_pred)
-    return attn_weights
+    # Tracking Progress
+    epoch_loss.update_state(loss) # Adding Batch Loss
+    train_accuracy.update_state(y_true, y_seq_pred) 
 
 
 logging.basicConfig(format='%(asctime)s %(levelname)s | %(message)s',
@@ -209,10 +203,11 @@ if __name__ == '__main__':
             attn = train_step(batch, labels)
             # attns.append(attn)
 
-            print(
-                f'Epoch {epoch + 1} Batch {idx} Loss {train_loss.result():.4f} Accuracy {train_accuracy.result():.4f}')
+            print(f'Epoch {epoch + 1} Batch {idx} Loss {epoch_loss.result():.4f} Accuracy {epoch_accuracy.result():.4f}')
 
-    print(f'Epoch {epoch + 1} Loss {train_loss.result():.4f} Accuracy {train_accuracy.result():.4f}')
+    print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}".format(epoch,
+                                                                epoch_loss_avg.result(),
+                                                                epoch_accuracy.result()))
 
     print(f'Time taken for 1 epoch: {time.time() - start:.2f} secs\n')
     # joblib.dump(attns, "/results/5_of_50_attn_weights.joblib")
