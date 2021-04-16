@@ -26,8 +26,7 @@ class Transformer(tf.keras.Model):
             input_vocab_size,
             d_model,
             weights=[embedding_matrix],
-            input_length=max_seq_len,
-            trainable=True)
+            input_length=max_seq_len)
 
         self.pos_encoding = PositionalEncoding(max_seq_len, d_model)
 
@@ -73,7 +72,7 @@ class Transformer(tf.keras.Model):
         encoding_padding_mask = None # input_tuple[1]
 
         # adding embedding and position encoding.
-        embedding_tensor = self.embedding(log_batch)  # (batch_size, input_seq_len, d_model)
+        embedding_tensor = self.embedding(log_batch, training=training)  # (batch_size, input_seq_len, d_model)
         embedding_tensor *= tf.math.sqrt(tf.cast(self.d_model, tf.float32))  # (batch_size, input_seq_len, d_model)
         # x += self.pos_encoding[:, :seq_len, :]
         embedding_tensor = self.pos_encoding(embedding_tensor)
@@ -83,34 +82,13 @@ class Transformer(tf.keras.Model):
         # (batch_size, inp_seq_len, d_model), (batch_size, class, inp_seq_len, inp_seq_len)
         enc_output, att = self.transformer_blocks[0](embedding_tensor, encoding_padding_mask)
 
-        print(f"Block 1: {enc_output.shape}")
-        print(f"Block 1 att: {att.shape}")
-
         # Transformer Block #2 vv (takes the place of the Decoder)
         fin_output, att = self.transformer_blocks[1](enc_output, encoding_padding_mask)
 
-        print(f"Block 2: {fin_output.shape}")
-        print(f"Block 2 att: {att.shape}")
-        # # dec_output.shape == (batch_size, tar_seq_len, d_model)
-        # # dec_output, attention_weights = self.decoder(
-        # #     tar, enc_output, training, look_ahead_mask, dec_padding_mask)
-
-        # print(attention_weights.shape)
-        # final_output = self.final_layer(enc_output)  # (batch_size, tar_seq_len, target_vocab_size)
-        # final_output = self.seq_pooling_layer(fin_output)  # (batch_size, max_seq_len, class)
-
         final_output = tf.reduce_mean(fin_output, axis=1)
-        final_output = tf.expand_dims(final_output, axis=0)
-
-        print(f"Pool 1: {final_output.shape}")
 
         out, att = self.transformer_blocks[2](final_output, encoding_padding_mask)
 
-        print(f"Block 3: {out.shape}")
-        print(f"Block 3 att: {att.shape}")
+        seq_representation = tf.reduce_mean(out, axis=1)
 
-        out = tf.reduce_mean(out, axis=1)
-
-        print(f"Pool 2: {out.shape}")
-
-        return final_output  # , attention_weights
+        return seq_representation, att

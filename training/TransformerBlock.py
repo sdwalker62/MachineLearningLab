@@ -4,7 +4,7 @@ from MultiHeadAttention import MultiHeadAttention
 # from tensorflow.keras.layers import MultiHeadAttention
 
 batch_size = int(os.environ["BATCH_SIZE"])
-training = bool(int(os.environ["TRAINING"]))
+training = bool(os.environ["TRAINING"])
 
 
 class EncoderLayer(tf.keras.layers.Layer):
@@ -36,15 +36,15 @@ class EncoderLayer(tf.keras.layers.Layer):
 
         # (2) - Add & Normalize
         attn_output = self.dropout1(attn_output, training=training)
-        out1 = self.layernorm1(x + attn_output)  # (batch_size, input_seq_len, d_model)
+        out1 = self.layernorm1(x + attn_output, training=training)  # (batch_size, input_seq_len, d_model)
 
         # (3) - Feed Forward NN
-        feed_forward_output = self.feed_forward_network(out1)  # (batch_size, input_seq_len, d_model)
+        feed_forward_output = self.feed_forward_network(out1, training=training)  # (batch_size, input_seq_len, d_model)
 
         # (4) - Add & Normalize
-        out2 = self.layernorm2(out1 + feed_forward_output)  # (batch_size, input_seq_len, d_model)
+        out2 = self.layernorm2(out1 + feed_forward_output, training=training)  # (batch_size, input_seq_len, d_model)
 
-        return out2, attn_weights
+        return tf.convert_to_tensor(out2), tf.convert_to_tensor(attn_weights)
 
 
 class TransformerBlock(tf.keras.layers.Layer):
@@ -71,4 +71,4 @@ class TransformerBlock(tf.keras.layers.Layer):
         for i in range(self.num_layers):
             x, attn_weights = self.enc_layers[i](x, mask)
 
-        return x, attn_weights  # (batch_size, input_seq_len, d_model)
+        return tf.convert_to_tensor(x), tf.convert_to_tensor(attn_weights)  # (batch_size, input_seq_len, d_model)

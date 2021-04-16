@@ -3,9 +3,13 @@ from MultiHeadAttention import MultiHeadAttention
 from tqdm import tqdm
 from Metrics import grad
 from Metrics import loss_function
+from Metrics import loss_function2
 from Metrics import accuracy_function
-from sklearn.linear_model import SGDClassifier
-from sklearn.preprocessing import LabelBinarizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
+
 from einops import rearrange
 
 import tensorflow as tf
@@ -46,16 +50,19 @@ class CustomSchedule(tf.keras.optimizers.schedules.LearningRateSchedule):
 learning_rate = CustomSchedule(d_model)
 
 optimus_prime = None
-sgd_optimizer = tf.keras.optimizers.SGD(learning_rate=0.01)
 adm_optimizer = tf.keras.optimizers.Adam(learning_rate, beta_1=0.9, beta_2=0.98, epsilon=1e-9)
 
 epoch_loss = tf.keras.metrics.Mean(name='train_loss')
 epoch_accuracy = tf.keras.metrics.CategoricalAccuracy(name='train_accuracy')
 
 train_step_signature = [
-    tf.TensorSpec(shape=(batch_size, max_seq_len), dtype=tf.int64),
-    tf.TensorSpec(shape=(batch_size, 4), dtype=tf.int64)
+    tf.TensorSpec(shape=([batch_size, None]), dtype=tf.int64),
+    tf.TensorSpec(shape=([batch_size]), dtype=tf.int64)
 ]
+
+add_att_layer = tf.keras.layers.AdditiveAttention()
+softmax = tf.keras.layers.Softmax()
+lr = LogisticRegression()
 
 @tf.function(input_signature=train_step_signature)
 def train_step(log_batch: tf.Tensor, labels: tf.Tensor):
@@ -65,15 +72,31 @@ def train_step(log_batch: tf.Tensor, labels: tf.Tensor):
         labels  # <tf.Tensor: shape=(batch_size, num_classes), dtype=uint32>
     ])
     
-    # print("CALLING OP")
-    predictions = optimus_prime(transformer_input)
+    with tf.GradientTape(persistent=True) as tape:
+        Rs, _ = optimus_prime.call(transformer_input)
 
-        # print((predictions))
+        a_s = add_att_layer([Rs, Rs])
+        y = softmax(a_s * Rs)
 
+        loss_input = tf.tuple([
+            labels, # <tf.Tensor: shape=(batch_size,), dtype=uint32>
+            y       # <tf.Tensor: shape=(batch_size, d_model), dtype=uint32>
+        ])
+        
+        loss = tf.py_function(loss_function, [labels, y], tf.float32)
+        # loss2 = loss_function2(labels, y)
 
-        # print(type(predictions[0]))
+        # print(f'\n\n\n LOSS : {loss} \n\n\n')
 
-    return predictions
+    # Optimize the model
+    grads = tape.gradient(loss, optimus_prime.trainable_variables)
+    adm_optimizer.apply_gradients(zip(grads, optimus_prime.trainable_variables))
+
+    # Tracking Progress
+    epoch_loss.update_state(loss)  # Adding Batch Loss
+    epoch_accuracy.update_state(labels, y)
+
+    # return y
 
 
 
@@ -122,12 +145,14 @@ def process_batch(dataset: pd.DataFrame,
                   idx: int,
                   labels: dict) -> tuple:
     logs = np.zeros((batch_size, max_seq_len))
-    y_true = np.empty((batch_size, 4))
+    y_true = np.empty((batch_size,))
 
     start_window = idx * batch_size
     end_window = (idx + 1) * batch_size
     for log_idx, log in enumerate(dataset['log'][start_window:end_window]):
         for seq_idx, word in enumerate(log.split()):
+            if seq_idx >= max_seq_len:
+                break
             logs[log_idx, seq_idx] = vocabulary[word] if word in vocabulary.keys() else 0
         y_true[log_idx] = labels[dataset['label'][log_idx]]
 
@@ -140,17 +165,18 @@ if __name__ == '__main__':
     word_embedding_matrix = joblib.load("/results/w2v_weights.joblib")
     vocabulary = joblib.load("/results/vocab_dict.joblib")
     dataset = database_builder('/database/')
+    dataset = dataset.sample(frac=1).reset_index(drop=True)
     max_seq_len = 200  # get_max_length_(dataset, 0.0)
     vocab_size = len(vocabulary)
 
     logging.info('Processing logs for training')
     label_unique = dataset['label'].unique()
-    lbp = LabelBinarizer().fit(label_unique)
+    lbp = LabelEncoder().fit(label_unique)
     binary_labels = lbp.transform(label_unique)
 
-    labels = {}
+    log_labels = {}
     for idx, label in enumerate(label_unique):
-        labels.update({
+        log_labels.update({
             label: binary_labels[idx]
         })
 
@@ -171,49 +197,46 @@ if __name__ == '__main__':
 
     optimizer = tf.keras.optimizers.Adam(learning_rate, beta_1=0.9, beta_2=0.98, epsilon=1e-9)
 
-    checkpoint_path = "./checkpoints/train"
-    checkpoint = tf.train.Checkpoint(transformer=optimus_prime, optimizer=optimizer)
-    checkpoint_manager = tf.train.CheckpointManager(checkpoint, checkpoint_path, max_to_keep=5)
+    # checkpoint_path = "./checkpoints/train"
+    # checkpoint = tf.train.Checkpoint(transformer=optimus_prime, optimizer=optimizer)
+    # checkpoint_manager = tf.train.CheckpointManager(checkpoint, checkpoint_path, max_to_keep=5)
 
-    # if a checkpoint exists, restore the latest checkpoint.
-    if checkpoint_manager.latest_checkpoint:
-        checkpoint.restore(checkpoint_manager.latest_checkpoint)
-        print('Latest checkpoint restored!!')
+    # # if a checkpoint exists, restore the latest checkpoint.
+    # if checkpoint_manager.latest_checkpoint:
+    #     checkpoint.restore(checkpoint_manager.latest_checkpoint)
+    #     print('Latest checkpoint restored!!')
 
     for epoch in tqdm(range(epochs)):
 
         start = time.time()
 
         for idx in range(n_iter):
-            log_batch, labels = process_batch(dataset, vocabulary, max_seq_len, idx, labels)
-            
-            with tf.GradientTape() as tape:
+            log_batch, labels = process_batch(dataset, vocabulary, max_seq_len, idx, log_labels)
+            # with tf.GradientTape() as tape:
                 
                 # Returns Eager Tensor for Predictions
-                print("RUNNING TRAING STEP")
-                preds = train_step(log_batch, labels)
+            train_step(log_batch, labels)
+                # lr.fit(preds, labels)
 
-                y_seq_pred = np.empty((batch_size, 4))
-                for idx in range(batch_size):
-                    seq_pred = preds[idx]  # (max_seq_len, classifications)
-                    y_seq_pred[idx] = tf.reduce_mean(seq_pred, axis=0)
+                # print(y_preds)
+                # print(f'Accuracy Score: {accuracy_score(labels, y_preds)}')
+                # print(f'Classification Report: {classification_report(labels, y_preds)}')
+                # loss = log_loss(labels, lr.predict_proba(preds), eps=1e-15)
+                # grads = tape.gradient(loss, optimus_prime.trainable_variables)
 
-                loss = loss_function(labels, y_seq_pred)
-                grads = tape.gradient(loss, optimus_prime.trainable_variables)
+            # # Optimize the model
+            # adm_optimizer.apply_gradients(zip(grads, optimus_prime.trainable_variables))
 
-            # Optimize the model
-            adm_optimizer.apply_gradients(zip(grads, optimus_prime.trainable_variables))
-
-            # Tracking Progress
-            epoch_loss.update_state(loss)  # Adding Batch Loss
-            epoch_accuracy.update_state(labels, y_seq_pred)
+            # # Tracking Progress
+            # epoch_loss.update_state(loss)  # Adding Batch Loss
+            # epoch_accuracy.update_state(labels, y_seq_pred)
 
             print(f'Epoch {epoch + 1} Batch {idx + 1}')
             # print(f'Epoch {epoch + 1} Batch {idx} Loss {epoch_loss.result():.4f} Accuracy {epoch_accuracy.result():.4f}')
 
-    print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}".format(epoch,
-                                                                epoch_loss.result(),
-                                                                epoch_accuracy.result()))
+        print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}".format(epoch,
+                                                                    epoch_loss.result(),
+                                                                    epoch_accuracy.result()))
 
-    print(f'Time taken for 1 epoch: {time.time() - start:.2f} secs\n')
+        print(f'Time taken for 1 epoch: {time.time() - start:.2f} secs\n')
     # joblib.dump(attns, "/results/5_of_50_attn_weights.joblib")
