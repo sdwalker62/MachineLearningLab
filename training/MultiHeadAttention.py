@@ -65,9 +65,9 @@ class MultiHeadAttention(tf.keras.layers.Layer):
   def call(self, v, k, q, mask):
     batch_size = tf.shape(q)[0]
 
-    q = self.wq(q, training=training)  # (batch_size, seq_len, d_model)
-    k = self.wk(k, training=training)  # (batch_size, seq_len, d_model)
-    v = self.wv(v, training=training)  # (batch_size, seq_len, d_model)
+    q = self.wq(q)  # (batch_size, seq_len, d_model)
+    k = self.wk(k)  # (batch_size, seq_len, d_model)
+    v = self.wv(v)  # (batch_size, seq_len, d_model)
 
     q = self.split_heads(q, batch_size)  # (batch_size, num_heads, seq_len_q, depth)
     k = self.split_heads(k, batch_size)  # (batch_size, num_heads, seq_len_k, depth)
@@ -84,6 +84,6 @@ class MultiHeadAttention(tf.keras.layers.Layer):
     concat_attention = tf.reshape(scaled_attention,
                                   (batch_size, -1, self.d_model))  # (batch_size, seq_len_q, d_model)
 
-    output = self.dense(concat_attention, training=training)  # (batch_size, seq_len_q, d_model)
+    output = self.dense(concat_attention)  # (batch_size, seq_len_q, d_model)
 
     return tf.convert_to_tensor(output), tf.convert_to_tensor(attention_weights)

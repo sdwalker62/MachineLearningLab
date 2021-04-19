@@ -63,10 +63,10 @@ class Transformer(tf.keras.Model):
         #     # tf.keras.layers.Softmax()
         # ])
 
-        self.final_layer = tf.keras.Sequential([
-            tf.keras.layers.Dense(d_model),
-            tf.keras.layers.Softmax()
-        ])
+        # self.final_layer = tf.keras.Sequential([
+        #     tf.keras.layers.Dense(d_model),
+        #     tf.keras.layers.Softmax()
+        # ])
 
         self.dropout = tf.keras.layers.Dropout(rate)
 
@@ -96,6 +96,6 @@ class Transformer(tf.keras.Model):
 
         seq_representation = tf.reduce_mean(out, axis=1)
 
-        seq_representation = self.final_layer(seq_representation)
+        # seq_representation = self.final_layer(seq_representation)
 
         return seq_representation, att

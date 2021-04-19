@@ -78,36 +78,24 @@ def train_step(log_batch: tf.Tensor, labels: tf.Tensor):
         labels  # <tf.Tensor: shape=(batch_size, num_classes), dtype=float32>
     ])
     
-    with tf.GradientTape(persistent=True) as tape:
+    with tf.GradientTape() as tape:
         Rs, _ = optimus_prime.call(transformer_input)
 
         a_s = add_att_layer([Rs, Rs])
         y = softmax(a_s * Rs)
-
-        loss_input = tf.tuple([
-            labels, # <tf.Tensor: shape=(batch_size,), dtype=float32>
-            y       # <tf.Tensor: shape=(batch_size, d_model), dtype=float32>
-        ])
         
         loss = tf.py_function(loss_function, [labels, y], tf.float32)
 
-        y = s1(y)
-        # loss2 = loss_function2(labels, y)
-
-        # print(f'\n\n\n LOSS : {loss} \n\n\n')
+        pred = s1(y)
+        labels = tf.cast(labels, tf.int64)
 
     # Optimize the model
     grads = tape.gradient(loss, optimus_prime.trainable_variables)
     adm_optimizer.apply_gradients(zip(grads, optimus_prime.trainable_variables))
 
-    print(f'{labels.shape} -- {y.shape}')
-
     # Tracking Progress
     epoch_loss.update_state(loss)  # Adding Batch Loss
-    epoch_accuracy.update_state(accuracy_function(labels, y))
-
-    # return y
-
+    epoch_accuracy.update_state(accuracy_function(labels, pred))
 
 
 logging.basicConfig(format='%(asctime)s %(levelname)s | %(message)s',
@@ -220,26 +208,14 @@ if __name__ == '__main__':
 
         start = time.time()
 
+        epoch_loss.reset_states()
+        epoch_accuracy.reset_states()
+
         for idx in range(n_iter):
             log_batch, labels = process_batch(dataset, vocabulary, max_seq_len, idx, log_labels)
-            # with tf.GradientTape() as tape:
                 
-                # Returns Eager Tensor for Predictions
+            # Returns Eager Tensor for Predictions
             train_step(log_batch, labels)
-                # lr.fit(preds, labels)
-
-                # print(y_preds)
-                # print(f'Accuracy Score: {accuracy_score(labels, y_preds)}')
-                # print(f'Classification Report: {classification_report(labels, y_preds)}')
-                # loss = log_loss(labels, lr.predict_proba(preds), eps=1e-15)
-                # grads = tape.gradient(loss, optimus_prime.trainable_variables)
-
-            # # Optimize the model
-            # adm_optimizer.apply_gradients(zip(grads, optimus_prime.trainable_variables))
-
-            # # Tracking Progress
-            # epoch_loss.update_state(loss)  # Adding Batch Loss
-            # epoch_accuracy.update_state(labels, y_seq_pred)
 
             print(f'Epoch {epoch + 1} Batch {idx + 1}/{n_iter}')
 

@@ -20,15 +20,14 @@ class EncoderLayer(tf.keras.layers.Layer):
 
         self.feed_forward_network = tf.keras.Sequential([
             tf.keras.layers.Dense(dff, activation='relu'),  # (batch_size, seq_len, dff)
-            tf.keras.layers.Dropout(rate),
             tf.keras.layers.Dense(d_model),  # (batch_size, seq_len, d_model)
-            tf.keras.layers.Dropout(rate)
         ])
 
         self.layernorm1 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
         self.layernorm2 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
 
         self.dropout1 = tf.keras.layers.Dropout(rate)
+        self.dropout2 = tf.keras.layers.Dropout(rate)
 
     def call(self, x, mask):
         # (1) - Attention Score
@@ -36,13 +35,14 @@ class EncoderLayer(tf.keras.layers.Layer):
 
         # (2) - Add & Normalize
         attn_output = self.dropout1(attn_output, training=training)
-        out1 = self.layernorm1(x + attn_output, training=training)  # (batch_size, input_seq_len, d_model)
+        out1 = self.layernorm1(x + attn_output)  # (batch_size, input_seq_len, d_model)
 
         # (3) - Feed Forward NN
-        feed_forward_output = self.feed_forward_network(out1, training=training)  # (batch_size, input_seq_len, d_model)
+        feed_forward_output = self.feed_forward_network(out1)  # (batch_size, input_seq_len, d_model)
 
         # (4) - Add & Normalize
-        out2 = self.layernorm2(out1 + feed_forward_output, training=training)  # (batch_size, input_seq_len, d_model)
+        feed_forward_output = self.dropout2(feed_forward_output, training=training)
+        out2 = self.layernorm2(out1 + feed_forward_output)  # (batch_size, input_seq_len, d_model)
 
         return tf.convert_to_tensor(out2), tf.convert_to_tensor(attn_weights)
 

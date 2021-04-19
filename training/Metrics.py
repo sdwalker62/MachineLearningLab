@@ -49,9 +49,7 @@ def loss_function2(real, pred):
 
 
 def accuracy_function(real, pred):
-    real = tf.cast(real, tf.int64)
-    pred = tf.argmax(pred, axis=1)
-    accuracies = tf.equal(real, pred)
+    accuracies = tf.equal(real, tf.argmax(pred, axis=1))
 
     mask = tf.math.logical_not(tf.math.equal(real, 0))
     accuracies = tf.math.logical_and(mask, accuracies)
