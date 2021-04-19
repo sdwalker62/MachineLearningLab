@@ -33,9 +33,13 @@ def grad(model, x):
     return loss, grads, y_seq_pred
     
 def loss_function(real, pred):
-    lr.fit(pred, real)
-    loss = tf.cast(log_loss(real, lr.predict_proba(pred), eps=1e-15), dtype=tf.float32)
-    return loss
+  mask = tf.math.logical_not(tf.math.equal(real, 0))
+  loss_ = loss_object(real, pred)
+
+  mask = tf.cast(mask, dtype=loss_.dtype)
+  loss_ *= mask
+
+  return tf.reduce_sum(loss_)/tf.reduce_sum(mask)
 
 def loss_function2(real, pred):
   mask = tf.math.logical_not(tf.math.equal(real, 0))
