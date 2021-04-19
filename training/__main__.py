@@ -53,11 +53,11 @@ optimus_prime = None
 adm_optimizer = tf.keras.optimizers.Adam(learning_rate, beta_1=0.9, beta_2=0.98, epsilon=1e-9)
 
 epoch_loss = tf.keras.metrics.Mean(name='train_loss')
-epoch_accuracy = tf.keras.metrics.CategoricalAccuracy(name='train_accuracy')
+epoch_accuracy = tf.keras.metrics.SparseCategoricalCrossentropy(name='train_accuracy')
 
 train_step_signature = [
-    tf.TensorSpec(shape=([batch_size, None]), dtype=tf.int64),
-    tf.TensorSpec(shape=([batch_size]), dtype=tf.int64)
+    tf.TensorSpec(shape=([batch_size, None]), dtype=tf.float32),
+    tf.TensorSpec(shape=([batch_size]), dtype=tf.float32)
 ]
 
 add_att_layer = tf.keras.layers.AdditiveAttention()
@@ -156,7 +156,7 @@ def process_batch(dataset: pd.DataFrame,
             logs[log_idx, seq_idx] = vocabulary[word] if word in vocabulary.keys() else 0
         y_true[log_idx] = labels[dataset['label'][log_idx]]
 
-    return tf.convert_to_tensor(logs, dtype=tf.int64), tf.convert_to_tensor(y_true, dtype=tf.int64)
+    return tf.convert_to_tensor(logs, dtype=tf.float32), tf.convert_to_tensor(y_true, dtype=tf.float32)
 
 
 if __name__ == '__main__':
@@ -181,7 +181,7 @@ if __name__ == '__main__':
         })
 
     n_logs = len(dataset.index)
-    n_iter = 5  # n_logs // batch_size
+    n_iter = n_logs // batch_size
     remainder = n_logs % batch_size
     attns = []
 
@@ -231,7 +231,11 @@ if __name__ == '__main__':
             # epoch_loss.update_state(loss)  # Adding Batch Loss
             # epoch_accuracy.update_state(labels, y_seq_pred)
 
-            print(f'Epoch {epoch + 1} Batch {idx + 1}')
+            print(f'Epoch {epoch + 1} Batch {idx + 1}/{n_iter}')
+
+            if (idx + 1) % 50 == 0:
+                print(f'Loss {epoch_loss.result():.3f}, Accuracy: {epoch_accuracy.result():.3%}')
+
             # print(f'Epoch {epoch + 1} Batch {idx} Loss {epoch_loss.result():.4f} Accuracy {epoch_accuracy.result():.4f}')
 
         print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}".format(epoch,
