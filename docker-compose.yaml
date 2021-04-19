@@ -25,7 +25,7 @@ services:
       - TRANSFORMER_DFF=2048
       - TRANSFORMER_HEADS=8
       - DROPOUT_RATE=0.1
-      - BATCH_SIZE=100
+      - BATCH_SIZE=50
       - TRAINING=1
     volumes:
       - ./database:/database:ro

@@ -53,7 +53,7 @@ optimus_prime = None
 adm_optimizer = tf.keras.optimizers.Adam(learning_rate, beta_1=0.9, beta_2=0.98, epsilon=1e-9)
 
 epoch_loss = tf.keras.metrics.Mean(name='train_loss')
-epoch_accuracy = tf.keras.metrics.SparseCategoricalCrossentropy(name='train_accuracy')
+epoch_accuracy = tf.keras.metrics.Mean(name='train_accuracy')
 
 train_step_signature = [
     tf.TensorSpec(shape=([batch_size, None]), dtype=tf.float32),
@@ -64,12 +64,18 @@ add_att_layer = tf.keras.layers.AdditiveAttention()
 softmax = tf.keras.layers.Softmax()
 lr = LogisticRegression()
 
+s1 = tf.keras.Sequential([
+    tf.keras.layers.Dense(512),
+    tf.keras.layers.Dense(4),
+    tf.keras.layers.Softmax()
+])
+
 @tf.function(input_signature=train_step_signature)
 def train_step(log_batch: tf.Tensor, labels: tf.Tensor):
 
     transformer_input = tf.tuple([
-        log_batch,  # <tf.Tensor: shape=(batch_size, max_seq_len), dtype=uint32>
-        labels  # <tf.Tensor: shape=(batch_size, num_classes), dtype=uint32>
+        log_batch,  # <tf.Tensor: shape=(batch_size, max_seq_len), dtype=float32>
+        labels  # <tf.Tensor: shape=(batch_size, num_classes), dtype=float32>
     ])
     
     with tf.GradientTape(persistent=True) as tape:
@@ -79,11 +85,13 @@ def train_step(log_batch: tf.Tensor, labels: tf.Tensor):
         y = softmax(a_s * Rs)
 
         loss_input = tf.tuple([
-            labels, # <tf.Tensor: shape=(batch_size,), dtype=uint32>
-            y       # <tf.Tensor: shape=(batch_size, d_model), dtype=uint32>
+            labels, # <tf.Tensor: shape=(batch_size,), dtype=float32>
+            y       # <tf.Tensor: shape=(batch_size, d_model), dtype=float32>
         ])
         
         loss = tf.py_function(loss_function, [labels, y], tf.float32)
+
+        y = s1(y)
         # loss2 = loss_function2(labels, y)
 
         # print(f'\n\n\n LOSS : {loss} \n\n\n')
@@ -92,9 +100,11 @@ def train_step(log_batch: tf.Tensor, labels: tf.Tensor):
     grads = tape.gradient(loss, optimus_prime.trainable_variables)
     adm_optimizer.apply_gradients(zip(grads, optimus_prime.trainable_variables))
 
+    print(f'{labels.shape} -- {y.shape}')
+
     # Tracking Progress
     epoch_loss.update_state(loss)  # Adding Batch Loss
-    epoch_accuracy.update_state(labels, y)
+    epoch_accuracy.update_state(accuracy_function(labels, y))
 
     # return y
 
@@ -233,7 +243,7 @@ if __name__ == '__main__':
 
             print(f'Epoch {epoch + 1} Batch {idx + 1}/{n_iter}')
 
-            if (idx + 1) % 50 == 0:
+            if (idx + 1) % 10 == 0:
                 print(f'Loss {epoch_loss.result():.3f}, Accuracy: {epoch_accuracy.result():.3%}')
 
             # print(f'Epoch {epoch + 1} Batch {idx} Loss {epoch_loss.result():.4f} Accuracy {epoch_accuracy.result():.4f}')
