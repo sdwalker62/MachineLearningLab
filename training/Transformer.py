@@ -40,34 +40,6 @@ class Transformer(tf.keras.Model):
                         max_seq_len,
                         rate) for _ in range(3)]
 
-        # self.final_transformer_block = TransformerBlock(
-        #     num_layers,
-        #     d_model,
-        #     embedding_matrix,
-        #     num_heads,
-        #     dff,
-        #     input_vocab_size,
-        #     max_seq_len,
-        #     rate)
-
-        # self.log_pooling_layer = tf.keras.Sequential([
-        #     tf.keras.layers.Dense(target_vocab_size, activation='relu'),
-        #     tf.keras.layers.AveragePooling1D(data_format='channels_last'),
-        #     tf.keras.layers.Softmax()
-        # ])
-
-        # self.seq_pooling_layer = tf.keras.Sequential([
-        #     tf.reduce_mean(axis=0)
-        #     # tf.keras.layers.Dense(target_vocab_size, activation='relu'),
-        #     # tf.keras.layers.AveragePooling1D(data_format='channels_last'),
-        #     # tf.keras.layers.Softmax()
-        # ])
-
-        # self.final_layer = tf.keras.Sequential([
-        #     tf.keras.layers.Dense(d_model),
-        #     tf.keras.layers.Softmax()
-        # ])
-
         self.dropout = tf.keras.layers.Dropout(rate)
 
     # def call(self, inp, tar, enc_padding_mask,
@@ -79,7 +51,6 @@ class Transformer(tf.keras.Model):
         # adding embedding and position encoding.
         embedding_tensor = self.embedding(log_batch, training=training)  # (batch_size, input_seq_len, d_model)
         embedding_tensor *= tf.math.sqrt(tf.cast(self.d_model, tf.float32))  # (batch_size, input_seq_len, d_model)
-        # x += self.pos_encoding[:, :seq_len, :]
         embedding_tensor = self.pos_encoding(embedding_tensor)
         embedding_tensor = self.dropout(embedding_tensor, training=training)
 
@@ -95,7 +66,5 @@ class Transformer(tf.keras.Model):
         out, att = self.transformer_blocks[2](final_output, encoding_padding_mask)
 
         seq_representation = tf.reduce_mean(out, axis=1)
-
-        # seq_representation = self.final_layer(seq_representation)
 
         return seq_representation, att

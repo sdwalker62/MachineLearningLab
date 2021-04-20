@@ -81,8 +81,10 @@ def train_step(log_batch: tf.Tensor, labels: tf.Tensor):
     with tf.GradientTape() as tape:
         Rs, _ = optimus_prime.call(transformer_input)
 
-        a_s = add_att_layer([Rs, Rs])
-        y = softmax(a_s * Rs)
+        # a_s = add_att_layer([Rs, Rs])
+        # y = softmax(a_s * Rs)
+
+        y = Rs
         
         loss = tf.py_function(loss_function, [labels, y], tf.float32)
 
@@ -195,14 +197,14 @@ if __name__ == '__main__':
 
     optimizer = tf.keras.optimizers.Adam(learning_rate, beta_1=0.9, beta_2=0.98, epsilon=1e-9)
 
-    # checkpoint_path = "./checkpoints/train"
-    # checkpoint = tf.train.Checkpoint(transformer=optimus_prime, optimizer=optimizer)
-    # checkpoint_manager = tf.train.CheckpointManager(checkpoint, checkpoint_path, max_to_keep=5)
+    checkpoint_path = "./checkpoints/train"
+    checkpoint = tf.train.Checkpoint(step=tf.Variable(1), transformer=optimus_prime, optimizer=optimizer)
+    checkpoint_manager = tf.train.CheckpointManager(checkpoint, checkpoint_path, max_to_keep=5)
 
-    # # if a checkpoint exists, restore the latest checkpoint.
-    # if checkpoint_manager.latest_checkpoint:
-    #     checkpoint.restore(checkpoint_manager.latest_checkpoint)
-    #     print('Latest checkpoint restored!!')
+    # if a checkpoint exists, restore the latest checkpoint.
+    if checkpoint_manager.latest_checkpoint:
+        checkpoint.restore(checkpoint_manager.latest_checkpoint)
+        print('Latest checkpoint restored!!')
 
     for epoch in tqdm(range(epochs)):
 
@@ -216,17 +218,15 @@ if __name__ == '__main__':
                 
             # Returns Eager Tensor for Predictions
             train_step(log_batch, labels)
+            checkpoint.step.assign_add(1)
 
-            print(f'Epoch {epoch + 1} Batch {idx + 1}/{n_iter}')
-
-            if (idx + 1) % 10 == 0:
+            if int(checkpoint.step) % 10 == 0:
+                save_path = checkpoint_manager.save()
+                print(f'Saved checkpoint for step {int(checkpoint.step)}: {save_path}')
                 print(f'Loss {epoch_loss.result():.3f}, Accuracy: {epoch_accuracy.result():.3%}')
-
-            # print(f'Epoch {epoch + 1} Batch {idx} Loss {epoch_loss.result():.4f} Accuracy {epoch_accuracy.result():.4f}')
 
         print("Epoch {:03d}: Loss: {:.3f}, Accuracy: {:.3%}".format(epoch,
                                                                     epoch_loss.result(),
                                                                     epoch_accuracy.result()))
 
         print(f'Time taken for 1 epoch: {time.time() - start:.2f} secs\n')
-    # joblib.dump(attns, "/results/5_of_50_attn_weights.joblib")
