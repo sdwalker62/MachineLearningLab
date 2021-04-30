@@ -11,3 +11,6 @@ results/*
 !results/.gitkeep
 
 /venv/
+
+# Ignore all zone identifier files with pushing from WSL2 on windows 
+*:Zone.Identifier
