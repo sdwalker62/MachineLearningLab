@@ -48,3 +48,15 @@ services:
       - ./results:/code/results:ro
     ports:
       - "8050:8050"
+
+  jupyter:
+    build: jupyter_notebooks/
+    container_name: jupyter
+    environment: 
+      - JUPYTER_ENABLE_LAB=yes
+    volumes:
+      - ./results:/home/jovyan/results
+      - ./database:/home/jovyan/database
+      - ./jupyter_notebooks:/home/jovyan/jupyter_notebooks
+    ports:
+      - "8888:8888"

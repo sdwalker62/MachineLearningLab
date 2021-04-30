@@ -1,0 +1,7 @@
+jupyterlab_theme_solarized_dark
+drain3
+plotly==4.5
+jupyter-dash
+tqdm
+jupyterlab-horizon-theme
+jupyterthemes
