@@ -60,3 +60,4 @@ services:
       - ./jupyter_notebooks:/home/jovyan/jupyter_notebooks
     ports:
       - "8888:8888"
+      - "8050:8050"

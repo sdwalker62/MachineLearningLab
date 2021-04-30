@@ -1,6 +1,8 @@
 # set base image (host OS)
 FROM jupyter/tensorflow-notebook
 
+USER root
+
 # copy the dependencies file to the working directory
 COPY requirements.txt requirements.txt
 
@@ -8,8 +10,10 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 RUN jupyter labextension install \
-    @jupyter-widgets/jupyterlab-manager 
-
+    @jupyter-widgets/jupyterlab-manager \
+    jupyterlab-system-monitor \
+    @jupyterlab/debugger
+   
 COPY config/ /home/jovyan/.jupyter/
 
 # install FiraCode font
@@ -18,4 +22,4 @@ RUN fc-cache -f -v
 
 
 # command to run on container start
-CMD ["jupyter", "lab", "--allow-root"]
+CMD ["jupyter", "lab","--ip=0.0.0.0", "--allow-root"]
