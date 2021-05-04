@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.7"
 
 services:
   preprocessing:
@@ -50,18 +50,19 @@ services:
       - "8050:8050"
 
   jupyter:
-    build: jupyter/
-      # args:
-      #   - username=${USER}
-      #   - uid=${UID}
-      #   - gid=${GID}
+    build: 
+      context: jupyter/
+      args:
+        - username=${username}
+        - uid=${uid}
+        - gid=${gid}
     container_name: jupyter
     environment: 
-      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_ENABLE_LAB=yes  
     volumes:
-      - ./results:/home/${USER}/app/results
-      - ./database:/home/${USER}/app/data
-      - ./assets:/home/${USER}/app/assets
+      - ./results:/home/${username}/app/results
+      - ./database:/home/${username}/app/data
+      - ./assets:/home/${username}/app/assets
     ports:
       - "8888:8888"
       - "8050:8050"
@@ -69,30 +70,30 @@ services:
     stdin_open: true
     tty: true
 
-  jupyter_gpu:
-    build: 
-      context: jupyter_notebooks_gpu/
-      args:
-        - CUDA=11.0
-    container_name: jupyter_gpu
-    environment:
-      - JUPYTER_ENABLE_LAB=yes
-      - CUDA_VERSION=11.0.3
-      - PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-      - LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64
-      - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_REQUIRE_CUDA=cuda>=11.0 brand=tesla,driver>=418,driver<419 brand=tesla,driver>=440,driver<441 brand=tesla,driver>=450,driver<451
-    volumes:
-      - ./results:/home/jovyan/results
-      - ./database:/home/jovyan/database
-      - ./jupyter_notebooks:/home/jovyan/jupyter_notebooks
-    ports:
-      - "8888:8888"
-      - "8050:8050"
-    deploy:
-      resources:
-        reservations:
-          devices:
-          - driver: nvidia
-            count: 1
-            capabilities: [gpu, utility, compute]
+  # jupyter_gpu:
+  #   build: 
+  #     context: jupyter_notebooks_gpu/
+  #     args:
+  #       - CUDA=11.0
+  #   container_name: jupyter_gpu
+  #   environment:
+  #     - JUPYTER_ENABLE_LAB=yes
+  #     - CUDA_VERSION=11.0.3
+  #     - PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  #     - LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64
+  #     - NVIDIA_VISIBLE_DEVICES=all
+  #     - NVIDIA_REQUIRE_CUDA=cuda>=11.0 brand=tesla,driver>=418,driver<419 brand=tesla,driver>=440,driver<441 brand=tesla,driver>=450,driver<451
+  #   volumes:
+  #     - ./results:/home/jovyan/results
+  #     - ./database:/home/jovyan/database
+  #     - ./jupyter_notebooks:/home/jovyan/jupyter_notebooks
+  #   ports:
+  #     - "8888:8888"
+  #     - "8050:8050"
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #         - driver: nvidia
+  #           count: 1
+  #           capabilities: [gpu, utility, compute]

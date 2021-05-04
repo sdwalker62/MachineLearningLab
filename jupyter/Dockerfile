@@ -12,11 +12,10 @@ RUN  apt-get update \
   && apt-get install -y wget \
   && rm -rf /var/lib/apt/lists/* 
 
-
 # -- User creation -- #
-ARG username=the-optimal-policies
-ARG uid=1000
-ARG gid=100
+ARG username
+ARG uid
+ARG gid
 ENV USER $username
 ENV UID $uid
 ENV GID $gid
@@ -27,7 +26,6 @@ RUN adduser --disabled-password \
     --gid $GID \
     --home $HOME \
     $USER
-
 
 # -- Copy config files -- # 
 COPY environment.yml requirements.txt /tmp/
@@ -42,9 +40,9 @@ RUN chown $UID:$GID /usr/local/bin/entrypoint.sh && \
     chmod u+x /usr/local/bin/entrypoint.sh
 
 COPY config/ /home/$USER/.jupyter/
+RUN chown -R $USER:$GID /home/${USER}/.jupyter/
 
-
-# -- Directory creation -- #
+# -- Directory creation --
 
 # Env dir
 ENV ENV_PREFIX $PWD/env
@@ -62,6 +60,7 @@ ENV PROJECT_DIR $HOME/app
 RUN mkdir $PROJECT_DIR && \
     chown $UID:$GID $PROJECT_DIR && \
     chown $UID:$GID $HOME
+RUN chown -R $USER:$GID $HOME/app/
 
 
 # -- Install miniconda -- #
