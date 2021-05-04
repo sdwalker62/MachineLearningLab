@@ -50,17 +50,24 @@ services:
       - "8050:8050"
 
   jupyter:
-    build: jupyter_notebooks/
+    build: jupyter/
+      # args:
+      #   - username=${USER}
+      #   - uid=${UID}
+      #   - gid=${GID}
     container_name: jupyter
     environment: 
       - JUPYTER_ENABLE_LAB=yes
     volumes:
-      - ./results:/home/jovyan/results
-      - ./database:/home/jovyan/database
-      - ./jupyter_notebooks:/home/jovyan/jupyter_notebooks
+      - ./results:/home/${USER}/app/results
+      - ./database:/home/${USER}/app/data
+      - ./assets:/home/${USER}/app/assets
     ports:
       - "8888:8888"
       - "8050:8050"
+    init: true
+    stdin_open: true
+    tty: true
 
   jupyter_gpu:
     build: 
