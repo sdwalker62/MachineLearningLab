@@ -4,7 +4,7 @@ jupyter_dash
 #tqdm
 #jupyterlab-lsp
 aquirdturtle_collapsible_headings
-#ipdb
+ipdb
 #jax
 sklearn
 #gensim

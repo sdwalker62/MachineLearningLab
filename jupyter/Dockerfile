@@ -40,6 +40,7 @@ RUN chown $UID:$GID /usr/local/bin/entrypoint.sh && \
     chmod u+x /usr/local/bin/entrypoint.sh
 
 COPY config/ /home/$USER/.jupyter/
+
 RUN chown -R $USER:$GID /home/${USER}/.jupyter/
 
 # -- Directory creation --
@@ -60,7 +61,8 @@ ENV PROJECT_DIR $HOME/app
 RUN mkdir $PROJECT_DIR && \
     chown $UID:$GID $PROJECT_DIR && \
     chown $UID:$GID $HOME
-RUN chown -R $USER:$GID $HOME/app/
+
+RUN chown -R $USER:$GID /home/$USER/app/
 
 
 # -- Install miniconda -- #
