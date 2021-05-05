@@ -112,6 +112,32 @@ Finally test that the installation was successful:
 docker-compose --version
 ```
 
+### Run the Jupyter container
+
+As things stand we are not using cuda to allow for GPU acceleration. This will soon change as we are actively working to update the container to include cuda. Hence for the following instructions assume that cuda is not present. 
+
+Now that all of the tools required to run the Jupyter container have been installed we can setup a local project repository using `git clone`. I will assume that you have setup an ssh key for your machine. 
+
+Navigate to a directory where you wish to place project files. You may wish to make a folder in your home directory for this purpose. For example if you wanted to house all of your code in a folder called projects you would run `mkdir ~/projects` then navigate to this folder using `cd ~/projects`. 
+
+From here you can pull down the repository using 
+
+```console
+git clone git@github.com:sdwalker62/log-analyzer.git
+```
+This will create a new folder in your current directory called log-analyzer. Navigate to this folder using `cd log-analyzer`. In this folder is the docker-compose.yaml which contains the instructions for docker-compose as well as the project's sub-directories described below. From here you can run 
+
+```console
+sudo docker-compose up jupyter 
+```
+or 
+
+```console
+sudo docker-compose up --build jupyter
+```
+
+if you have made changes to either the docker-compose file or the Dockerfile in /jupyter/
+
 ## 1. jupyter 
 
 This is the main directory for experimentation. It houses all the code necessary to build the jupyter docker container. The notebooks, results, data, and doc directories are mapped to this container through docker-compose for serializing/deserializing objects, loading trained models, and modifying LaTeX reports. 
