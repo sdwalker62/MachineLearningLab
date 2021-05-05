@@ -89,12 +89,23 @@ We don't just have a singular Docker container. If that was true we could use th
 
 To manage these containers we use docker-compose. The Dockerfiles that contain the build instructions are still called by the docker-compose command. I will expand more on this when I discuss how to run the container. First let's install docker-compose:
 
-Again we will need to add the correct repository and then update that repository before installing docker-compose. 
+To install docker-compose we will use curl. If for some reason you do not have curl you can install it using:
+
+```console
+apt-get install curl
+```
+
+Now we will use curl to download docker-compose into /usr/local/bin/
 
 ```console 
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```
+For security reasons files downloaded from the web are not executable. To make the docker-compose binary executable run 
+
+```console
 sudo chmod +x /usr/local/bin/docker-compose
 ```
+
 Finally test that the installation was successful:
 
 ```console
