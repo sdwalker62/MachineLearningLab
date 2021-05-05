@@ -20,8 +20,8 @@ This repository is the main project page for research into log messages and thei
 
 * jupyter: The docker container for our jupyterlab environment. 
 * notebook: Repository for our jupyter notebooks, only contains \*.ipynb files  
-* data: All databases and other source data will be stored here, note this is not where models and other serialized derived data is to be stored.
-* reults: Data which is derivative of information from the data directory will be kept here.
+* data: Databases and other source data will be stored here, note this is not where models and other derived data is to be stored.
+* reults: Derivative data will be kept here.
 * doc: Any useful documentation will be kept in this directory. This includes research papers and notes. 
 * preprocessing: The code for the pre-processing pipeline. 
 * training: The transformer code is maintained here. Note this is not where saved models are stored, check the results folder. 
