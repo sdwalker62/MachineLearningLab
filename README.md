@@ -29,6 +29,14 @@ Please note that if you intend to use CUDA to leverage your GPU then linux is a 
 
 From here on I will assume you are using Ubuntu and thus aptitude. If you are using yum or pacman just substitute those commands or using Docker's documentation for installing on those distributions. 
 
+First a word on why we use Docker. I will try to explain our rationale for the tools we use whenever appropriate. Of course some of this is a matter of opinion.
+
+Docker allows for us to easily package and manage our environments. The members of our team use Linux (Arch/Ubuntu), macOS, and Windows 10. To provide a more consistent experience across all of these platforms we package our environment using Docker containers. We can design these containers however we would like and using whatever verions are necessary. Instead of requiring all members to use Python 3.9, which many aren't using and would require then to setup yet *another* environment using pyenv or virtualenv, we simply record that decision in the Dockerfile. Since we do not move large files from the host machine to the Docker VM (if not on Linux) we don't experience any performance degradation when using Docker, so from our perspective there are only positives. I will talk about the design of our container later.
+
+Now let's get started. 
+
+### Install Docker Engine
+
 To start you will need docker. Check to see if any previous version of Docker is lingering around - we will need to remove it if so. 
 
 ```console
@@ -60,6 +68,23 @@ echo \
   "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
+
+Now that we have the signed repo setup we can install Docker: 
+
+```console 
+ sudo apt-get update
+ sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+Note that this will install the *latest* docker engine. If you need a specific version for compatability reasons please refer to the documentation. 
+
+Finally we will check that the installation was successful:
+
+```console
+sudo docker run hello-world
+```
+
+### Install Docker-Compose 
+
 
 
 ## 1. jupyter 
