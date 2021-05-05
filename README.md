@@ -99,7 +99,7 @@ sudo docker run hello-world
 
 ### Install Docker-Compose 
 
-We don't just have a singular Docker container. If that was true we could use the docker run command for our needs. Instead we have specialized Docker containers that each are responsible for a single task. Our design philosophy follows the Single Responsibility Principle. https://en.wikipedia.org/wiki/Single-responsibility_principle
+We don't just have a singular Docker container. If that was true we could use the docker run command for our needs. Instead we have specialized Docker containers that are designed for a single task. Our design philosophy follows the Single Responsibility Principle. https://en.wikipedia.org/wiki/Single-responsibility_principle
 
 To manage these containers we use docker-compose. The Dockerfiles that contain the build instructions are still called by the docker-compose command. I will expand more on this when I discuss how to run the container. First let's install docker-compose:
 
