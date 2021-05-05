@@ -19,7 +19,7 @@
 This repository is the main project page for research into log messages and their potential for determining system state information. The following directories, listed and defined in no particular order, comprise the project: 
 
 * jupyter: The docker container for our jupyterlab environment. 
-* notebook: Contains the necessary code to standup the jupyter notebook. 
+* notebook: Repository for our jupyter notebooks, only contains \*.ipynb files  
 * data: All databases and other source data will be stored here, note this is not where models and other serialized derived data is to be stored.
 * reults: Data which is derivative of information from the data directory will be kept here.
 * doc: Any useful documentation will be kept in this directory. This includes research papers and notes. 
