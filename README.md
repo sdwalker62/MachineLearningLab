@@ -18,8 +18,8 @@ Hey there! In this section I will describe the steps to getting the jupyter cont
 
 I highly recommend setting up ssh for GitHub. The use of passwords will soon be depreciated. Here are some links on how to do this. Note you will need to setup an ssh key for each computer you wish to use and the key is repository agnostic (meaning you will not need a new key for each repository you access). 
 
-Some information on SSH: https://www.hostinger.com/tutorials/ssh-tutorial-how-does-ssh-work
-GitHub's guide to setting up an ssh key for your machine: https://docs.github.com/en/enterprise-server@3.0/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
+* Some information on SSH: https://www.hostinger.com/tutorials/ssh-tutorial-how-does-ssh-work
+* GitHub's guide to setting up an ssh key for your machine: https://docs.github.com/en/enterprise-server@3.0/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 
 I also highly recommend using some flavor of Linux. Docker is heavily used in this project and runs better on Linux since it does not require a VM unlike macOS and Windows 10. Although this is highly controversial I would recommend using Ubuntu 21.04 or 20.04 LTS. If Cannonical disgust you then I would recommend using MX Linux or Manjoro. 
 
@@ -31,7 +31,7 @@ From here on I will assume you are using Ubuntu and thus aptitude. If you are us
 
 To start you will need docker. Check to see if any previous version of Docker is lingering around - we will need to remove it if so. 
 
-```bash 
+```shell 
 sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
