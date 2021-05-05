@@ -9,8 +9,6 @@
   - [Run the Jupyter Container](#run-the-jupyter-container)
 - [Jupyter](#jupyter)
 - [Notebook](#notebook)
-- [Data](#data)
-- [Results](#results)
 - [Doc](#doc)
 - [Pre-processing](#pre-processing)
 - [Training](#training)
@@ -162,9 +160,7 @@ This is the main directory for experimentation. It houses all the code necessary
 
 This is source folder for all Jupyter notebooks. As Jupyter is the primary tool for experimentation this folder houses all experimental code. Updates and modifications to the pre-processing and training folders more than likely originate from this directory. Currently there is only the longruntransformer.ipynb notebook in this directory which holds the experimental transformer code. I will soon add a playground.ipynb notebook for throwaway code. 
 
-## Results 
-
-All trained models, pickeled intermediary results, and tensorflow checkpoints, and static graphs will be kept here. This directory is mapped to the jupyter container through docker-compose for loading and saving objects. 
+## Docs 
 
 ## Pre-processing 
 
