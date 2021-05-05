@@ -1,6 +1,6 @@
 # log-analyzer
 
-{toc:}
+{:toc}
 
 ## Introduction
 
