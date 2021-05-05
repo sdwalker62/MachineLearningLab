@@ -2,7 +2,7 @@
 
 <!-- TOC -->
 - [Introduction](#introduction)
-- [First Steps](#0.-first-steps)
+- [0. First Steps](#0.-first-steps)
 <!-- /TOC -->
 
 ## Introduction
