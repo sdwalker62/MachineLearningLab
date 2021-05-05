@@ -39,7 +39,7 @@ I also highly recommend using some flavor of Linux. Docker is heavily used in th
 
 All instructions in this document will assume the use of linux, if you are using WSL2 or macOS there may be slight alterations needed to make the code work. I will write about this at the end of the section. Also at the end will be a quick introduction on setting up Docker on WSL2 (Windows) and macOS. If you need further help please message me and I will try to help where I can. 
 
-Please note that if you intend to use CUDA to leverage your GPU then linux is a requirement. I know that GPU passthrough is a thing on the Window's developer ring and thus technically useable with WSL2 using Nvidia's beta drivers. I would advise against this route unless you truly know what you are doing and are willing to accept the risk of an unstable Windows 10. 
+Please note that if you intend to use CUDA to leverage your GPU then Linux is a requirement. I know that GPU passthrough is a thing on the Window's developer ring and thus technically useable with WSL2 using Nvidia's beta drivers. I would advise against this route unless you truly know what you are doing and are willing to accept the risk of an unstable Windows 10. 
 
 From here on I will assume you are using Ubuntu and thus aptitude. If you are using yum or pacman just substitute those commands or using Docker's documentation for installing on those distributions. 
 
