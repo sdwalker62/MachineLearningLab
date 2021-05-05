@@ -28,7 +28,7 @@ This repository is the main project page for research into log messages and thei
 
 ## First Steps 
 
-Hey there! In this section I will describe the steps to getting the jupyter container running. If you are experienced and just want the tldr then here it is: make sure there are database files in the data dir (message me if you need these files) and then stand up the jupyter container using docker-compose (use the --build flag: sudo docker-compose up --build jupyter). Below is the gentle introduction.
+Hey there! In this section I will describe the steps to getting the Jupyter container running. If you are experienced and just want the tldr then here it is: make sure there are database files in the data dir (message me if you need these files) and then stand up the jupyter container using docker-compose (use the --build flag: sudo docker-compose up --build jupyter). Below is the gentle introduction.
 
 I highly recommend setting up ssh for GitHub. The use of passwords will soon be depreciated. Here are some links on how to do this. Note you will need to setup an ssh key for each computer you wish to use and the key is repository agnostic (meaning you will not need a new key for each repository you access). 
 
