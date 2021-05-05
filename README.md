@@ -35,7 +35,7 @@ I highly recommend setting up ssh for GitHub. The use of passwords will soon be 
 * Some information on SSH: https://www.hostinger.com/tutorials/ssh-tutorial-how-does-ssh-work
 * GitHub's guide to setting up an ssh key for your machine: https://docs.github.com/en/enterprise-server@3.0/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 
-I also highly recommend using some flavor of Linux. Docker is heavily used in this project and runs better on Linux since it does not require a VM unlike macOS and Windows 10. Although this is highly controversial I would recommend using Ubuntu 21.04 or 20.04 LTS. If Cannonical disgust you then I would recommend using MX Linux or Manjoro. 
+I also highly recommend using some flavor of Linux. Docker is heavily used in this project and runs better on Linux since it does not require a VM unlike macOS and Windows 10. Although this is highly controversial I would recommend using Ubuntu 21.04 or 20.04 LTS. If you have ethical grievances with Cannonical then I would recommend using MX Linux or Manjoro. 
 
 All instructions in this document will assume the use of linux, if you are using WSL2 or macOS there may be slight alterations needed to make the code work. I will write about this at the end of the section. Also at the end will be a quick introduction on setting up Docker on WSL2 (Windows) and macOS. If you need further help please message me and I will try to help where I can. 
 
