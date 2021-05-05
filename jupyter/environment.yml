@@ -1,0 +1,21 @@
+name: datascience
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - nodejs
+  - git
+  - jupyterlab>=3.0
+  - jupyterlab-git
+  - jupyterlab-lsp
+  - gensim
+  - numpy
+  - pandas
+  - tqdm
+  - pip
+  - pip:
+    - -r file:requirements.txt
+  - python
+  - xeus-python

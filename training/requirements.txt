@@ -1,0 +1,12 @@
+jsonpickle
+cachetools
+tensorflow
+keras
+joblib
+tqdm
+# tensorflow-gpu
+matplotlib
+einops
+numpy
+pandas
+scikit-learn

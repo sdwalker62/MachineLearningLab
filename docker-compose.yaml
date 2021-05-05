@@ -1,6 +1,36 @@
-version: "3.0"
+version: "3.7"
 
 services:
+  preprocessing:
+    build: preprocessing/
+    container_name: preprocessing
+    environment:
+      - GENERATE_NEW_DRAIN=yes
+      - W2V_WINDOW_SIZE=5
+      - W2V_EMBED_SIZE=512
+      - NUM_NEG_SAMPLING=4
+      - EPOCHS=25
+    # runtime: nvidia
+    volumes:
+      - ./database:/database:ro
+      - ./results:/results
+
+  training:
+    build: training/
+    container_name: training
+    environment:
+      - W2V_EMBED_SIZE=512
+      - EPOCHS=5
+      - TRANSFORMER_LAYERS=4
+      - TRANSFORMER_DFF=2048
+      - TRANSFORMER_HEADS=8
+      - DROPOUT_RATE=0.1
+      - BATCH_SIZE=50
+      - TRAINING=1
+    volumes:
+      - ./database:/database:ro
+      - ./results:/results
+
   genmat:
     build: genmat/
     container_name: genmat
@@ -18,3 +48,52 @@ services:
       - ./results:/code/results:ro
     ports:
       - "8050:8050"
+
+  jupyter:
+    build: 
+      context: jupyter/
+      args:
+        - username=${username}
+        - uid=${uid}
+        - gid=${gid}
+    container_name: jupyter
+    environment: 
+      - JUPYTER_ENABLE_LAB=yes  
+    volumes:
+      - ./results:/home/${username}/app/results
+      - ./database:/home/${username}/app/data
+      - ./assets:/home/${username}/app/assets
+    ports:
+      - "8888:8888"
+      - "8050:8050"
+    init: true
+    stdin_open: true
+    tty: true
+
+  # jupyter_gpu:
+  #   build: 
+  #     context: jupyter_notebooks_gpu/
+  #     args:
+  #       - CUDA=11.0
+  #   container_name: jupyter_gpu
+  #   environment:
+  #     - JUPYTER_ENABLE_LAB=yes
+  #     - CUDA_VERSION=11.0.3
+  #     - PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  #     - LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64
+  #     - NVIDIA_VISIBLE_DEVICES=all
+  #     - NVIDIA_REQUIRE_CUDA=cuda>=11.0 brand=tesla,driver>=418,driver<419 brand=tesla,driver>=440,driver<441 brand=tesla,driver>=450,driver<451
+  #   volumes:
+  #     - ./results:/home/jovyan/results
+  #     - ./database:/home/jovyan/database
+  #     - ./jupyter_notebooks:/home/jovyan/jupyter_notebooks
+  #   ports:
+  #     - "8888:8888"
+  #     - "8050:8050"
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #         - driver: nvidia
+  #           count: 1
+  #           capabilities: [gpu, utility, compute]

@@ -1,0 +1,13 @@
+drain3
+plotly>=4.5
+jupyter_dash
+tqdm
+jupyterlab-lsp
+aquirdturtle_collapsible_headings
+ipdb
+jax
+sklearn
+gensim
+pandas
+numpy
+tensorboard

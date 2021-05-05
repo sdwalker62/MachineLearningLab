@@ -77,7 +77,6 @@ def genmat(df: pd.DataFrame, tf: timedelta):
     col_lens += [['########','########']]
     col_lens += [['Total', total_number_of_logs]]
 
-
     print(tabulate(col_lens, headers=("firstrow"), missingval="-"))
 
     # build the cluster count dictionary
@@ -86,7 +85,6 @@ def genmat(df: pd.DataFrame, tf: timedelta):
 
     hd = {idx: {label: {container: {} for container in considered_containers} for label in labels}
           for idx in dfs.keys()}
-
 
     for idx, di in dfs.items():
         for label in labels:
