@@ -35,6 +35,33 @@ To start you will need docker. Check to see if any previous version of Docker is
 sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
+Don't worry if apt-get reports that none of these packages are installed. Next we will setup the Docker repository:
+
+
+```console
+ sudo apt-get update
+ sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+```
+
+Now we will add Docker's official GPG (GNU Privacy Guard) key. This is necessary as it will sign the code as being legitimate and thus enabling encrypted information to be transferred.
+
+```console
+ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+```
+We will use the **stable** repositry. If you wish to use the nightly or test channels then replace the word stable in the above command. Note that the below command is for x86_64 / amd64 only! If you are using arm64 or armhf refer to the documentation here: https://docs.docker.com/engine/install/ubuntu/
+
+```console
+echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+
 ## 1. jupyter 
 
 This is the main directory for experimentation. It houses all the code necessary to build the jupyter docker container. The notebooks, results, data, and doc directories are mapped to this container through docker-compose for serializing/deserializing objects, loading trained models, and modifying LaTeX reports. 
