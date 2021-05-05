@@ -38,7 +38,7 @@ sudo apt-get remove docker docker-engine docker.io containerd runc
 Don't worry if apt-get reports that none of these packages are installed. Next we will setup the Docker repository:
 
 
-```shellscript
+```console
  sudo apt-get update
  sudo apt-get install \
     apt-transport-https \
