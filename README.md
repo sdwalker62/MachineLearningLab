@@ -4,6 +4,16 @@
 <!-- TOC -->
 - [Introduction](#introduction)
 - [First Steps](#first-steps)
+  - [Install Docker](#install-docker-engine)
+  - [Install Docker-Compose](#install-docker-compose)
+  - [Run the Jupyter Container](#run-the-jupyter-container)
+- [Jupyter](#jupyter)
+- [Notebook](#notebook)
+- [Data](#data)
+- [Results](#results)
+- [Doc](#doc)
+- [Pre-processing](#pre-processing)
+- [Training](#training)
 <!-- /TOC -->
 
 ## Introduction
@@ -144,18 +154,18 @@ sudo docker-compose up --build jupyter
 
 if you have made changes to either the docker-compose file or the Dockerfile in /jupyter/
 
-## 1. jupyter 
+## Jupyter 
 
 This is the main directory for experimentation. It houses all the code necessary to build the jupyter docker container. The notebooks, results, data, and doc directories are mapped to this container through docker-compose for serializing/deserializing objects, loading trained models, and modifying LaTeX reports. 
 
-## 2. notebooks 
+## Notebooks 
 
 This is source folder for all Jupyter notebooks. As Jupyter is the primary tool for experimentation this folder houses all experimental code. Updates and modifications to the pre-processing and training folders more than likely originate from this directory. Currently there is only the longruntransformer.ipynb notebook in this directory which holds the experimental transformer code. I will soon add a playground.ipynb notebook for throwaway code. 
 
-## 3. results 
+## Results 
 
 All trained models, pickeled intermediary results, and tensorflow checkpoints, and static graphs will be kept here. This directory is mapped to the jupyter container through docker-compose for loading and saving objects. 
 
-## 4. preprocessing 
+## Pre-processing 
 
-## 5. training
+## Training
