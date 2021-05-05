@@ -1,8 +1,9 @@
 # log-analyzer
 
+### Table of Contents
 <!-- TOC -->
 - [Introduction](#introduction)
-- [0. First Steps](#0.-first-steps)
+- [First Steps](#0. first steps)
 <!-- /TOC -->
 
 ## Introduction
