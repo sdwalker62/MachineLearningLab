@@ -31,7 +31,7 @@ From here on I will assume you are using Ubuntu and thus aptitude. If you are us
 
 To start you will need docker. Check to see if any previous version of Docker is lingering around - we will need to remove it if so. 
 
-```console 
+```bash 
 sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
