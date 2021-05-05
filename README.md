@@ -1,6 +1,9 @@
 # log-analyzer
 
-{:toc}
+<!-- TOC -->
+- [Introduction](#introduction)
+- [First Steps](#0.-first-steps)
+<!-- /TOC -->
 
 ## Introduction
 
