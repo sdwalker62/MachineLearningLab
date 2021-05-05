@@ -3,7 +3,7 @@
 ### Table of Contents
 <!-- TOC -->
 - [Introduction](#introduction)
-- [First Steps](#0. first steps)
+- [First Steps](#first-steps)
 <!-- /TOC -->
 
 ## Introduction
@@ -18,7 +18,7 @@ This repository is the main project page for research into log messages and thei
 * preprocessing: The code for the pre-processing pipeline. (section 4)
 * training: The transformer code is maintained here. Note this is not where saved models are stored, check the results folder. (section 5)
 
-## 0. First Steps 
+## First Steps 
 
 Hey there! In this section I will describe the steps to getting the jupyter container running. If you are experienced and just want the tldr then here it is: make sure there are database files in the data dir (message me if you need these files) and then stand up the jupyter container using docker-compose (use the --build flag: sudo docker-compose up --build jupyter). Below is the gentle introduction.
 
