@@ -85,7 +85,21 @@ sudo docker run hello-world
 
 ### Install Docker-Compose 
 
+We don't just have a singular Docker container. If that was true we could use the docker run command for our needs. Instead we have specialized Docker containers that each are responsible for a single task. Our design philosophy follows the Single Responsibility Principle. https://en.wikipedia.org/wiki/Single-responsibility_principle
 
+To manage these containers we use docker-compose. The Dockerfiles that contain the build instructions are still called by the docker-compose command. I will expand more on this when I discuss how to run the container. First let's install docker-compose:
+
+Again we will need to add the correct repository and then update that repository before installing docker-compose. 
+
+```console 
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+Finally test that the installation was successful:
+
+```console
+docker-compose --version
+```
 
 ## 1. jupyter 
 
