@@ -8,8 +8,8 @@
   - [Install Docker-Compose](#install-docker-compose)
   - [Run the Jupyter Container](#run-the-jupyter-container)
 - [Jupyter](#jupyter)
-- [Notebook](#notebook)
-- [Doc](#doc)
+- [Notebooks](#notebooks)
+- [Docs](#docs)
 - [Pre-processing](#pre-processing)
 - [Training](#training)
 <!-- /TOC -->
