@@ -1,11 +1,10 @@
 # ignore databases since those are too large
-.db
+*.db
 
 # ignore .joblib files since they are generated
-.joblib
+*.joblib
 
-database/*
-results/*
+data/*
 
 !database/.gitkeep
 !results/.gitkeep

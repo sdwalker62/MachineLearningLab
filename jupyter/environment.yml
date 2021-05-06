@@ -10,12 +10,8 @@ dependencies:
   - jupyterlab>=3.0
   - jupyterlab-git
   - jupyterlab-lsp
-  - gensim
-  - numpy
-  - pandas
-  - tqdm
   - pip
   - pip:
     - -r file:requirements.txt
-  - python
   - xeus-python
+  - python=3.8.6

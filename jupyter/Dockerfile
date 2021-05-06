@@ -6,6 +6,8 @@ FROM ubuntu:latest
 # are sourced properly 
 SHELL [ "/bin/bash", "--login", "-c" ]
 
+EXPOSE 8888
+EXPOSE 8050
 
 # -- Install wget for conda -- #
 RUN  apt-get update \
@@ -64,11 +66,10 @@ RUN mkdir $PROJECT_DIR && \
 
 RUN chown -R $USER:$GID /home/$USER/app/
 
-
 # -- Install miniconda -- #
 USER $USER
 # install miniconda
-ENV MINICONDA_VERSION py39_4.9.2
+ENV MINICONDA_VERSION py38_4.8.3
 ENV CONDA_DIR $HOME/miniconda3
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-$MINICONDA_VERSION-Linux-x86_64.sh -O ~/miniconda.sh && \
     chmod +x ~/miniconda.sh && \

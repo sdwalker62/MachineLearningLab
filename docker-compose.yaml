@@ -12,7 +12,7 @@ services:
       - EPOCHS=25
     # runtime: nvidia
     volumes:
-      - ./database:/database:ro
+      - ./data:/data:ro
       - ./results:/results
 
   training:
@@ -28,18 +28,8 @@ services:
       - BATCH_SIZE=50
       - TRAINING=1
     volumes:
-      - ./database:/database:ro
+      - ./data:/data:ro
       - ./results:/results
-
-  genmat:
-    build: genmat/
-    container_name: genmat
-    environment:
-      - TIME_FRAME=5
-      - DB_PATH=/code/database/
-    volumes:
-      - ./database:/code/database:ro
-      - ./results:/code/results
 
   dash:
     build: dash/
@@ -61,18 +51,18 @@ services:
       - JUPYTER_ENABLE_LAB=yes  
     volumes:
       - ./results:/home/${username}/app/results
-      - ./database:/home/${username}/app/data
+      - ./data:/home/${username}/app/data
       - ./assets:/home/${username}/app/assets
     ports:
       - "8888:8888"
       - "8050:8050"
-    init: true
-    stdin_open: true
-    tty: true
-    deploy:
-      resources:
-        reservations:
-          devices:
-          - driver: nvidia
-            count: 1
-            capabilities: [gpu, utility, compute]
+    # init: true
+    # stdin_open: true
+    # tty: true
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #       - driver: nvidia
+    #         count: 1
+    #         capabilities: [gpu, utility, compute]
