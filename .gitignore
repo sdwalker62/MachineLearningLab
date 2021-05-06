@@ -6,8 +6,9 @@
 
 data/*
 
-!database/.gitkeep
+!data/.gitkeep
 !results/.gitkeep
+!docs/.gitkeep
 
 /venv/
 
