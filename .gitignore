@@ -6,6 +6,9 @@
 
 data/*
 
+# ignore all Dash Cache since they are generated
+assets/dash_cache/*
+
 !data/.gitkeep
 !results/.gitkeep
 !docs/.gitkeep
