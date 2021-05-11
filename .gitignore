@@ -7,7 +7,7 @@
 data/*
 
 # ignore all Dash Cache since they are generated
-assets/dash_cache/*
+results/dash_cache/*
 
 !data/.gitkeep
 !results/.gitkeep
@@ -17,3 +17,6 @@ assets/dash_cache/*
 
 # Ignore all zone identifier files with pushing from WSL2 on windows 
 *:Zone.Identifier
+
+# Ignore Mac folder meta data
+.DS_Store

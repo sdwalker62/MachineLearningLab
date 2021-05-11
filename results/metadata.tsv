@@ -16,6 +16,19 @@ java.util.concurrent.futuretask.run(futuretask.java:266)
 [178:org.eclipse.jetty.servlet:9.4.12.v20180830]
 [169:org.eclipse.jetty.io:9.4.12.v20180830]
 [180:org.eclipse.jetty.util:9.4.12.v20180830]
+<<<<<<< HEAD
+framework
+stop
+client
+not
+for
+to
+~[60:org.apache.cxf.cxf-core:3.2.6]
+solr
+source)
+zookeeper
+is
+=======
 not
 client
 framework
@@ -27,6 +40,7 @@ solr
 source)
 is
 zookeeper
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 method)
 org.eclipse.jetty.servlet.servlethandler$cachedchain.dofilter(servlethandler.java:1642)
 java.lang.thread.run(thread.java:748)
@@ -34,6 +48,14 @@ clientcnxn
 session:
 org.apache.zookeeper.zookeeper
 [372:persistence-core-listeners:2.15.0]
+<<<<<<< HEAD
+487
+catalog-rest-impl
+java.util.concurrent.threadpoolexecutor.runworker(threadpoolexecutor.java:1149)
+java.util.concurrent.threadpoolexecutor$worker.run(threadpoolexecutor.java:624)
+java.security.accesscontroller.doprivileged(native
+4.2.2
+=======
 java.util.concurrent.threadpoolexecutor.runworker(threadpoolexecutor.java:1149)
 java.util.concurrent.threadpoolexecutor$worker.run(threadpoolexecutor.java:624)
 487
@@ -41,34 +63,55 @@ catalog-rest-impl
 java.security.accesscontroller.doprivileged(native
 4.2.2
 more
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 shut
 down
 caused
 by:
+<<<<<<< HEAD
+more
+org.codice.solr.factory.impl.solrclientproxy.query(solrclientproxy.java:403)
+[7:org.apache.karaf.services.eventadmin:4.2.2]
+=======
 org.codice.solr.factory.impl.solrclientproxy.query(solrclientproxy.java:403)
 [7:org.apache.karaf.services.eventadmin:4.2.2]
 cannot
 connection
 initiating
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 actionproviderregistryproxy
 tion.actionproviderregistryproxy
 99
 service
 unregistered
+<<<<<<< HEAD
+initiating
+connection
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 service.scope=bundle,
 ...
 org.codice.solr.factory.impl.solrclientadapter.handle(solrclientadapter.java:276)
 failed
+<<<<<<< HEAD
+cannot
+available
+=======
 available
 session
 0
 oaesb-net:12181)
 .zookeeper.clientcnxn$sendthread
 socket
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 146
 bundle
 471
 catalog-core-standardframework
+<<<<<<< HEAD
+session
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 zookeeper.clientcnxn$eventthread
 520
 eventthread
@@ -76,10 +119,20 @@ eventthread
 connection,
 connectstring=solr:12181
 sessiontimeout=10000
+<<<<<<< HEAD
+oaesb-net:12181)
+.zookeeper.clientcnxn$sendthread
+socket
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 could
 java.util.concurrent.executors$runnableadapter.call(executors.java:511)
 org.codice.solr.factory.impl.solrclientproxy.lambda$query$46(solrclientproxy.java:403)
 1
+<<<<<<< HEAD
+0
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 687
 closed
 create
@@ -92,6 +145,13 @@ initializing
 'catalog'
 org.apache.aries.blueprint.di.abstractrecipe$1.call(abstractrecipe.java:81)
 org.apache.aries.blueprint.di.abstractrecipe.create(abstractrecipe.java:90)
+<<<<<<< HEAD
+118
+org.apache.karaf.shell.core
+152
+shutdown
+server
+=======
 152
 118
 org.apache.karaf.shell.core
@@ -102,6 +162,7 @@ server
 <duration>
 and
 shutdown
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 mime-type=text/<path>,
 ddf.catalog.source.solr.solrcatalogprovider.query(solrcatalogprovider.java:207)
 ddf.catalog.source.solr.remotesolrcatalogprovider.query(remotesolrcatalogprovider.java:128)
@@ -112,21 +173,37 @@ ddf.catalog.cache.solr.impl.cachingfederationstrategy$callablesourceresponse.cal
 org.apache.solr.client.solrj.impl.cloudsolrclient.requestwithretryonstalestate(cloudsolrclient.java:948)
 org.apache.solr.client.solrj.impl.cloudsolrclient.request(cloudsolrclient.java:819)
 org.apache.solr.client.solrj.solrrequest.process(solrrequest.java:194)
+<<<<<<< HEAD
+connect
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 rclientadapter
 eocodingthread
 solrcatalogprovider
 .source.solr.solrcatalogprovider
 608
 catalog-solr-provider
+<<<<<<< HEAD
+<duration>
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 rint
 extender:
 error
 llerpollthread
+<<<<<<< HEAD
+while
+and
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 alertlistener
 persistence.events.alertlistener
 372
 persistence-core-listeners
 alert.
+<<<<<<< HEAD
+exception
+=======
 org.apache.sshd.core
 1.7.0
 set
@@ -136,6 +213,7 @@ will
 have
 from
 solr.soaesb
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 commandextension
 mpl.action.osgi.commandextension
 commands
@@ -145,13 +223,28 @@ executor.q.operation.size=0,
 org.apache.aries.blueprint.core
 1.10.1
 blueprint
+<<<<<<< HEAD
+org.apache.sshd.core
+1.7.0
 been
 strategythread
 7
+have
+solr.soaesb
+will
+=======
+been
+strategythread
+7
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 180
 org.eclipse.jetty.util
 9.4.12.v20180830
 stopped
+<<<<<<< HEAD
+from
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 ddf.catalog.source.unsupportedqueryexception:
 complete
 query.
@@ -163,6 +256,10 @@ org.apache.solr.client.solrj.impl.cloudsolrclient.requestwithretryonstalestate(c
 org.apache.solr.client.solrj.solrclient.query(solrclient.java:974)
 org.apache.solr.client.solrj.solrclient.query(solrclient.java:990)
 ddf.catalog.source.solr.solrmetacardclientimpl.query(solrmetacardclientimpl.java:231)
+<<<<<<< HEAD
+set
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 119
 org.apache.karaf.shell.ssh
 key
@@ -170,6 +267,11 @@ java.util.concurrent.timeoutexception:
 solr:12181
 within
 0x0
+<<<<<<< HEAD
+crl
+in
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 165
 ping
 request/response
@@ -347,6 +449,8 @@ org.eclipse.osgi.internal.framework.equinoxeventpublisher.publishbundleevent(equ
 org.eclipse.osgi.internal.framework.equinoxcontaineradaptor.publishmoduleevent(equinoxcontaineradaptor.java:191)
 org.eclipse.osgi.container.module.publishevent(module.java:476)
 org.eclipse.osgi.container.module.start(module.java:467)
+<<<<<<< HEAD
+=======
 shellutil
 he.karaf.shell.support.shellutil
 caught
@@ -417,6 +521,7 @@ error)
 877
 established
 soaesb-net/<path>,
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 ev.healthmonitor
 healthmonitor
 dardloggerfactory$standardlogger
@@ -444,6 +549,14 @@ nt.container.blueprintextender$3
 322
 destroying
 container
+<<<<<<< HEAD
+serveruserauthservice
+er.session.serveruserauthservice
+296
+admin@/<ip>
+authenticated
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 blueprintcontainerimpl
 container.blueprintcontainerimpl
 426
@@ -468,6 +581,18 @@ service.bundleid=113,
 service.scope=singleton}]]
 dispatcher
 may
+<<<<<<< HEAD
+1035
+opening
+soaesb-net/<ip>.
+attempt
+authenticate
+using
+sasl
+(unknown
+error)
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 [{ddf.catalog.transform.metacardtransformer}={displayname=ogc
 gml,
 shortname=xml,
@@ -524,6 +649,12 @@ abstractconnector
 e.jetty.server.abstractconnector
 341
 http/1.1]}{<ip>}
+<<<<<<< HEAD
+877
+established
+soaesb-net/<path>,
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 wn
 thread
 shutdownsocketthread
@@ -554,6 +685,19 @@ properties:
 resource
 does
 exists
+<<<<<<< HEAD
+cxf-ststhread
+649
+security-sts-ldapclaimshandler
+server,
+therefore
+unable
+log
+level
+"ddf.security.sts.claimshandler"
+debug
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 opensshkeypairprovider
 generator.opensshkeypairprovider
 97
@@ -630,6 +774,23 @@ into
 catalog-ui-search
 id:
 613
+<<<<<<< HEAD
+lcheckerthread
+crlchecker
+andler.pki.crlchecker$crlrefresh
+172
+245
+security-handler-pki
+property
+/opt/gdes/etc/ws-security/server/encryption.properties
+set.
+certs
+be
+checked
+against
+a
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
 org.apache.felix.eventadmin.impl.tasks.handlertask.run(handlertask.java:70)
 93
 persist
@@ -700,3 +861,35 @@ org.eclipse.osgi.container.modulecontainer$containerstartlevel.dispatchevent(mod
 org.eclipse.osgi.container.modulecontainer$containerstartlevel.dispatchevent(modulecontainer.java:1)
 org.eclipse.osgi.framework.eventmgr.eventmanager.dispatchevent(eventmanager.java:230)
 org.eclipse.osgi.framework.eventmgr.eventmanager$eventthread.run(eventmanager.java:340)
+<<<<<<< HEAD
+shellutil
+he.karaf.shell.support.shellutil
+caught
+executing
+command
+java.lang.illegalargumentexception:
+no
+matching
+bundles
+org.apache.karaf.bundle.command.bundlescommand.doexecute(bundlescommand.java:60)
+org.apache.karaf.bundle.command.bundlescommand.execute(bundlescommand.java:55)
+org.apache.karaf.shell.impl.action.command.actioncommand.execute(actioncommand.java:84)
+org.apache.karaf.shell.impl.console.osgi.secured.securedcommand.execute(securedcommand.java:68)
+org.apache.karaf.shell.impl.console.osgi.secured.securedcommand.execute(securedcommand.java:86)
+org.apache.felix.gogo.runtime.closure.executecmd(closure.java:599)
+org.apache.felix.gogo.runtime.closure.executestatement(closure.java:526)
+org.apache.felix.gogo.runtime.closure.execute(closure.java:415)
+org.apache.felix.gogo.runtime.pipe.docall(pipe.java:416)
+org.apache.felix.gogo.runtime.pipe.call(pipe.java:229)
+org.apache.felix.gogo.runtime.pipe.call(pipe.java:59)
+1159
+timed
+out,
+heard
+sessionid
+0x10005dd4f4e0010,
+closing
+attempting
+reconnect
+=======
+>>>>>>> fcf090ea89b24d7f6d2dfafd55b2dbd261cfe09f
