@@ -1,0 +1,11 @@
+LABEL authors="The Optimal Policies"
+
+USER root
+
+ENV FONT_DIR /usr/local/share/fonts
+RUN mkdir $FONT_DIR/FiraCode/ && \
+    chown $NB_UID:$NB_GID $FONT_DIR/FiraCode
+
+COPY FiraCode-Retina.ttf $FONT_DIR/FiraCode
+
+COPY config/ /home/$NB_USER/.jupyter/
