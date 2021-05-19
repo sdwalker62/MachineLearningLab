@@ -78,13 +78,6 @@ chmod 755 .build/*
 
 echo "
 ############################################################################
-#################### Modification: Optimal Policies ########################
-############################################################################
-" >> $DOCKERFILE
-cat src/Dockerfile.custom >> $DOCKERFILE
-
-echo "
-############################################################################
 ################# Dependency: jupyter/minimal-notebook #####################
 ############################################################################
 " >> $DOCKERFILE
@@ -129,6 +122,13 @@ if [[ "$no_useful_packages" != 1 ]]; then
 else
   echo "Set 'no-useful-packages', not installing stuff within src/Dockerfile.usefulpackages."
 fi
+
+echo "
+############################################################################
+#################### Modification: Optimal Policies ########################
+############################################################################
+" >> $DOCKERFILE
+cat src/Dockerfile.custom >> $DOCKERFILE
 
 # Copy the demo notebooks and change permissions
 # cp -r extra/Getting_Started data

@@ -201,6 +201,35 @@ COPY FiraCode-Retina.ttf $FONT_DIR/FiraCode
 
 COPY config/ /home/$NB_USER/.jupyter/
 
+USER $NB_UID
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Install Python 3 packages
+RUN conda install --quiet --yes \
+    'xeus-python' \
+    'jupyterlab-lsp' \
+    'jupyterlab-git' \
+    'jupyterlab>=3.0' \
+    'nodejs' \ 
+    'plotly>=4.5' \ 
+    'jupyter-dash' \ 
+    'tqdm' \
+    #'aquirdturtle-collapsible-headings' \
+    'ipdb' \
+    'jax' \
+    'gensim' \
+    'numpy' \
+    'tensorboard' \
+    'flask' \
+    'python-lsp-server[all]' \
+    'sentencepiece' \
+    'pyyaml' && \
+    conda install --quiet --yes -c conda-forge 'Flask-Caching' && \
+    conda clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
 ############################################################################
 ################# Dependency: jupyter/minimal-notebook #####################
 ############################################################################
