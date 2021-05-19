@@ -192,6 +192,7 @@ LABEL authors="The Optimal Policies"
 
 USER root
 
+RUN mkdir /usr/local/share/fonts
 ENV FONT_DIR /usr/local/share/fonts
 RUN mkdir $FONT_DIR/FiraCode/ && \
     chown $NB_UID:$NB_GID $FONT_DIR/FiraCode
