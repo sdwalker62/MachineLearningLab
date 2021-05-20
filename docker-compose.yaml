@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
 
 services:
   preprocessing:
@@ -40,29 +40,27 @@ services:
       - "8050:8050"
 
   jupyter:
-    build: 
-      context: jupyter/
-      args:
-        - username=${username}
-        - uid=${uid}
-        - gid=${gid}
-    container_name: jupyter
-    environment: 
-      - JUPYTER_ENABLE_LAB=yes  
-    volumes:
-      - ./results:/home/${username}/app/results
-      - ./data:/home/${username}/app/data
-      - ./assets:/home/${username}/app/assets
+    build: jupyter/.build/
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities:
+              - gpu
+              - utility
+              - compute
     ports:
-      - "8888:8888"
-      - "8050:8050"
-    # init: true
-    # stdin_open: true
-    # tty: true
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #       - driver: nvidia
-    #         count: 1
-    #         capabilities: [gpu, utility, compute]
+      - 8888:8888
+    volumes:
+      - ./results:/home/jovyan/results
+      - ./data:/home/jovyan/data
+      - ./assets:/home/jovyan/assets
+    environment:
+      GRANT_SUDO: "yes"
+      JUPYTER_ENABLE_LAB: "yes"
+      NB_UID: ${JUPYTER_UID:-1000}
+      NB_GID: ${JUPYTER_GID:-1000}
+    # enable sudo permissions
+    user:
+      "root"
+    restart: always
