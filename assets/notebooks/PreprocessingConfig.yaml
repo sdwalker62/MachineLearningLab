@@ -21,8 +21,8 @@ TextClusteringLayerConfig:
     model_name: 'template_miner.joblib'
     
 NegativeSkipgramLayerConfig:
-    load_data: False
-    save_data: True
+    load_model: False
+    save_model: True
     window_size: 2
     training: False
     
