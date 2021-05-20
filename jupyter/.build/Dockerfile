@@ -185,52 +185,6 @@ USER $NB_UID
 WORKDIR $HOME
 
 ############################################################################
-#################### Modification: Optimal Policies ########################
-############################################################################
-
-LABEL authors="The Optimal Policies"
-
-USER root
-
-RUN mkdir /usr/local/share/fonts
-ENV FONT_DIR /usr/local/share/fonts
-RUN mkdir $FONT_DIR/FiraCode/ && \
-    chown $NB_UID:$NB_GID $FONT_DIR/FiraCode
-
-COPY FiraCode-Retina.ttf $FONT_DIR/FiraCode
-
-COPY config/ /home/$NB_USER/.jupyter/
-
-USER $NB_UID
-
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-# Install Python 3 packages
-RUN conda install --quiet --yes \
-    'xeus-python' \
-    'jupyterlab-lsp' \
-    'jupyterlab-git' \
-    'jupyterlab>=3.0' \
-    'nodejs' \ 
-    'plotly>=4.5' \ 
-    'jupyter-dash' \ 
-    'tqdm' \
-    #'aquirdturtle-collapsible-headings' \
-    'ipdb' \
-    'jax' \
-    'gensim' \
-    'numpy' \
-    'tensorboard' \
-    'flask' \
-    'python-lsp-server[all]' \
-    'sentencepiece' \
-    'pyyaml' && \
-    conda install --quiet --yes -c conda-forge 'Flask-Caching' && \
-    conda clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-############################################################################
 ################# Dependency: jupyter/minimal-notebook #####################
 ############################################################################
 
@@ -524,5 +478,48 @@ RUN fix-permissions /home/$NB_USER
 # Switch back to jovyan to avoid accidental container runs as root
 USER $NB_UID
 
+############################################################################
+#################### Modification: Optimal Policies ########################
+############################################################################
+
+LABEL authors="The Optimal Policies"
+
+USER root
+
+#RUN mkdir /usr/local/share/fonts
+ENV FONT_DIR /usr/local/share/fonts
+RUN mkdir $FONT_DIR/FiraCode/ && \
+    chown $NB_UID:$NB_GID $FONT_DIR/FiraCode
+
+COPY FiraCode-Retina.ttf $FONT_DIR/FiraCode
+
+COPY config/ /home/$NB_USER/.jupyter/
+
+# Install Python 3 packages
+RUN conda install --quiet --yes \
+    'xeus-python' \
+    'jupyterlab-lsp' \
+    'jupyterlab-git' \
+    'jupyterlab>=3.0' \
+    'nodejs' \ 
+    'plotly>=4.5' \ 
+    'jupyter-dash' \ 
+    'tqdm' \
+    'ipdb' \
+    'jax' \
+    'numpy' \
+    'tensorboard' \
+    'flask' \
+    'python-lsp-server[all]' \
+    'sentencepiece' \
+    'pyyaml' && \
+    conda clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+USER $NB_UID
 # Copy jupyter_notebook_config.json
 COPY jupyter_notebook_config.json /etc/jupyter/
