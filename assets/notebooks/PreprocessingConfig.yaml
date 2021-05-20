@@ -1,0 +1,35 @@
+PreprocessingGlobalConfig:    
+    embed_size: 64
+    max_vocab_size: 2000
+    buffer_size: 10000
+    global_training: True
+    num_neg_sampling: 10
+    path: '/results/'
+    
+PhraseCaptureLayerConfig:
+    min_count: 5
+    threshold: 7
+    load_model: False
+    save_model: True
+    training: False
+    model_name: 'phrase_model.joblib'
+    
+TextClusteringLayerConfig:
+    load_model: False
+    save_model: True
+    training: False
+    model_name: 'template_miner.joblib'
+    
+NegativeSkipgramLayerConfig:
+    load_data: False
+    save_data: True
+    window_size: 2
+    training: False
+    
+W2VLayerConfig:
+    load_model: False
+    save_model: True
+    epochs: 25
+    batch_size: 2048
+    training: True
+    model_name: 'word2vec'
