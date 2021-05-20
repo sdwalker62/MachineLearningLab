@@ -1,0 +1,24 @@
+# ignore databases since those are too large
+*.db
+
+# ignore .joblib files since they are generated
+*.joblib
+
+data/*
+
+# ignore all Dash Cache since they are generated
+results/dash_cache/*
+results/.ipynb_checkpoints/
+results/debug.ipynb
+
+!data/.gitkeep
+!results/.gitkeep
+!docs/.gitkeep
+
+/venv/
+
+# Ignore all zone identifier files with pushing from WSL2 on windows 
+*:Zone.Identifier
+
+# Ignore Mac folder meta data
+.DS_Store
