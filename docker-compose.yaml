@@ -1,54 +1,16 @@
 version: "3.8"
 
 services:
-  preprocessing:
-    build: preprocessing/
-    container_name: preprocessing
-    environment:
-      - GENERATE_NEW_DRAIN=yes
-      - W2V_WINDOW_SIZE=5
-      - W2V_EMBED_SIZE=512
-      - NUM_NEG_SAMPLING=4
-      - EPOCHS=25
-    # runtime: nvidia
-    volumes:
-      - ./data:/data:ro
-      - ./results:/results
-
-  training:
-    build: training/
-    container_name: training
-    environment:
-      - W2V_EMBED_SIZE=512
-      - EPOCHS=5
-      - TRANSFORMER_LAYERS=4
-      - TRANSFORMER_DFF=2048
-      - TRANSFORMER_HEADS=8
-      - DROPOUT_RATE=0.1
-      - BATCH_SIZE=50
-      - TRAINING=1
-    volumes:
-      - ./data:/data:ro
-      - ./results:/results
-
-  dash:
-    build: dash/
-    container_name: dash
-    volumes:
-      - ./results:/code/results:ro
-    ports:
-      - "8050:8050"
-
   jupyter:
     build: jupyter/.build/
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities:
-              - gpu
-              - utility
-              - compute
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - capabilities:
+    #           - gpu
+    #           - utility
+    #           - compute
     ports:
       - 8888:8888
     volumes:

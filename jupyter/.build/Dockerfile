@@ -486,15 +486,6 @@ LABEL authors="The Optimal Policies"
 
 USER root
 
-#RUN mkdir /usr/local/share/fonts
-ENV FONT_DIR /usr/local/share/fonts
-RUN mkdir $FONT_DIR/FiraCode/ && \
-    chown $NB_UID:$NB_GID $FONT_DIR/FiraCode
-
-COPY FiraCode-Retina.ttf $FONT_DIR/FiraCode
-
-COPY config/ /home/$NB_USER/.jupyter/
-
 # Install Python 3 packages
 RUN conda install --quiet --yes \
     'xeus-python' \
@@ -519,6 +510,17 @@ RUN conda install --quiet --yes \
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt
+
+#RUN mkdir /usr/local/share/fonts
+ENV FONT_DIR /usr/local/share/fonts
+RUN mkdir $FONT_DIR/FiraCode/ && \
+    chown $NB_UID:$NB_GID $FONT_DIR/FiraCode
+
+COPY FiraCode-Retina.ttf $FONT_DIR/FiraCode
+
+COPY config/ /home/$NB_USER/.jupyter/
+
+RUN jupyter lab build
 
 USER $NB_UID
 # Copy jupyter_notebook_config.json
