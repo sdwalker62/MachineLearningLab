@@ -1,0 +1,21 @@
+PreprocessingGlobalConfig:    
+    embed_size: 32
+    max_vocab_size: 2000
+    buffer_size: 10000
+    global_training: True
+    num_neg_sampling: 4
+    path: '/results/'
+    
+NegativeSkipgramLayerConfig:
+    load_model: False
+    save_model: True
+    window_size: 2
+    training: False
+    
+W2VLayerConfig:
+    load_model: False
+    save_model: True
+    epochs: 10
+    batch_size: 2048
+    training: True
+    model_name: 'word2vec'
