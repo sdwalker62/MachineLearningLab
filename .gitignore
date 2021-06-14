@@ -6,7 +6,6 @@
 
 data/*
 
-
 # ignore all Dash Cache since they are generated
 results/dash_cache/*
 results/.ipynb_checkpoints/
