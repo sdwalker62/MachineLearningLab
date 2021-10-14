@@ -1,28 +1,28 @@
 version: "3.8"
 
 services:
-  jupyter:
-    build: jupyter/.build/
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - capabilities:
-    #           - gpu
-    #           - utility
-    #           - compute
+  machine_learning_lab:
+    build: .
     ports:
       - 8888:8888
     volumes:
-      - ./results:/home/jovyan/results
-      - ./data:/home/jovyan/data
-      - ./assets:/home/jovyan/assets
-    environment:
-      GRANT_SUDO: "yes"
-      JUPYTER_ENABLE_LAB: "yes"
-      NB_UID: ${JUPYTER_UID:-1000}
-      NB_GID: ${JUPYTER_GID:-1000}
+      - ./results:/home/jovyan/results:rw
+      - ./data:/home/jovyan/data:rw
+      - ./assets:/home/jovyan/assets:rw
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+   # environment:
+      #GRANT_SUDO: "yes"
+      #JUPYTER_ENABLE_LAB: "yes"
+      #NB_UID: ${JUPYTER_UID:-1000}
+      #NB_GID: ${JUPYTER_GID:-1000}
     # enable sudo permissions
-    user:
-      "root"
-    restart: always
+    #user:
+    #  "root"
+    #runtime: nvidia
+    #restart: always

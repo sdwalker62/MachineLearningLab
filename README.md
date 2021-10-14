@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# CommonLit
-=======
 # log-analyzer
 
 ### Table of Contents
@@ -168,4 +165,3 @@ This is source folder for all Jupyter notebooks. As Jupyter is the primary tool 
 ## Pre-processing 
 
 ## Training
->>>>>>> dabf034e389ef303a5be9f59cade94d849d9f3e1
