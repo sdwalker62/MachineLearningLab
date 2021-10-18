@@ -9,13 +9,15 @@ services:
       - ./results:/home/jovyan/results:rw
       - ./data:/home/jovyan/data:rw
       - ./assets:/home/jovyan/assets:rw
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+    # mem_limit: 5000m
+    # mem_reservation: 100m
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
    # environment:
       #GRANT_SUDO: "yes"
       #JUPYTER_ENABLE_LAB: "yes"
