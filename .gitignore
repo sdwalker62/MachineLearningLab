@@ -4,7 +4,7 @@
 # ignore .joblib files since they are generated
 *.joblib
 
-data/*
+lab/data/
 
 # ignore all Dash Cache since they are generated
 results/dash_cache/*

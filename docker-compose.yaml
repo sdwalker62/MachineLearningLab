@@ -6,25 +6,6 @@ services:
     ports:
       - 8888:8888
     volumes:
-      - ./results:/home/jovyan/results:rw
-      - ./data:/home/jovyan/data:rw
-      - ./assets:/home/jovyan/assets:rw
-    # mem_limit: 5000m
-    # mem_reservation: 100m
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: nvidia
-    #           count: 1
-    #           capabilities: [gpu]
-   # environment:
-      #GRANT_SUDO: "yes"
-      #JUPYTER_ENABLE_LAB: "yes"
-      #NB_UID: ${JUPYTER_UID:-1000}
-      #NB_GID: ${JUPYTER_GID:-1000}
-    # enable sudo permissions
-    #user:
-    #  "root"
-    #runtime: nvidia
-    #restart: always
+      - ./lab/results:/home/jovyan/results:rw
+      - ./lab/data:/home/jovyan/data:rw
+      - ./lab/assets:/home/jovyan/assets:rw
