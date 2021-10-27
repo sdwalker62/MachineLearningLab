@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   machine_learning_lab:
-    build: .
+    build: lab
     ports:
       - 8888:8888
     volumes:
