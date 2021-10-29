@@ -5,6 +5,9 @@
 *.joblib
 
 lab/data/
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+__pycache__
 
 # ignore all Dash Cache since they are generated
 lab/results/dash_cache/*

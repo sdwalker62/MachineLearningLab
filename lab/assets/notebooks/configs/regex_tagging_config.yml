@@ -1,0 +1,4 @@
+package_library: (?<=\s)(mil|com|org|java\.)([a-zA-Z.\d]+)
+java_file_line: ([a-zA-Z]+.java:\d+)
+url: (http://[a-zA-Z\d.:]+)
+directory: (?<!http:/)(/[a-zA-Z-]+)
