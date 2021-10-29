@@ -1,0 +1,11 @@
+JAVA_FILE:
+  TEXT:
+    REGEX: ([a-zA-Z]+.java:\d+)
+
+URL:
+  TEXT:
+    REGEX: (http://[a-zA-Z\d.:]+)
+    
+DIRECTORY:
+  TEXT:
+    REGEX: (?<!http:/)(/[a-zA-Z-]+)
