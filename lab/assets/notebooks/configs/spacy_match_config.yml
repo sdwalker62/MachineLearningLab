@@ -4,8 +4,8 @@ JAVA_FILE:
 
 URL:
   TEXT:
-    REGEX: (http://[a-zA-Z\d.:]+)
+    REGEX: ((https)|(http)):\/\/[a-zA-Z\d.:]+
     
 DIRECTORY:
   TEXT:
-    REGEX: (?<!http:/)(/[a-zA-Z-]+)
+    REGEX: (?:(?!https://)(?:(?<=\s)(/[a-zA-Z-/.]+)))
