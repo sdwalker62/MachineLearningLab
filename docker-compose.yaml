@@ -2,10 +2,15 @@ version: "3.8"
 
 services:
   machine_learning_lab:
-    build: lab
+    build: lab/.build
+    env_file: lab/.build/lab.env
     ports:
       - 8888:8888
     volumes:
-      - ./lab/results:/home/jovyan/results:rw
-      - ./lab/data:/home/jovyan/data:rw
-      - ./lab/assets:/home/jovyan/assets:rw
+      - ./lab/data:${LAB_HOME}/data:rw
+      - ./lab/docs:${LAB_HOME}/docs:rw
+      - ./lab/libs:${LAB_HOME}/libs:rw
+      - ./lab/models:${LAB_HOME}/models:rw
+      - ./lab/results:${LAB_HOME}/results:rw
+      - ./lab/notebooks:${LAB_HOME}/notebooks:rw
+      - ./lab/personal-notebooks:${LAB_HOME}/personal-notebooks:rw

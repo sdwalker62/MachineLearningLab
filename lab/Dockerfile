@@ -1,1 +1,0 @@
-FROM cschranz/gpu-jupyter

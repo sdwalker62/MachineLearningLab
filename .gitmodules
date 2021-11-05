@@ -1,4 +1,3 @@
-[submodule ".build/docker-stacks"]
-	path = .build/docker-stacks
-	url = https://github.com/jupyter/docker-stacks.git
-	branch = master
+[submodule "personal-notebooks"]
+	path = lab/personal-notebooks
+	url = git@github.com:sdwalker62/personal-notebooks.git
