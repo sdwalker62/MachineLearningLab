@@ -1,0 +1,14 @@
+tensorflow
+keras
+torch 
+torchvision 
+torchaudio 
+torchviz
+ipyleaflet 
+plotly
+ipywidgets
+jupyterlab-drawio
+jupyter_contrib_nbextensions
+jupyter_nbextensions_configurator 
+rise
+graphviz

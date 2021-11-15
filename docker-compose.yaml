@@ -3,9 +3,11 @@ version: "3.8"
 services:
   machine_learning_lab:
     build: lab/.build
-    env_file: lab/.build/lab.env
     ports:
       - 8888:8888
+    environment:
+      - LAB_HOME=/home/jovyan/
+      - JUPYTER_ENABLE_LAB=1
     volumes:
       - ./lab/data:${LAB_HOME}/data:rw
       - ./lab/docs:${LAB_HOME}/docs:rw
