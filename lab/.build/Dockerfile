@@ -240,9 +240,18 @@ USER $NB_UID
 # Copy jupyter_notebook_config.json
 COPY config/jupyter_notebook_config.json /etc/jupyter/
 
-# Copy custom config settings
-COPY config/lab /home/jovyan/.jupyter/lab
+# Dyamic apt packages
+USER root
+COPY dynamic-elements/dynamic-apt-packages.txt ${PKG_DIR}
+RUN apt-get update && \
+    xargs -a ${PKG_DIR}/dynamic-apt-packages.txt \
+    apt-get install -yq --no-install-recommends \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+USER $NB_UID
 
 # Dynamic pip packages
 COPY dynamic-elements/dynamic-pip-packages.txt ${PKG_DIR}
 RUN pip install --no-cache-dir -r ${PKG_DIR}/dynamic-pip-packages.txt
+
+# Copy custom config settings
+COPY config/lab /home/jovyan/.jupyter/lab

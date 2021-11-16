@@ -6,7 +6,7 @@
 
     // Theme
     // The theme for the terminal.
-    "theme": "dark",
+    "theme": "JupyterLab One Dark Pro",
 
     // Font size
     // The font size used to render text.

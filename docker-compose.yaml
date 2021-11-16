@@ -14,4 +14,4 @@ services:
       - ./lab/models:/home/jovyan/models:rw
       - ./lab/results:/home/jovyan/results:rw
       - ./lab/notebooks:/home/jovyan/notebooks:rw
-      - ./lab/personal-notebooks:/home/jovyan/personal-notebooks:rw
+      #- ./lab/personal-notebooks:/home/jovyan/personal-notebooks:rw
