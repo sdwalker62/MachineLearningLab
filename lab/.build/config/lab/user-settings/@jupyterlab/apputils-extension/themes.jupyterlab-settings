@@ -1,5 +1,4 @@
 {
-
     // Theme CSS Overrides
     // Override theme CSS variables by setting key-value pairs here
     "overrides": {
@@ -8,7 +7,7 @@
 
     // Selected Theme
     // Application-level visual styling theme
-    //"theme": "JupyterLab Dark",
+    "theme": "JupyterLab Dark",
 
     // Scrollbar Theming
     // Enable/disable styling of the application scrollbars

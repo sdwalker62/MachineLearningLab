@@ -6,6 +6,17 @@ LABEL authors="Dalton Walker <samuel.dalton.walker@gmail.com>, Andrew Romans <an
 LABEL team=SIGIL
 LABEL date=2021-11-15
 
+# TOC: 
+# SN  Item                      Line Number 
+# =========================================
+# [0] Base Layer .............. 22
+# [1] Install Anaconda ........ 98
+# [2] Install Jupyter ......... 132
+# [3] Install Conda Packages .. 178
+# [4] Install pip Packages .... 214
+# [5] Install Jupyterlab Ext .. 222
+# [6] Install Dynamic Content . 238
+# =========================================
 
 
 # [0] Base Layer ............. #
@@ -35,8 +46,17 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 USER root
 
 # Copy a script that we will use to correct permissions after running certain commands
-COPY fix-permissions /usr/local/bin/fix-permissions
+COPY scripts/fix-permissions /usr/local/bin/fix-permissions
 RUN chmod a+rx /usr/local/bin/fix-permissions
+
+# Add package lists directory which we can remove later
+ARG PKG_DIR="/pkg_lists"
+RUN mkdir $PKG_DIR
+
+# Copy the static elements only to avoid cache problems
+COPY /static-elements/* \
+     /scripts/* \
+     ${PKG_DIR}
 
 RUN apt-get -q update && apt-get install -yq locales && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
@@ -44,13 +64,10 @@ RUN apt-get -q update && apt-get install -yq locales && \
 
 # Instructions located at https://docs.anaconda.com/anaconda/install/linux/
 ENV DEBIAN_FRONTEND noninteractive
-COPY apt-packages.txt /
 RUN apt-get -q update \
- && xargs -a /apt-packages.txt \
+ && xargs -a ${PKG_DIR}/static-apt-packages.txt \
  apt-get install -yq --no-install-recommends \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-
 
 # Enable prompt color in the skeleton .bashrc before creating the default NB_USER
 # hadolint ignore=SC2016
@@ -76,6 +93,9 @@ ARG PYTHON_VERSION=default
 # Setup work directory for backward-compatibility
 RUN mkdir "/home/$NB_USER/work" && \
     fix-permissions "/home/$NB_USER"
+
+
+# [1] Install Anaconda ............. #
 
 # Install conda as jovyan and check the sha256 sum provided on the download site
 WORKDIR /tmp
@@ -109,7 +129,9 @@ RUN wget --quiet "https://repo.anaconda.com/archive/${ANACONDA_INSTALLER}" && \
     fix-permissions /home/$NB_USER
 
 
-# Install Jupyter Notebook, Lab, and Hub
+# [2] Install Jupyter from Conda ............. #
+
+# Install Jupyter Lab 
 # Generate a notebook server config
 # Cleanup temporary files
 # Correct permissions
@@ -131,7 +153,11 @@ ENTRYPOINT ["tini", "-g", "--"]
 CMD ["start-notebook.sh"]
 
 # Copy local files as late as possible to avoid cache busting
-COPY start.sh start-notebook.sh start-singleuser.sh /usr/local/bin/
+COPY scripts/start.sh \
+     scripts/start-notebook.sh \
+     scripts/start-singleuser.sh \
+     /usr/local/bin/
+     
 # Currently need to have both jupyter_notebook_config and jupyter_server_config to support classic and lab
 COPY config/jupyter_notebook_config.py /etc/jupyter/
 
@@ -149,21 +175,23 @@ RUN fix-permissions /etc/jupyter/
 WORKDIR $HOME
 
 
-# Copyright (c) Jupyter Development Team.
-# Distributed under the terms of the Modified BSD License.
-
-LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
-
+# [3] Install Conda packages ............. #
 
 # Create alternative for nano -> nano-tiny
 RUN update-alternatives --install /usr/bin/nano nano /bin/nano-tiny 10
 
+RUN git clone https://github.com/Syllo/nvtop.git /run/nvtop && \
+    mkdir -p /run/nvtop/build && cd /run/nvtop/build && \
+    (cmake .. -DNVML_RETRIEVE_HEADER_ONLINE=True 2> /dev/null || echo "cmake was not successful") && \
+    (make 2> /dev/null || echo "make was not successful") && \
+    (make install 2> /dev/null || echo "make install was not successful") && \
+    cd /tmp && rm -rf /tmp/nvtop
+
 USER $NB_UID
 
 # Install Python 3 packages
-COPY conda-packages.txt /
 RUN conda config --add channels conda-forge && \
-    conda install --quiet --yes --file=/conda-packages.txt && \
+    conda install --quiet --yes --file=${PKG_DIR}/static-conda-packages.txt && \
     conda clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
@@ -182,21 +210,39 @@ ENV XDG_CACHE_HOME="/home/${NB_USER}/.cache/"
 RUN MPLBACKEND=Agg python -c "import matplotlib.pyplot" && \
     fix-permissions "/home/${NB_USER}"
 
-COPY requirements.txt /
+
+# [4] Install pip packages ............. #
+
 RUN pip install --upgrade pip && \
-    pip install --no-cache-dir -r /requirements.txt
+    pip install --no-cache-dir -r ${PKG_DIR}/static-pip-packages.txt
 
 WORKDIR $HOME
 
-RUN jupyter nbextension enable --py --sys-prefix ipyleaflet
-RUN jupyter labextension install jupyterlab-plotly
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget
-RUN jupyter labextension install @ijmbarr/jupyterlab_spellchecker
 
+# [5] Install Jupyterlab Extensions ............. #
+
+RUN jupyter nbextension enable --py --sys-prefix ipyleaflet
+RUN jupyter labextension install jupyterlab-plotly \
+                                 @jupyter-widgets/jupyterlab-manager plotlywidget \
+                                 @ijmbarr/jupyterlab_spellchecker \
+                                 jupyterlab-theme-solarized-dark \
+                                 jupyterlab-tailwind-theme \
+                                 jupyterlab-theme-hale \
+                                 jupyterlab_onedarkpro
 RUN fix-permissions $CONDA_DIR
 RUN fix-permissions /home/$NB_USER
 
 USER $NB_UID
 
+
+# [6] Install Dynamic Content ............. #
+
 # Copy jupyter_notebook_config.json
 COPY config/jupyter_notebook_config.json /etc/jupyter/
+
+# Copy custom config settings
+COPY config/lab /home/jovyan/.jupyter/lab
+
+# Dynamic pip packages
+COPY dynamic-elements/dynamic-pip-packages.txt ${PKG_DIR}
+RUN pip install --no-cache-dir -r ${PKG_DIR}/dynamic-pip-packages.txt
