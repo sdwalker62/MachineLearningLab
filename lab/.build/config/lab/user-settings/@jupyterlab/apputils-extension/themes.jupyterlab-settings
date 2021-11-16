@@ -7,7 +7,7 @@
 
     // Selected Theme
     // Application-level visual styling theme
-    "theme": "JupyterLab Dark",
+    "theme": "JupyterLab One Dark Pro",
 
     // Scrollbar Theming
     // Enable/disable styling of the application scrollbars
