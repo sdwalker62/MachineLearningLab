@@ -1,3 +1,9 @@
 [submodule "personal-notebooks"]
 	path = lab/personal-notebooks
 	url = git@github.com:sdwalker62/personal-notebooks.git
+[submodule "sigil_libs"]
+	path = sigil_libs
+	url = git@github.com:sdwalker62/sigil_libs.git
+[submodule "lab/sigil_libs"]
+	path = lab/sigil_libs
+	url = git@github.com:sdwalker62/sigil_libs.git
