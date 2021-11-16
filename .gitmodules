@@ -7,3 +7,9 @@
 [submodule "lab/sigil_libs"]
 	path = lab/sigil_libs
 	url = git@github.com:sdwalker62/sigil_libs.git
+[submodule "lab/sigil_models"]
+	path = lab/sigil_models
+	url = git@github.com:sdwalker62/sigil_models.git
+[submodule "lab/sigil_notebooks"]
+	path = lab/sigil_notebooks
+	url = git@github.com:sdwalker62/sigil_notebooks.git
