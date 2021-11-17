@@ -56,7 +56,7 @@ RUN mkdir $PKG_DIR
 # Copy the static elements only to avoid cache problems
 COPY /static-elements/* \
      /scripts/* \
-     ${PKG_DIR}
+     ${PKG_DIR}/
 
 RUN apt-get -q update && apt-get install -yq locales && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \

@@ -9,9 +9,9 @@ services:
       - JUPYTER_ENABLE_LAB=1
     volumes:
       - ./lab/data:/home/jovyan/data:rw
-      - ./lab/docs:/home/jovyan/docs:rw
-      - ./lab/libs:/home/jovyan/libs:rw
-      - ./lab/models:/home/jovyan/models:rw
+      - ./lab/sigil_docs:/home/jovyan/docs:rw
+      - ./lab/sigil_libs:/home/jovyan/libs:rw
+      - ./lab/sigil_models:/home/jovyan/models:rw
       - ./lab/results:/home/jovyan/results:rw
-      - ./lab/notebooks:/home/jovyan/notebooks:rw
+      - ./lab/sigil_notebooks:/home/jovyan/notebooks:rw
       #- ./lab/personal-notebooks:/home/jovyan/personal-notebooks:rw
