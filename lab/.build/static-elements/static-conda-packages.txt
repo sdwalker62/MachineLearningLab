@@ -26,6 +26,7 @@ sympy=1.7.*
 vincent=0.4.*   
 widgetsnbextension=3.5.*  
 xlrd=2.0.*
+spacy
 pyyaml 
 mkl 
 mkl-include 
