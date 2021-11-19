@@ -193,6 +193,7 @@ USER $NB_UID
 RUN conda config --add channels conda-forge && \
     conda install --quiet --yes --file=${PKG_DIR}/static-conda-packages.txt && \
     conda clean --all -f -y && \
+    conda update --all && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
@@ -229,8 +230,8 @@ RUN jupyter labextension install jupyterlab-plotly \
                                  jupyterlab-tailwind-theme \
                                  jupyterlab-theme-hale \
                                  jupyterlab_onedarkpro
-RUN fix-permissions $CONDA_DIR
-RUN fix-permissions /home/$NB_USER
+RUN fix-permissions ${CONDA_DIR}
+RUN fix-permissions /home/${NB_USER}
 
 USER $NB_UID
 
@@ -247,7 +248,6 @@ RUN apt-get update && \
     xargs -a ${PKG_DIR}/dynamic-apt-packages.txt \
     apt-get install -yq --no-install-recommends \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
-USER $NB_UID
 
 # Dynamic pip packages
 COPY dynamic-elements/dynamic-pip-packages.txt ${PKG_DIR}
@@ -255,3 +255,8 @@ RUN pip install --no-cache-dir -r ${PKG_DIR}/dynamic-pip-packages.txt
 
 # Copy custom config settings
 COPY config/lab /home/jovyan/.jupyter/lab
+
+# Fixing Permission Denied Error
+RUN chown -R $NB_UID:$NB_GID /home/$NB_USER/.jupyter
+
+USER $NB_UID
