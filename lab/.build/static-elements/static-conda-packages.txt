@@ -1,4 +1,4 @@
-nodejs
+nodejs >=12.0.0
 beautifulsoup4   
 conda-forge::blas=*=openblas   
 bokeh   
