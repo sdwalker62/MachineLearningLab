@@ -1,0 +1,1 @@
+docker run --gpus all mll:latest ls -l /usr/local | grep cuda

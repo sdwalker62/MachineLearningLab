@@ -3,6 +3,14 @@ version: "3.8"
 services:
   machine_learning_lab:
     build: lab/.build
+    image: mll:latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
     ports:
       - 8888:8888
     environment:
