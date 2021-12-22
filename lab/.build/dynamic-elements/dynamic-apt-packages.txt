@@ -1,2 +1,0 @@
-libcairo2-dev 
-ffmpeg
