@@ -62,8 +62,11 @@ def add_conda_pkgs(container_name: str) -> str:
     # the first two line are comments, delete them
     for _ in range(2): del lines[0]
         
-    lines.insert(0, '#2. `conda` Packages')
-    lines.insert(2, '| --- | --- | --- | ---|')
+    lines.insert(0, '# 2. `conda` Packages')
+    lines.insert(1, "<details>")
+    lines.insert(2, '<summary> Click to show table </summary>\n')
+    lines.insert(4, '| --- | --- | --- | ---|')
+    lines.append('</details>\n')
     logger.info('... complete')
 
     write_content = '\n'.join(lines)

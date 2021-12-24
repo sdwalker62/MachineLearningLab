@@ -111,7 +111,10 @@
 </details>
 
 ---
-#2. `conda` Packages
+# 2. `conda` Packages
+<details>
+<summary> Click to show table </summary>
+
 | Name | Version | Build | Channel |
 | --- | --- | --- | ---|
 | _libgcc_mutex | 0.1 | conda_forge | conda-forge |
@@ -262,3 +265,4 @@
 | zipp | 3.6.0 | pyhd8ed1ab_0 | conda-forge |
 | zlib | 1.2.11 | h36c2ea0_1013 | conda-forge |
 | zstd | 1.5.0 | ha95c52a_0 | conda-forge |
+</details>
