@@ -1,7 +1,7 @@
 
 # Table of Contents
 ---
-1. (`pip` Packages)[# `pip` Packages]
+1. (`pip` Packages)[#-`pip`-Packages]
 2. (`conda` Packages)[# `conda` Packages]
 
 # `pip` Packages
