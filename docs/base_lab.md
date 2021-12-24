@@ -1,8 +1,8 @@
 
 # Table of Contents
 ---
-1. (`pip` Packages)[#pip-packages]
-2. (`conda` Packages)[#conda-packages]
+1. [`pip` Packages](#pip-packages)
+2. [`conda` Packages](#conda-packages)
 
 # `pip` Packages
 | Package | Version |
