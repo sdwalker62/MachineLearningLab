@@ -32,7 +32,7 @@ def add_pip_pkgs(container_name: str) -> str:
             lines[i] = re.sub(r"\s{3,}", " | ", lines[i])
         lines[i] = "| " + lines[i] + " |"
 
-    lines.insert(0, "# Included `pip` Packages:")
+    lines.insert(0, "# `pip` Packages")
     logger.info('... complete')
 
     write_content = '\n'.join(lines)
@@ -58,7 +58,7 @@ def add_conda_pkgs(container_name: str) -> str:
     # the first two line are comments, delete them
     for _ in range(2): del lines[0]
         
-    lines.insert(0, '# `conda` packages')
+    lines.insert(0, '# `conda` Packages')
     lines.insert(2, '| --- | --- | --- | ---|')
     logger.info('... complete')
 
@@ -76,8 +76,16 @@ if __name__ == "__main__":
     image_type = tag.split('_')[0]
     image = f'docs/{image_type}_lab.md'
 
+    toc = """
+    # Table of Contents
+    ---
+    1. (`pip` Packages)[# `pip` Packages]
+    2. (`conda` Packages)[# `conda` Packages]
+    """
+
     logger.info('Writing content to documents ...')
     with open(image, 'w') as w:
+        w.write(toc)
         w.write(pip_content)
         w.write('\n')
         w.write('---')

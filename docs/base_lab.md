@@ -1,4 +1,9 @@
-# Included `pip` Packages:
+
+    # Table of Contents
+    ---
+    1. (`pip` Packages)[# `pip` Packages]
+    2. (`conda` Packages)[# `conda` Packages]
+    # `pip` Packages
 | Package | Version |
 | ----------------------------- | --------- |
 | alembic | 1.7.5 |
@@ -101,7 +106,7 @@
 | wheel | 0.37.1 |
 | zipp | 3.6.0 |
 ---
-# `conda` packages
+# `conda` Packages
 | Name | Version | Build | Channel |
 | --- | --- | --- | ---|
 | _libgcc_mutex | 0.1 | conda_forge | conda-forge |
