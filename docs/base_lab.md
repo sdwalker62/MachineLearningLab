@@ -4,6 +4,7 @@
 ---
 
 # 1. `pip` Packages
+[Jump back to table of contents](#table-of-contents)
 <details>
 <summary> Click to show table </summary>
 
@@ -112,6 +113,7 @@
 
 ---
 # 2. `conda` Packages
+[Jump back to table of contents](#table-of-contents)
 <details>
 <summary> Click to show table </summary>
 

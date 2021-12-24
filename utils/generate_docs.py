@@ -34,8 +34,9 @@ def add_pip_pkgs(container_name: str) -> str:
         # lines[i] = '    ' + lines[i]
 
     lines.insert(0, "# 1. `pip` Packages")
-    lines.insert(1, "<details>")
-    lines.insert(2, '<summary> Click to show table </summary>\n')
+    lines.insert(1, '[Jump back to table of contents](#table-of-contents)')
+    lines.insert(2, "<details>")
+    lines.insert(3, '<summary> Click to show table </summary>\n')
     lines.append('</details>\n')
     logger.info('... complete')
 
@@ -63,9 +64,10 @@ def add_conda_pkgs(container_name: str) -> str:
     for _ in range(2): del lines[0]
         
     lines.insert(0, '# 2. `conda` Packages')
-    lines.insert(1, "<details>")
-    lines.insert(2, '<summary> Click to show table </summary>\n')
-    lines.insert(4, '| --- | --- | --- | ---|')
+    lines.insert(1, '[Jump back to table of contents](#table-of-contents)')
+    lines.insert(2, "<details>")
+    lines.insert(3, '<summary> Click to show table </summary>\n')
+    lines.insert(5, '| --- | --- | --- | ---|')
     lines.append('</details>\n')
     logger.info('... complete')
 
