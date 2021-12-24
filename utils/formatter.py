@@ -31,11 +31,11 @@ def add_pip_pkgs(container_name: str) -> str:
         else:
             lines[i] = re.sub(r"\s{3,}", " | ", lines[i])
         lines[i] = "| " + lines[i] + " |"
-        lines[i] = '    ' + lines[i]
+        # lines[i] = '    ' + lines[i]
 
     lines.insert(0, "#1. `pip` Packages")
     lines.insert(1, "<details>")
-    lines.insert(2, '  <summary> Click to show table </summary>')
+    lines.insert(2, '<summary> Click to show table </summary>\n')
     lines.append('</details>')
     logger.info('... complete')
 
