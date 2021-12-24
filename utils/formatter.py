@@ -29,7 +29,7 @@ def add_pip_pkgs(container_name):
     logger.info('... complete')
 
     logger.info('writing contents to document...')
-    lines.insert(0, "# Included pip Packages:")
+    lines.insert(0, "# Included `pip` Packages:")
     lines.append('\n')
     lines.append('---')
     write_content = '\n'.join(lines)

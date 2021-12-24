@@ -1,4 +1,4 @@
-# Included pip Packages:
+# Included `pip` Packages:
 | Package | Version |
 | ----------------------------- | --------- |
 | alembic | 1.7.5 |
