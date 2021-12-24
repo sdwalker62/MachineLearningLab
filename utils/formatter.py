@@ -33,10 +33,10 @@ def add_pip_pkgs(container_name: str) -> str:
         lines[i] = "| " + lines[i] + " |"
         # lines[i] = '    ' + lines[i]
 
-    lines.insert(0, "#1. `pip` Packages")
+    lines.insert(0, "# 1. `pip` Packages")
     lines.insert(1, "<details>")
     lines.insert(2, '<summary> Click to show table </summary>\n')
-    lines.append('</details>')
+    lines.append('</details>\n')
     logger.info('... complete')
 
     write_content = '\n'.join(lines)

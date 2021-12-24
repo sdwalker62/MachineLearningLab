@@ -3,7 +3,7 @@
 2. [`conda` Packages](#2-conda-packages)
 ---
 
-#1. `pip` Packages
+# 1. `pip` Packages
 <details>
 <summary> Click to show table </summary>
 
@@ -109,6 +109,7 @@
 | wheel | 0.37.1 |
 | zipp | 3.6.0 |
 </details>
+
 ---
 #2. `conda` Packages
 | Name | Version | Build | Channel |
