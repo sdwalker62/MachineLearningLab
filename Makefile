@@ -11,3 +11,6 @@ gpu-build:
 	@docker tag samuel62/minimal-notebook:latest samuel62/minimal-lab:cuda_$(CUDA_VER)
 	@docker tag samuel62/scipy-notebook:latest samuel62/scipy-lab:cuda_$(CUDA_VER)
 	@docker tag samuel62/datascience-notebook:latest samuel62/datascience-lab:cuda_$(CUDA_VER)
+
+dev:
+	@pip3 install docker
