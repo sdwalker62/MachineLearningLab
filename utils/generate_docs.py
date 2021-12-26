@@ -81,8 +81,12 @@ def add_apt_pkgs(container_name: str) -> str:
     logger.info('Formatting apt packages into tabular format ...')
     lines = content.split('\n')
     for i in range(len(lines)-1):
-        if i > 2: lines[i] = re.sub(r"\s{2,}", " | ", lines[i][4:])
+        if i == 3: 
+            lines[i] = re.sub(r"\s{1,}", " | ", lines[i][4:])
+        else: 
+            lines[i] = re.sub(r"\s{2,}", " | ", lines[i][4:])
         lines[i] = "| " + lines[i] + " |"
+
 
     # the first two line are comments, delete them
     for _ in range(3): del lines[0]
@@ -116,7 +120,7 @@ if __name__ == "__main__":
     toc.append('# Table of Contents')
     toc.append('1. [`pip` Packages](#1-pip-packages)')
     toc.append('2. [`conda` Packages](#2-conda-packages)')
-    toc.append('3. [`apt` Packages](#3-apt-packages')
+    toc.append('3. [`apt` Packages](#3-apt-packages)')
     toc.append('---')
     toc.append('\n')
 

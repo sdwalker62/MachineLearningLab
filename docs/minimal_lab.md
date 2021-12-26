@@ -1,7 +1,7 @@
 # Table of Contents
 1. [`pip` Packages](#1-pip-packages)
 2. [`conda` Packages](#2-conda-packages)
-3. [`apt` Packages](#3-apt-packages
+3. [`apt` Packages](#3-apt-packages)
 ---
 
 # 1. `pip` Packages
@@ -276,7 +276,7 @@
 <details>
 <summary> Click to show table </summary>
 
-| Name | Version | Architecture Description |
+| Name | Version | Architecture | Description |
 | --- | --- | --- | ---|
 | adduser | 3.118ubuntu2 | all | add and remove users and groups |
 | adwaita-icon-theme | 3.36.1-2ubuntu0.20.04.2 | all | default icon theme of GNOME (small subset) |
