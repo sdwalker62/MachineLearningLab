@@ -1,6 +1,7 @@
 # Table of Contents
 1. [`pip` Packages](#1-pip-packages)
 2. [`conda` Packages](#2-conda-packages)
+3. [`apt` Packages](#3-apt-packages
 ---
 
 # 1. `pip` Packages
@@ -436,4 +437,499 @@
 | zipp | 3.6.0 | pyhd8ed1ab_0 | conda-forge |
 | zlib | 1.2.11 | h36c2ea0_1013 | conda-forge |
 | zstd | 1.5.0 | ha95c52a_0 | conda-forge |
+</details>
+
+---
+# 3. `apt` Packages
+[Jump back to table of contents](#table-of-contents)
+<details>
+<summary> Click to show table </summary>
+
+| Name | Version | Architecture Description |
+| --- | --- | --- | ---|
+| adduser | 3.118ubuntu2 | all | add and remove users and groups |
+| adwaita-icon-theme | 3.36.1-2ubuntu0.20.04.2 | all | default icon theme of GNOME (small subset) |
+| apt | 2.0.6 | amd64 | commandline package manager |
+| base-files | 11ubuntu5.4 | amd64 | Debian base system miscellaneous files |
+| base-passwd | 3.5.47 | amd64 | Debian base system master password and group files |
+| bash | 5.0-6ubuntu1.1 | amd64 | GNU Bourne Again SHell |
+| bsdutils | 1:2.34-0.1ubuntu9.1 | amd64 | basic utilities from 4.4BSD-Lite |
+| bzip2 | 1.0.8-2 | amd64 | high-quality block-sorting file compressor - utilities |
+| ca-certificates | 20210119~20.04.2 | all | Common CA certificates |
+| cm-super | 0.3.4-15 | all | TeX font package (full version) with CM (EC) in Type1 in T1, T2*, TS1, X2 enc |
+| cm-super-minimal | 0.3.4-15 | all | TeX font package (minimal version) with CM/EC in Type1 in T1, T2*, TS1, X2 enc |
+| coreutils | 8.30-3ubuntu2 | amd64 | GNU core utilities |
+| cuda-compat-11-3 | 465.19.01-1 | amd64 | CUDA Compatibility Platform |
+| cuda-cudart-11-3 | 11.3.109-1 | amd64 | CUDA Runtime native Libraries |
+| cuda-libraries-11-3 | 11.3.1-1 | amd64 | CUDA Libraries 11.3 meta-package |
+| cuda-nvrtc-11-3 | 11.3.109-1 | amd64 | NVRTC native runtime libraries |
+| cuda-nvtx-11-3 | 11.3.109-1 | amd64 | NVIDIA Tools Extension |
+| cuda-toolkit-11-3-config-common 11.3.109-1 | all | Common config package for CUDA Toolkit 11.3. |
+| cuda-toolkit-11-config-common | 11.5.117-1 | all | Common config package for CUDA Toolkit 11. |
+| cuda-toolkit-config-common | 11.5.117-1 | all | Common config package for CUDA Toolkit. |
+| dash | 0.5.10.2-6 | amd64 | POSIX-compliant shell |
+| debconf | 1.5.73 | all | Debian configuration management system |
+| debianutils | 4.9.1 | amd64 | Miscellaneous utilities specific to Debian |
+| dictionaries-common | 1.28.1 | all | spelling dictionaries - common utilities |
+| diffutils | 1:3.7-3 | amd64 | File comparison utilities |
+| dirmngr | 2.2.19-3ubuntu2.1 | amd64 | GNU privacy guard - network certificate management service |
+| dpkg | 1.19.7ubuntu3 | amd64 | Debian package management system |
+| dvipng | 1.15-1.1 | amd64 | convert DVI files to PNG graphics |
+| e2fsprogs | 1.45.5-2ubuntu1 | amd64 | ext2/ext3/ext4 file system utilities |
+| emacsen-common | 3.0.4 | all | Common facilities for all emacsen |
+| fdisk | 2.34-0.1ubuntu9.1 | amd64 | collection of partitioning utilities |
+| ffmpeg | 7:4.2.4-1ubuntu0.1 | amd64 | Tools for transcoding, streaming and playing of multimedia files |
+| findutils | 4.7.0-1ubuntu1 | amd64 | utilities for finding files--find, xargs |
+| fontconfig | 2.13.1-2ubuntu3 | amd64 | generic font configuration library - support binaries |
+| fontconfig-config | 2.13.1-2ubuntu3 | all | generic font configuration library - configuration |
+| fonts-liberation | 1:1.07.4-11 | all | Fonts with the same metrics as Times, Arial and Courier |
+| fonts-lmodern | 2.004.5-6 | all | OpenType fonts based on Computer Modern |
+| fonts-urw-base35 | 20170801.1-3 | all | font set metric-compatible with the 35 PostScript Level 2 Base Fonts |
+| gcc-10-base:amd64 | 10.3.0-1ubuntu1~20.04 | amd64 | GCC, the GNU Compiler Collection (base package) |
+| ghostscript | 9.50~dfsg-5ubuntu4.4 | amd64 | interpreter for the PostScript language and for PDF |
+| git | 1:2.25.1-1ubuntu3.2 | amd64 | fast, scalable, distributed revision control system |
+| git-man | 1:2.25.1-1ubuntu3.2 | all | fast, scalable, distributed revision control system (manual pages) |
+| gnupg | 2.2.19-3ubuntu2.1 | all | GNU privacy guard - a free PGP replacement |
+| gnupg-l10n | 2.2.19-3ubuntu2.1 | all | GNU privacy guard - localization files |
+| gnupg-utils | 2.2.19-3ubuntu2.1 | amd64 | GNU privacy guard - utility programs |
+| gnupg2 | 2.2.19-3ubuntu2.1 | all | GNU privacy guard - a free PGP replacement (dummy transitional package) |
+| gpg | 2.2.19-3ubuntu2.1 | amd64 | GNU Privacy Guard -- minimalist public key operations |
+| gpg-agent | 2.2.19-3ubuntu2.1 | amd64 | GNU privacy guard - cryptographic agent |
+| gpg-wks-client | 2.2.19-3ubuntu2.1 | amd64 | GNU privacy guard - Web Key Service client |
+| gpg-wks-server | 2.2.19-3ubuntu2.1 | amd64 | GNU privacy guard - Web Key Service server |
+| gpgconf | 2.2.19-3ubuntu2.1 | amd64 | GNU privacy guard - core configuration utilities |
+| gpgsm | 2.2.19-3ubuntu2.1 | amd64 | GNU privacy guard - S/MIME version |
+| gpgv | 2.2.19-3ubuntu2.1 | amd64 | GNU privacy guard - signature verification tool |
+| grep | 3.4-1 | amd64 | GNU grep, egrep and fgrep |
+| gtk-update-icon-cache | 3.24.20-0ubuntu1 | amd64 | icon theme caching utility |
+| gzip | 1.10-0ubuntu4 | amd64 | GNU compression utilities |
+| hicolor-icon-theme | 0.17-2 | all | default fallback theme for FreeDesktop.org icon themes |
+| hostname | 3.23 | amd64 | utility to set/show the host name or domain name |
+| humanity-icon-theme | 0.6.15 | all | Humanity Icon theme |
+| hunspell-en-us | 1:2018.04.16-1 | all | English_american dictionary for hunspell |
+| imagemagick-6-common | 8:6.9.10.23+dfsg-2.1ubuntu11.4 | all | image manipulation programs -- infrastructure |
+| init-system-helpers | 1.57 | all | helper tools for all init systems |
+| inkscape | 0.92.5-1ubuntu1.1 | amd64 | vector-based drawing program |
+| libacl1:amd64 | 2.2.53-6 | amd64 | access control list - shared library |
+| libaom0:amd64 | 1.0.0.errata1-3build1 | amd64 | AV1 Video Codec Library |
+| libapache-pom-java | 18-1 | all | Maven metadata for all Apache Software projects |
+| libapparmor1:amd64 | 2.13.3-7ubuntu5.1 | amd64 | changehat AppArmor library |
+| libapt-pkg6.0:amd64 | 2.0.6 | amd64 | package management runtime library |
+| libasn1-8-heimdal:amd64 | 7.7.0+dfsg-1ubuntu1 | amd64 | Heimdal Kerberos - ASN.1 library |
+| libasound2:amd64 | 1.2.2-2.1ubuntu2.5 | amd64 | shared library for ALSA applications |
+| libasound2-data | 1.2.2-2.1ubuntu2.5 | all | Configuration files and profiles for ALSA drivers |
+| libaspell15:amd64 | 0.60.8-1ubuntu0.1 | amd64 | GNU Aspell spell-checker runtime library |
+| libass9:amd64 | 1:0.14.0-2 | amd64 | library for SSA/ASS subtitles rendering |
+| libassuan0:amd64 | 2.5.3-7ubuntu2 | amd64 | IPC library for the GnuPG components |
+| libasyncns0:amd64 | 0.8-6 | amd64 | Asynchronous name service query library |
+| libatk1.0-0:amd64 | 2.35.1-1ubuntu2 | amd64 | ATK accessibility toolkit |
+| libatk1.0-data | 2.35.1-1ubuntu2 | all | Common files for the ATK accessibility toolkit |
+| libatkmm-1.6-1v5:amd64 | 2.28.0-2build1 | amd64 | C++ wrappers for ATK accessibility toolkit (shared libraries) |
+| libattr1:amd64 | 1:2.4.48-5 | amd64 | extended attribute handling - shared library |
+| libaudit-common | 1:2.8.5-2ubuntu6 | all | Dynamic library for security auditing - common files |
+| libaudit1:amd64 | 1:2.8.5-2ubuntu6 | amd64 | Dynamic library for security auditing |
+| libavahi-client3:amd64 | 0.7-4ubuntu7.1 | amd64 | Avahi client library |
+| libavahi-common-data:amd64 | 0.7-4ubuntu7.1 | amd64 | Avahi common data files |
+| libavahi-common3:amd64 | 0.7-4ubuntu7.1 | amd64 | Avahi common library |
+| libavc1394-0:amd64 | 0.5.4-5 | amd64 | control IEEE 1394 audio/video devices |
+| libavcodec58:amd64 | 7:4.2.4-1ubuntu0.1 | amd64 | FFmpeg library with de/encoders for audio/video codecs - runtime files |
+| libavdevice58:amd64 | 7:4.2.4-1ubuntu0.1 | amd64 | FFmpeg library for handling input and output devices - runtime files |
+| libavfilter7:amd64 | 7:4.2.4-1ubuntu0.1 | amd64 | FFmpeg library containing media filters - runtime files |
+| libavformat58:amd64 | 7:4.2.4-1ubuntu0.1 | amd64 | FFmpeg library with (de)muxers for multimedia containers - runtime files |
+| libavresample4:amd64 | 7:4.2.4-1ubuntu0.1 | amd64 | FFmpeg compatibility library for resampling - runtime files |
+| libavutil56:amd64 | 7:4.2.4-1ubuntu0.1 | amd64 | FFmpeg library with functions for simplifying programming - runtime files |
+| libblkid1:amd64 | 2.34-0.1ubuntu9.1 | amd64 | block device ID library |
+| libbluray2:amd64 | 1:1.2.0-1 | amd64 | Blu-ray disc playback support library (shared library) |
+| libbrotli1:amd64 | 1.0.7-6ubuntu0.1 | amd64 | library implementing brotli encoder and decoder (shared libraries) |
+| libbs2b0:amd64 | 3.1.0+dfsg-2.2build1 | amd64 | Bauer stereophonic-to-binaural DSP library |
+| libbsd0:amd64 | 0.10.0-1 | amd64 | utility functions from BSD systems - shared library |
+| libbz2-1.0:amd64 | 1.0.8-2 | amd64 | high-quality block-sorting file compressor library - runtime |
+| libc-bin | 2.31-0ubuntu9.2 | amd64 | GNU C Library: Binaries |
+| libc6:amd64 | 2.31-0ubuntu9.2 | amd64 | GNU C Library: Shared libraries |
+| libcaca0:amd64 | 0.99.beta19-2.1ubuntu1.20.04.2 | amd64 | colour ASCII art library |
+| libcairo-gobject2:amd64 | 1.16.0-4ubuntu1 | amd64 | Cairo 2D vector graphics library (GObject library) |
+| libcairo2:amd64 | 1.16.0-4ubuntu1 | amd64 | Cairo 2D vector graphics library |
+| libcairomm-1.0-1v5:amd64 | 1.12.2-4build1 | amd64 | C++ wrappers for Cairo (shared libraries) |
+| libcap-ng0:amd64 | 0.7.9-2.1build1 | amd64 | An alternate POSIX capabilities library |
+| libcbor0.6:amd64 | 0.6.0-0ubuntu1 | amd64 | library for parsing and generating CBOR (RFC 7049) |
+| libcdio-cdda2:amd64 | 10.2+2.0.0-1 | amd64 | library to read and control digital audio CDs |
+| libcdio-paranoia2:amd64 | 10.2+2.0.0-1 | amd64 | library to read digital audio CDs with error correction |
+| libcdio18:amd64 | 2.0.0-2 | amd64 | library to read and control CD-ROM |
+| libcdr-0.1-1:amd64 | 0.1.6-1build2 | amd64 | library for reading and converting Corel DRAW files |
+| libchromaprint1:amd64 | 1.4.3-3build1 | amd64 | audio fingerprint library |
+| libcodec2-0.9:amd64 | 0.9.2-2 | amd64 | Codec2 runtime library |
+| libcom-err2:amd64 | 1.45.5-2ubuntu1 | amd64 | common error description library |
+| libcommons-logging-java | 1.2-2 | all | common wrapper interface for several logging APIs |
+| libcommons-parent-java | 43-1 | all | Maven metadata for Apache Commons project |
+| libcrypt1:amd64 | 1:4.4.10-10ubuntu4 | amd64 | libcrypt shared library |
+| libcublas-11-3 | 11.5.1.109-1 | amd64 | CUBLAS native runtime libraries |
+| libcudnn8 | 8.2.0.53-1+cuda11.3 | amd64 | cuDNN runtime libraries |
+| libcufft-11-3 | 10.4.2.109-1 | amd64 | CUFFT native runtime libraries |
+| libcups2:amd64 | 2.3.1-9ubuntu1.1 | amd64 | Common UNIX Printing System(tm) - Core library |
+| libcurand-11-3 | 10.2.4.109-1 | amd64 | CURAND native runtime libraries |
+| libcurl3-gnutls:amd64 | 7.68.0-1ubuntu2.7 | amd64 | easy-to-use client-side URL transfer library (GnuTLS flavour) |
+| libcusolver-11-3 | 11.1.2.109-1 | amd64 | CUDA solver native runtime libraries |
+| libcusparse-11-3 | 11.6.0.109-1 | amd64 | CUSPARSE native runtime libraries |
+| libdatrie1:amd64 | 0.2.12-3 | amd64 | Double-array trie library |
+| libdb5.3:amd64 | 5.3.28+dfsg1-0.6ubuntu2 | amd64 | Berkeley v5.3 Database Libraries [runtime] |
+| libdbus-1-3:amd64 | 1.12.16-2ubuntu2.1 | amd64 | simple interprocess messaging system (library) |
+| libdbus-glib-1-2:amd64 | 0.110-5fakssync1 | amd64 | deprecated library for D-Bus IPC |
+| libdc1394-22:amd64 | 2.2.5-2.1 | amd64 | high level programming interface for IEEE 1394 digital cameras |
+| libdebconfclient0:amd64 | 0.251ubuntu1 | amd64 | Debian Configuration Management System (C-implementation library) |
+| libdrm-amdgpu1:amd64 | 2.4.105-3~20.04.2 | amd64 | Userspace interface to amdgpu-specific kernel DRM services -- runtime |
+| libdrm-common | 2.4.105-3~20.04.2 | all | Userspace interface to kernel DRM services -- common files |
+| libdrm-intel1:amd64 | 2.4.105-3~20.04.2 | amd64 | Userspace interface to intel-specific kernel DRM services -- runtime |
+| libdrm-nouveau2:amd64 | 2.4.105-3~20.04.2 | amd64 | Userspace interface to nouveau-specific kernel DRM services -- runtime |
+| libdrm-radeon1:amd64 | 2.4.105-3~20.04.2 | amd64 | Userspace interface to radeon-specific kernel DRM services -- runtime |
+| libdrm2:amd64 | 2.4.105-3~20.04.2 | amd64 | Userspace interface to kernel DRM services -- runtime |
+| libedit2:amd64 | 3.1-20191231-1 | amd64 | BSD editline and history libraries |
+| libelf1:amd64 | 0.176-1.1build1 | amd64 | library to read and write ELF files |
+| libenchant-2-2:amd64 | 2.2.8-1ubuntu0.20.04.1 | amd64 | Wrapper library for various spell checker engines (runtime libs) |
+| liberror-perl | 0.17029-1 | all | Perl module for error/exception handling in an OO-ish way |
+| libexpat1:amd64 | 2.2.9-1build1 | amd64 | XML parsing C library - runtime library |
+| libext2fs2:amd64 | 1.45.5-2ubuntu1 | amd64 | ext2/ext3/ext4 file system libraries |
+| libfdisk1:amd64 | 2.34-0.1ubuntu9.1 | amd64 | fdisk partitioning library |
+| libffi7:amd64 | 3.3-4 | amd64 | Foreign Function Interface library runtime |
+| libfftw3-double3:amd64 | 3.3.8-2ubuntu1 | amd64 | Library for computing Fast Fourier Transforms - Double precision |
+| libfido2-1:amd64 | 1.3.1-1ubuntu2 | amd64 | library for generating and verifying FIDO 2.0 objects |
+| libflac8:amd64 | 1.3.3-1build1 | amd64 | Free Lossless Audio Codec - runtime C library |
+| libflite1:amd64 | 2.1-release-3 | amd64 | Small run-time speech synthesis engine - shared libraries |
+| libfontbox-java | 1:1.8.16-2 | all | Java font library |
+| libfontconfig1:amd64 | 2.13.1-2ubuntu3 | amd64 | generic font configuration library - runtime |
+| libfontenc1:amd64 | 1:1.1.4-0ubuntu1 | amd64 | X11 font encoding library |
+| libfreetype6:amd64 | 2.10.1-2ubuntu0.1 | amd64 | FreeType 2 font engine, shared library files |
+| libfribidi0:amd64 | 1.0.8-2 | amd64 | Free Implementation of the Unicode BiDi algorithm |
+| libgc1c2:amd64 | 1:7.6.4-0.4ubuntu1 | amd64 | conservative garbage collector for C and C++ |
+| libgcc-s1:amd64 | 10.3.0-1ubuntu1~20.04 | amd64 | GCC support library |
+| libgcrypt20:amd64 | 1.8.5-5ubuntu1.1 | amd64 | LGPL Crypto library - runtime library |
+| libgd3:amd64 | 2.2.5-5.2ubuntu2.1 | amd64 | GD Graphics Library |
+| libgdbm-compat4:amd64 | 1.18.1-5 | amd64 | GNU dbm database routines (legacy support runtime version)  |
+| libgdbm6:amd64 | 1.18.1-5 | amd64 | GNU dbm database routines (runtime version)  |
+| libgdk-pixbuf2.0-0:amd64 | 2.40.0+dfsg-3ubuntu0.2 | amd64 | GDK Pixbuf library |
+| libgdk-pixbuf2.0-common | 2.40.0+dfsg-3ubuntu0.2 | all | GDK Pixbuf library - data files |
+| libgl1:amd64 | 1.3.2-1~ubuntu0.20.04.1 | amd64 | Vendor neutral GL dispatch library -- legacy GL support |
+| libgl1-mesa-dri:amd64 | 21.0.3-0ubuntu0.3~20.04.5 | amd64 | free implementation of the OpenGL API -- DRI modules |
+| libglapi-mesa:amd64 | 21.0.3-0ubuntu0.3~20.04.5 | amd64 | free implementation of the GL API -- shared library |
+| libglib2.0-0:amd64 | 2.64.6-1~ubuntu20.04.4 | amd64 | GLib library of C routines |
+| libglibmm-2.4-1v5:amd64 | 2.64.2-1 | amd64 | C++ wrapper for the GLib toolkit (shared libraries) |
+| libglvnd0:amd64 | 1.3.2-1~ubuntu0.20.04.1 | amd64 | Vendor neutral GL dispatch library |
+| libglx-mesa0:amd64 | 21.0.3-0ubuntu0.3~20.04.5 | amd64 | free implementation of the OpenGL API -- GLX vendor library |
+| libglx0:amd64 | 1.3.2-1~ubuntu0.20.04.1 | amd64 | Vendor neutral GL dispatch library -- GLX support |
+| libgme0:amd64 | 0.6.2-1build1 | amd64 | Playback library for video game music files - shared library |
+| libgmp10:amd64 | 2:6.2.0+dfsg-4 | amd64 | Multiprecision arithmetic library |
+| libgnutls30:amd64 | 3.6.13-2ubuntu1.6 | amd64 | GNU TLS library - main runtime library |
+| libgomp1:amd64 | 10.3.0-1ubuntu1~20.04 | amd64 | GCC OpenMP (GOMP) support library |
+| libgpg-error0:amd64 | 1.37-1 | amd64 | GnuPG development runtime library |
+| libgraphite2-3:amd64 | 1.3.13-11build1 | amd64 | Font rendering engine for Complex Scripts -- library |
+| libgs9:amd64 | 9.50~dfsg-5ubuntu4.4 | amd64 | interpreter for the PostScript language and for PDF - Library |
+| libgs9-common | 9.50~dfsg-5ubuntu4.4 | all | interpreter for the PostScript language and for PDF - common files |
+| libgsl23:amd64 | 2.5+dfsg-6build1 | amd64 | GNU Scientific Library (GSL) -- library package |
+| libgslcblas0:amd64 | 2.5+dfsg-6build1 | amd64 | GNU Scientific Library (GSL) -- blas library package |
+| libgsm1:amd64 | 1.0.18-2 | amd64 | Shared libraries for GSM speech compressor |
+| libgssapi-krb5-2:amd64 | 1.17-6ubuntu4.1 | amd64 | MIT Kerberos runtime libraries - krb5 GSS-API Mechanism |
+| libgssapi3-heimdal:amd64 | 7.7.0+dfsg-1ubuntu1 | amd64 | Heimdal Kerberos - GSSAPI support library |
+| libgtk2.0-0:amd64 | 2.24.32-4ubuntu4 | amd64 | GTK graphical user interface library - old version |
+| libgtk2.0-common | 2.24.32-4ubuntu4 | all | common files for the GTK graphical user interface library |
+| libgtkmm-2.4-1v5:amd64 | 1:2.24.5-4ubuntu2 | amd64 | C++ wrappers for GTK+ 2 (shared libraries) |
+| libgtkspell0:amd64 | 2.0.16-1.3 | amd64 | spell-checking addon for GTK's TextView widget |
+| libharfbuzz-icu0:amd64 | 2.6.4-1ubuntu4 | amd64 | OpenType text shaping engine ICU backend |
+| libharfbuzz0b:amd64 | 2.6.4-1ubuntu4 | amd64 | OpenType text shaping engine (shared library) |
+| libhcrypto4-heimdal:amd64 | 7.7.0+dfsg-1ubuntu1 | amd64 | Heimdal Kerberos - crypto library |
+| libheimbase1-heimdal:amd64 | 7.7.0+dfsg-1ubuntu1 | amd64 | Heimdal Kerberos - Base library |
+| libheimntlm0-heimdal:amd64 | 7.7.0+dfsg-1ubuntu1 | amd64 | Heimdal Kerberos - NTLM support library |
+| libhogweed5:amd64 | 3.5.1+really3.5.1-2ubuntu0.2 | amd64 | low level cryptographic library (public-key cryptos) |
+| libhunspell-1.7-0:amd64 | 1.7.0-2build2 | amd64 | spell checker and morphological analyzer (shared library) |
+| libhx509-5-heimdal:amd64 | 7.7.0+dfsg-1ubuntu1 | amd64 | Heimdal Kerberos - X509 support library |
+| libice6:amd64 | 2:1.0.10-0ubuntu1 | amd64 | X11 Inter-Client Exchange library |
+| libicu66:amd64 | 66.1-2ubuntu2.1 | amd64 | International Components for Unicode |
+| libidn11:amd64 | 1.33-2.2ubuntu2 | amd64 | GNU Libidn library, implementation of IETF IDN specifications |
+| libidn2-0:amd64 | 2.2.0-2 | amd64 | Internationalized domain names (IDNA2008/TR46) library |
+| libiec61883-0:amd64 | 1.2.0-3 | amd64 | partial implementation of IEC 61883 (shared lib) |
+| libijs-0.35:amd64 | 0.35-15 | amd64 | IJS raster image transport protocol: shared library |
+| libjack-jackd2-0:amd64 | 1.9.12~dfsg-2ubuntu2 | amd64 | JACK Audio Connection Kit (libraries) |
+| libjbig0:amd64 | 2.1-3.1build1 | amd64 | JBIGkit libraries |
+| libjbig2dec0:amd64 | 0.18-1ubuntu1 | amd64 | JBIG2 decoder library - shared libraries |
+| libjpeg-turbo8:amd64 | 2.0.3-0ubuntu1.20.04.1 | amd64 | IJG JPEG compliant runtime library. |
+| libjpeg8:amd64 | 8c-2ubuntu8 | amd64 | Independent JPEG Group's JPEG runtime library (dependency package) |
+| libk5crypto3:amd64 | 1.17-6ubuntu4.1 | amd64 | MIT Kerberos runtime libraries - Crypto Library |
+| libkeyutils1:amd64 | 1.6-6ubuntu1 | amd64 | Linux Key Management Utilities (library) |
+| libkpathsea6:amd64 | 2019.20190605.51237-3build2 | amd64 | TeX Live: path search library for TeX (runtime part) |
+| libkrb5-26-heimdal:amd64 | 7.7.0+dfsg-1ubuntu1 | amd64 | Heimdal Kerberos - libraries |
+| libkrb5-3:amd64 | 1.17-6ubuntu4.1 | amd64 | MIT Kerberos runtime libraries |
+| libkrb5support0:amd64 | 1.17-6ubuntu4.1 | amd64 | MIT Kerberos runtime libraries - Support library |
+| libksba8:amd64 | 1.3.5-2 | amd64 | X.509 and CMS support library |
+| liblcms2-2:amd64 | 2.9-4 | amd64 | Little CMS 2 color management library |
+| libldap-2.4-2:amd64 | 2.4.49+dfsg-2ubuntu1.8 | amd64 | OpenLDAP libraries |
+| libldap-common | 2.4.49+dfsg-2ubuntu1.8 | all | OpenLDAP common files for libraries |
+| liblilv-0-0:amd64 | 0.24.6-1ubuntu0.1 | amd64 | library for simple use of LV2 plugins |
+| libllvm12:amd64 | 1:12.0.0-3ubuntu1~20.04.4 | amd64 | Modular compiler and toolchain technologies, runtime library |
+| liblqr-1-0:amd64 | 0.4.2-2.1 | amd64 | converts plain array images into multi-size representation |
+| libltdl7:amd64 | 2.4.6-14 | amd64 | System independent dlopen wrapper for GNU libtool |
+| liblz4-1:amd64 | 1.9.2-2ubuntu0.20.04.1 | amd64 | Fast LZ compression algorithm library - runtime |
+| liblzma5:amd64 | 5.2.4-1ubuntu1 | amd64 | XZ-format compression library |
+| libmagick++-6.q16-8:amd64 | 8:6.9.10.23+dfsg-2.1ubuntu11.4 | amd64 | C++ interface to ImageMagick -- quantum depth Q16 |
+| libmagickcore-6.q16-6:amd64 | 8:6.9.10.23+dfsg-2.1ubuntu11.4 | amd64 | low-level image manipulation library -- quantum depth Q16 |
+| libmagickwand-6.q16-6:amd64 | 8:6.9.10.23+dfsg-2.1ubuntu11.4 | amd64 | image manipulation library -- quantum depth Q16 |
+| libmount1:amd64 | 2.34-0.1ubuntu9.1 | amd64 | device mounting library |
+| libmp3lame0:amd64 | 3.100-3 | amd64 | MP3 encoding library |
+| libmpdec2:amd64 | 2.4.2-3 | amd64 | library for decimal floating point arithmetic (runtime library) |
+| libmpfr6:amd64 | 4.0.2-1 | amd64 | multiple precision floating-point computation |
+| libmpg123-0:amd64 | 1.25.13-1 | amd64 | MPEG layer 1/2/3 audio decoder (shared library) |
+| libmysofa1:amd64 | 1.0~dfsg0-1 | amd64 | library to read HRTFs stored in the AES69-2015 SOFA format |
+| libnccl2 | 2.9.9-1+cuda11.3 | amd64 | NVIDIA Collective Communication Library (NCCL) Runtime |
+| libncurses6:amd64 | 6.2-0ubuntu2 | amd64 | shared libraries for terminal handling |
+| libncursesw6:amd64 | 6.2-0ubuntu2 | amd64 | shared libraries for terminal handling (wide character support) |
+| libnettle7:amd64 | 3.5.1+really3.5.1-2ubuntu0.2 | amd64 | low level cryptographic library (symmetric and one-way cryptos) |
+| libnghttp2-14:amd64 | 1.40.0-1build1 | amd64 | library implementing HTTP/2 protocol (shared library) |
+| libnorm1:amd64 | 1.5.8+dfsg2-2build1 | amd64 | NACK-Oriented Reliable Multicast (NORM) library |
+| libnpp-11-3 | 11.3.3.95-1 | amd64 | NPP native runtime libraries |
+| libnpth0:amd64 | 1.6-1 | amd64 | replacement for GNU Pth using system threads |
+| libnspr4:amd64 | 2:4.25-1 | amd64 | NetScape Portable Runtime Library |
+| libnss3:amd64 | 2:3.49.1-1ubuntu1.6 | amd64 | Network Security Service libraries |
+| libnuma1:amd64 | 2.0.12-1 | amd64 | Libraries for controlling NUMA policy |
+| libnvjpeg-11-3 | 11.5.0.109-1 | amd64 | NVJPEG native runtime libraries |
+| libogg0:amd64 | 1.3.4-0ubuntu1 | amd64 | Ogg bitstream library |
+| libopenal-data | 1:1.19.1-1 | all | Software implementation of the OpenAL audio API (data files) |
+| libopenal1:amd64 | 1:1.19.1-1 | amd64 | Software implementation of the OpenAL audio API (shared library) |
+| libopenjp2-7:amd64 | 2.3.1-1ubuntu4.20.04.1 | amd64 | JPEG 2000 image compression/decompression library |
+| libopenmpt0:amd64 | 0.4.11-1build1 | amd64 | module music library based on OpenMPT -- shared library |
+| libopus0:amd64 | 1.3.1-0ubuntu1 | amd64 | Opus codec runtime library |
+| libp11-kit0:amd64 | 0.23.20-1ubuntu0.1 | amd64 | library for loading and coordinating access to PKCS#11 modules - runtime |
+| libpam-modules:amd64 | 1.3.1-5ubuntu4.3 | amd64 | Pluggable Authentication Modules for PAM |
+| libpam-modules-bin | 1.3.1-5ubuntu4.3 | amd64 | Pluggable Authentication Modules for PAM - helper binaries |
+| libpam-runtime | 1.3.1-5ubuntu4.3 | all | Runtime support for the PAM library |
+| libpam0g:amd64 | 1.3.1-5ubuntu4.3 | amd64 | Pluggable Authentication Modules library |
+| libpango-1.0-0:amd64 | 1.44.7-2ubuntu4 | amd64 | Layout and rendering of internationalized text |
+| libpangocairo-1.0-0:amd64 | 1.44.7-2ubuntu4 | amd64 | Layout and rendering of internationalized text |
+| libpangoft2-1.0-0:amd64 | 1.44.7-2ubuntu4 | amd64 | Layout and rendering of internationalized text |
+| libpangomm-1.4-1v5:amd64 | 2.42.0-2build1 | amd64 | C++ Wrapper for pango (shared libraries) |
+| libpaper-utils | 1.1.28 | amd64 | library for handling paper characteristics (utilities) |
+| libpaper1:amd64 | 1.1.28 | amd64 | library for handling paper characteristics |
+| libpciaccess0:amd64 | 0.16-0ubuntu1 | amd64 | Generic PCI access library for X |
+| libpcre2-8-0:amd64 | 10.34-7 | amd64 | New Perl Compatible Regular Expression Library- 8 bit runtime files |
+| libpcre3:amd64 | 2:8.39-12build1 | amd64 | Old Perl 5 Compatible Regular Expression Library - runtime files |
+| libpdfbox-java | 1:1.8.16-2 | all | PDF library for Java |
+| libperl5.30:amd64 | 5.30.0-9ubuntu0.2 | amd64 | shared Perl library |
+| libpgm-5.2-0:amd64 | 5.2.122~dfsg-3ubuntu1 | amd64 | OpenPGM shared library |
+| libpixman-1-0:amd64 | 0.38.4-0ubuntu1 | amd64 | pixel-manipulation library for X and cairo |
+| libpng16-16:amd64 | 1.6.37-2 | amd64 | PNG library - runtime (version 1.6) |
+| libpoppler-glib8:amd64 | 0.86.1-0ubuntu1 | amd64 | PDF rendering library (GLib-based shared library) |
+| libpoppler97:amd64 | 0.86.1-0ubuntu1 | amd64 | PDF rendering library |
+| libpopt0:amd64 | 1.16-14 | amd64 | lib for parsing cmdline parameters |
+| libpostproc55:amd64 | 7:4.2.4-1ubuntu0.1 | amd64 | FFmpeg library for post processing - runtime files |
+| libpotrace0:amd64 | 1.16-2 | amd64 | library for tracing bitmaps |
+| libprocps8:amd64 | 2:3.3.16-1ubuntu2.3 | amd64 | library for accessing process information from /proc |
+| libpsl5:amd64 | 0.21.0-1ubuntu1 | amd64 | Library for Public Suffix List (shared libraries) |
+| libptexenc1:amd64 | 2019.20190605.51237-3build2 | amd64 | TeX Live: pTeX encoding library |
+| libpthread-stubs0-dev:amd64 | 0.4-1 | amd64 | pthread stubs not provided by native libc, development files |
+| libpulse0:amd64 | 1:13.99.1-1ubuntu3.13 | amd64 | PulseAudio client libraries |
+| libpython2-stdlib:amd64 | 2.7.17-2ubuntu4 | amd64 | interactive high-level object-oriented language (Python2) |
+| libpython2.7-minimal:amd64 | 2.7.18-1~20.04.1 | amd64 | Minimal subset of the Python language (version 2.7) |
+| libpython2.7-stdlib:amd64 | 2.7.18-1~20.04.1 | amd64 | Interactive high-level object-oriented language (standard library, version 2.7) |
+| libpython3-stdlib:amd64 | 3.8.2-0ubuntu2 | amd64 | interactive high-level object-oriented language (default python3 version) |
+| libpython3.8-minimal:amd64 | 3.8.10-0ubuntu1~20.04.2 | amd64 | Minimal subset of the Python language (version 3.8) |
+| libpython3.8-stdlib:amd64 | 3.8.10-0ubuntu1~20.04.2 | amd64 | Interactive high-level object-oriented language (standard library, version 3.8) |
+| libraw1394-11:amd64 | 2.1.2-1 | amd64 | library for direct access to IEEE 1394 bus (aka FireWire) |
+| libreadline8:amd64 | 8.0-4 | amd64 | GNU readline and history libraries, run-time libraries |
+| librevenge-0.0-0:amd64 | 0.0.4-6ubuntu5 | amd64 | Base Library for writing document interface filters |
+| libroken18-heimdal:amd64 | 7.7.0+dfsg-1ubuntu1 | amd64 | Heimdal Kerberos - roken support library |
+| librsvg2-2:amd64 | 2.48.9-1ubuntu0.20.04.1 | amd64 | SAX-based renderer library for SVG files (runtime) |
+| librsvg2-common:amd64 | 2.48.9-1ubuntu0.20.04.1 | amd64 | SAX-based renderer library for SVG files (extra runtime) |
+| librtmp1:amd64 | 2.4+20151223.gitfa8646d.1-2build1 amd64 | toolkit for RTMP streams (shared library) |
+| librubberband2:amd64 | 1.8.2-1build1 | amd64 | audio time-stretching and pitch-shifting library |
+| libsamplerate0:amd64 | 0.1.9-2 | amd64 | Audio sample rate conversion library |
+| libsasl2-2:amd64 | 2.1.27+dfsg-2 | amd64 | Cyrus SASL - authentication abstraction library |
+| libsasl2-modules-db:amd64 | 2.1.27+dfsg-2 | amd64 | Cyrus SASL - pluggable authentication modules (DB) |
+| libsdl2-2.0-0:amd64 | 2.0.10+dfsg1-3 | amd64 | Simple DirectMedia Layer |
+| libseccomp2:amd64 | 2.5.1-1ubuntu1~20.04.2 | amd64 | high level interface to Linux seccomp filter |
+| libselinux1:amd64 | 3.0-1build2 | amd64 | SELinux runtime shared libraries |
+| libsemanage-common | 3.0-1build2 | all | Common files for SELinux policy management libraries |
+| libsemanage1:amd64 | 3.0-1build2 | amd64 | SELinux policy management library |
+| libsensors-config | 1:3.6.0-2ubuntu1 | all | lm-sensors configuration files |
+| libsensors5:amd64 | 1:3.6.0-2ubuntu1 | amd64 | library to read temperature/voltage/fan sensors |
+| libsepol1:amd64 | 3.0-1 | amd64 | SELinux library for manipulating binary security policies |
+| libserd-0-0:amd64 | 0.30.2-1 | amd64 | lightweight RDF syntax library |
+| libshine3:amd64 | 3.1.1-2 | amd64 | Fixed-point MP3 encoding library - runtime files |
+| libsigc++-2.0-0v5:amd64 | 2.10.2-1build1 | amd64 | type-safe Signal Framework for C++ - runtime |
+| libslang2:amd64 | 2.3.2-4 | amd64 | S-Lang programming library - runtime version |
+| libsm6:amd64 | 2:1.2.3-1 | amd64 | X11 Session Management library |
+| libsmartcols1:amd64 | 2.34-0.1ubuntu9.1 | amd64 | smart column output alignment library |
+| libsnappy1v5:amd64 | 1.1.8-1build1 | amd64 | fast compression/decompression library |
+| libsndfile1:amd64 | 1.0.28-7ubuntu0.1 | amd64 | Library for reading/writing audio files |
+| libsndio7.0:amd64 | 1.5.0-3 | amd64 | Small audio and MIDI framework from OpenBSD, runtime libraries |
+| libsodium23:amd64 | 1.0.18-1 | amd64 | Network communication, cryptography and signaturing library |
+| libsord-0-0:amd64 | 0.16.4-1 | amd64 | library for storing RDF data in memory |
+| libsoxr0:amd64 | 0.1.3-2build1 | amd64 | High quality 1D sample-rate conversion library |
+| libspeex1:amd64 | 1.2~rc1.2-1.1ubuntu1 | amd64 | The Speex codec runtime library |
+| libsqlite3-0:amd64 | 3.31.1-4ubuntu0.2 | amd64 | SQLite 3 shared library |
+| libsratom-0-0:amd64 | 0.6.4-1 | amd64 | library for serialising LV2 atoms to/from Turtle |
+| libss2:amd64 | 1.45.5-2ubuntu1 | amd64 | command-line interface parsing library |
+| libssh-4:amd64 | 0.9.3-2ubuntu2.2 | amd64 | tiny C SSH library (OpenSSL flavor) |
+| libssh-gcrypt-4:amd64 | 0.9.3-2ubuntu2.2 | amd64 | tiny C SSH library (gcrypt flavor) |
+| libssl1.1:amd64 | 1.1.1f-1ubuntu2.10 | amd64 | Secure Sockets Layer toolkit - shared libraries |
+| libstdc++6:amd64 | 10.3.0-1ubuntu1~20.04 | amd64 | GNU Standard C++ Library v3 |
+| libswresample3:amd64 | 7:4.2.4-1ubuntu0.1 | amd64 | FFmpeg library for audio resampling, rematrixing etc. - runtime files |
+| libswscale5:amd64 | 7:4.2.4-1ubuntu0.1 | amd64 | FFmpeg library for image scaling and various conversions - runtime files |
+| libsynctex2:amd64 | 2019.20190605.51237-3build2 | amd64 | TeX Live: SyncTeX parser library |
+| libsystemd0:amd64 | 245.4-4ubuntu3.13 | amd64 | systemd utility library |
+| libtasn1-6:amd64 | 4.16.0-2 | amd64 | Manage ASN.1 structures (runtime) |
+| libteckit0:amd64 | 2.5.8+ds2-5ubuntu2 | amd64 | Encoding conversion library |
+| libtexlua53:amd64 | 2019.20190605.51237-3build2 | amd64 | TeX Live: Lua 5.3, modified for use with LuaTeX |
+| libtexluajit2:amd64 | 2019.20190605.51237-3build2 | amd64 | TeX Live: LuaJIT, modified for use with LuaJITTeX |
+| libtext-iconv-perl | 1.7-7 | amd64 | module to convert between character sets in Perl |
+| libthai-data | 0.1.28-3 | all | Data files for Thai language support library |
+| libthai0:amd64 | 0.1.28-3 | amd64 | Thai language support library |
+| libtheora0:amd64 | 1.1.1+dfsg.1-15ubuntu2 | amd64 | Theora Video Compression Codec |
+| libtiff5:amd64 | 4.1.0+git191117-2ubuntu0.20.04.2 | amd64 | Tag Image File Format (TIFF) library |
+| libtinfo6:amd64 | 6.2-0ubuntu2 | amd64 | shared low-level terminfo library for terminal handling |
+| libtwolame0:amd64 | 0.4.0-2 | amd64 | MPEG Audio Layer 2 encoding library |
+| libudev1:amd64 | 245.4-4ubuntu3.13 | amd64 | libudev shared library |
+| libunistring2:amd64 | 0.9.10-2 | amd64 | Unicode string library for C |
+| libusb-1.0-0:amd64 | 2:1.0.23-2build1 | amd64 | userspace USB programming library |
+| libuuid1:amd64 | 2.34-0.1ubuntu9.1 | amd64 | Universally Unique ID library |
+| libva-drm2:amd64 | 2.7.0-2 | amd64 | Video Acceleration (VA) API for Linux -- DRM runtime |
+| libva-x11-2:amd64 | 2.7.0-2 | amd64 | Video Acceleration (VA) API for Linux -- X11 runtime |
+| libva2:amd64 | 2.7.0-2 | amd64 | Video Acceleration (VA) API for Linux -- runtime |
+| libvdpau1:amd64 | 1.3-1ubuntu2 | amd64 | Video Decode and Presentation API for Unix (libraries) |
+| libvidstab1.1:amd64 | 1.1.0-2 | amd64 | video stabilization library (shared library) |
+| libvisio-0.1-1:amd64 | 0.1.7-1build2 | amd64 | library for parsing the visio file structure |
+| libvorbis0a:amd64 | 1.3.6-2ubuntu1 | amd64 | decoder library for Vorbis General Audio Compression Codec |
+| libvorbisenc2:amd64 | 1.3.6-2ubuntu1 | amd64 | encoder library for Vorbis General Audio Compression Codec |
+| libvorbisfile3:amd64 | 1.3.6-2ubuntu1 | amd64 | high-level API for Vorbis General Audio Compression Codec |
+| libvpx6:amd64 | 1.8.2-1build1 | amd64 | VP8 and VP9 video codec (shared library) |
+| libvulkan1:amd64 | 1.2.131.2-1 | amd64 | Vulkan loader library |
+| libwavpack1:amd64 | 5.2.0-1ubuntu0.1 | amd64 | audio codec (lossy and lossless) - library |
+| libwayland-client0:amd64 | 1.18.0-1 | amd64 | wayland compositor infrastructure - client library |
+| libwayland-cursor0:amd64 | 1.18.0-1 | amd64 | wayland compositor infrastructure - cursor library |
+| libwayland-egl1:amd64 | 1.18.0-1 | amd64 | wayland compositor infrastructure - EGL library |
+| libwebp6:amd64 | 0.6.1-2ubuntu0.20.04.1 | amd64 | Lossy compression of digital photographic images. |
+| libwebpmux3:amd64 | 0.6.1-2ubuntu0.20.04.1 | amd64 | Lossy compression of digital photographic images. |
+| libwind0-heimdal:amd64 | 7.7.0+dfsg-1ubuntu1 | amd64 | Heimdal Kerberos - stringprep implementation |
+| libwpd-0.10-10:amd64 | 0.10.3-1build1 | amd64 | Library for handling WordPerfect documents (shared library) |
+| libwpg-0.3-3:amd64 | 0.3.3-1build1 | amd64 | WordPerfect graphics import/convert library (shared library) |
+| libwrap0:amd64 | 7.6.q-30 | amd64 | Wietse Venema's TCP wrappers library |
+| libx11-6:amd64 | 2:1.6.9-2ubuntu1.2 | amd64 | X11 client-side library |
+| libx11-data | 2:1.6.9-2ubuntu1.2 | all | X11 client-side library |
+| libx11-dev:amd64 | 2:1.6.9-2ubuntu1.2 | amd64 | X11 client-side library (development headers) |
+| libx11-xcb1:amd64 | 2:1.6.9-2ubuntu1.2 | amd64 | Xlib/XCB interface library |
+| libx264-155:amd64 | 2:0.155.2917+git0a84d98-2 | amd64 | x264 video coding library |
+| libx265-179:amd64 | 3.2.1-1build1 | amd64 | H.265/HEVC video stream encoder (shared library) |
+| libxau-dev:amd64 | 1:1.0.9-0ubuntu1 | amd64 | X11 authorisation library (development headers) |
+| libxau6:amd64 | 1:1.0.9-0ubuntu1 | amd64 | X11 authorisation library |
+| libxaw7:amd64 | 2:1.0.13-1 | amd64 | X11 Athena Widget library |
+| libxcb-dri2-0:amd64 | 1.14-2 | amd64 | X C Binding, dri2 extension |
+| libxcb-dri3-0:amd64 | 1.14-2 | amd64 | X C Binding, dri3 extension |
+| libxcb-glx0:amd64 | 1.14-2 | amd64 | X C Binding, glx extension |
+| libxcb-present0:amd64 | 1.14-2 | amd64 | X C Binding, present extension |
+| libxcb-render0:amd64 | 1.14-2 | amd64 | X C Binding, render extension |
+| libxcb-shape0:amd64 | 1.14-2 | amd64 | X C Binding, shape extension |
+| libxcb-shm0:amd64 | 1.14-2 | amd64 | X C Binding, shm extension |
+| libxcb-sync1:amd64 | 1.14-2 | amd64 | X C Binding, sync extension |
+| libxcb-xfixes0:amd64 | 1.14-2 | amd64 | X C Binding, xfixes extension |
+| libxcb1:amd64 | 1.14-2 | amd64 | X C Binding |
+| libxcb1-dev:amd64 | 1.14-2 | amd64 | X C Binding, development files |
+| libxcomposite1:amd64 | 1:0.4.5-1 | amd64 | X11 Composite extension library |
+| libxcursor1:amd64 | 1:1.2.0-2 | amd64 | X cursor management library |
+| libxdamage1:amd64 | 1:1.1.5-2 | amd64 | X11 damaged region extension library |
+| libxdmcp-dev:amd64 | 1:1.1.3-0ubuntu1 | amd64 | X11 authorisation library (development headers) |
+| libxdmcp6:amd64 | 1:1.1.3-0ubuntu1 | amd64 | X11 Display Manager Control Protocol library |
+| libxext-dev:amd64 | 2:1.3.4-0ubuntu1 | amd64 | X11 miscellaneous extensions library (development headers) |
+| libxext6:amd64 | 2:1.3.4-0ubuntu1 | amd64 | X11 miscellaneous extension library |
+| libxfixes3:amd64 | 1:5.0.3-2 | amd64 | X11 miscellaneous 'fixes' extension library |
+| libxi6:amd64 | 2:1.7.10-0ubuntu1 | amd64 | X11 Input extension library |
+| libxinerama1:amd64 | 2:1.1.4-2 | amd64 | X11 Xinerama extension library |
+| libxkbcommon0:amd64 | 0.10.0-1 | amd64 | library interface to the XKB compiler - shared library |
+| libxml2:amd64 | 2.9.10+dfsg-5ubuntu0.20.04.1 | amd64 | GNOME XML library |
+| libxmu6:amd64 | 2:1.1.3-0ubuntu1 | amd64 | X11 miscellaneous utility library |
+| libxpm4:amd64 | 1:3.5.12-1 | amd64 | X11 pixmap library |
+| libxrandr2:amd64 | 2:1.5.2-0ubuntu1 | amd64 | X11 RandR extension library |
+| libxrender1:amd64 | 1:0.9.10-1 | amd64 | X Rendering Extension client library |
+| libxshmfence1:amd64 | 1.3-1 | amd64 | X shared memory fences - shared library |
+| libxslt1.1:amd64 | 1.1.34-4 | amd64 | XSLT 1.0 processing library - runtime library |
+| libxss1:amd64 | 1:1.2.3-1 | amd64 | X11 Screen Saver extension library |
+| libxt6:amd64 | 1:1.1.5-1 | amd64 | X11 toolkit intrinsics library |
+| libxv1:amd64 | 2:1.0.11-1 | amd64 | X11 Video extension library |
+| libxvidcore4:amd64 | 2:1.3.7-1 | amd64 | Open source MPEG-4 video codec (library) |
+| libxxf86vm1:amd64 | 1:1.1.4-1build1 | amd64 | X11 XFree86 video mode extension library |
+| libzmq5:amd64 | 4.3.2-2ubuntu1 | amd64 | lightweight messaging kernel (shared library) |
+| libzstd1:amd64 | 1.4.4+dfsg-3ubuntu0.1 | amd64 | fast lossless compression algorithm |
+| libzvbi-common | 0.2.35-17 | all | Vertical Blanking Interval decoder (VBI) - common files |
+| libzvbi0:amd64 | 0.2.35-17 | amd64 | Vertical Blanking Interval decoder (VBI) - runtime files |
+| libzzip-0-13:amd64 | 0.13.62-3.2ubuntu1 | amd64 | library providing read access on ZIP-archives - library |
+| lmodern | 2.004.5-6 | all | scalable PostScript and OpenType fonts based on Computer Modern |
+| locales | 2.31-0ubuntu9.2 | all | GNU C Library: National Language (locale) data [support] |
+| login | 1:4.8.1-1ubuntu5.20.04.1 | amd64 | system login tools |
+| logsave | 1.45.5-2ubuntu1 | amd64 | save the output of a command in a log file |
+| lsb-base | 11.1.0ubuntu2 | all | Linux Standard Base init script functionality |
+| mawk | 1.3.4.20200120-2 | amd64 | Pattern scanning and text processing language |
+| mime-support | 3.64ubuntu1 | all | MIME files 'mime.types' & 'mailcap', and support programs |
+| mount | 2.34-0.1ubuntu9.1 | amd64 | tools for mounting and manipulating filesystems |
+| nano-tiny | 4.8-1ubuntu1 | amd64 | small, friendly text editor inspired by Pico - tiny build |
+| ncurses-base | 6.2-0ubuntu2 | all | basic terminal type definitions |
+| ncurses-bin | 6.2-0ubuntu2 | amd64 | terminal-related programs and man pages |
+| netcat | 1.206-1ubuntu1 | all | TCP/IP swiss army knife -- transitional package |
+| netcat-openbsd | 1.206-1ubuntu1 | amd64 | TCP/IP swiss army knife |
+| ocl-icd-libopencl1:amd64 | 2.2.11-1ubuntu1 | amd64 | Generic OpenCL ICD Loader |
+| openssh-client | 1:8.2p1-4ubuntu0.3 | amd64 | secure shell (SSH) client, for secure access to remote machines |
+| openssl | 1.1.1f-1ubuntu2.10 | amd64 | Secure Sockets Layer toolkit - cryptographic utility |
+| passwd | 1:4.8.1-1ubuntu5.20.04.1 | amd64 | change and administer password and group data |
+| perl | 5.30.0-9ubuntu0.2 | amd64 | Larry Wall's Practical Extraction and Report Language |
+| perl-base | 5.30.0-9ubuntu0.2 | amd64 | minimal Perl system |
+| perl-modules-5.30 | 5.30.0-9ubuntu0.2 | all | Core Perl modules |
+| pfb2t1c2pfb | 0.3-11 | amd64 | convert pfb into more compressible format and back |
+| pinentry-curses | 1.1.0-3build1 | amd64 | curses-based PIN or pass-phrase entry dialog for GnuPG |
+| poppler-data | 0.4.9-2 | all | encoding data for the poppler PDF rendering library |
+| preview-latex-style | 11.91-2ubuntu2 | all | extraction of elements from LaTeX documents as graphics |
+| procps | 2:3.3.16-1ubuntu2.3 | amd64 | /proc file system utilities |
+| python2 | 2.7.17-2ubuntu4 | amd64 | interactive high-level object-oriented language (Python2 version) |
+| python2-minimal | 2.7.17-2ubuntu4 | amd64 | minimal subset of the Python2 language |
+| python2.7 | 2.7.18-1~20.04.1 | amd64 | Interactive high-level object-oriented language (version 2.7) |
+| python2.7-minimal | 2.7.18-1~20.04.1 | amd64 | Minimal subset of the Python language (version 2.7) |
+| python3 | 3.8.2-0ubuntu2 | amd64 | interactive high-level object-oriented language (default python3 version) |
+| python3-minimal | 3.8.2-0ubuntu2 | amd64 | minimal subset of the Python language (default python3 version) |
+| python3.8 | 3.8.10-0ubuntu1~20.04.2 | amd64 | Interactive high-level object-oriented language (version 3.8) |
+| python3.8-minimal | 3.8.10-0ubuntu1~20.04.2 | amd64 | Minimal subset of the Python language (version 3.8) |
+| readline-common | 8.0-4 | all | GNU readline and history libraries, common files |
+| run-one | 1.17-0ubuntu1 | all | run just one instance of a command and its args at a time |
+| sed | 4.7-1 | amd64 | GNU stream editor for filtering/transforming text |
+| sensible-utils | 0.0.12+nmu1 | all | Utilities for sensible alternative selection |
+| shared-mime-info | 1.15-1 | amd64 | FreeDesktop.org shared MIME database and spec |
+| sudo | 1.8.31-1ubuntu1.2 | amd64 | Provide limited super user privileges to specific users |
+| sysvinit-utils | 2.96-2.1ubuntu1 | amd64 | System-V-like utilities |
+| t1utils | 1.41-3 | amd64 | Collection of simple Type 1 font manipulation programs |
+| tar | 1.30+dfsg-7ubuntu0.20.04.1 | amd64 | GNU version of the tar archiving utility |
+| teckit | 2.5.8+ds2-5ubuntu2 | amd64 | Custom legacy encoding conversion tools for plain text files |
+| tex-common | 6.13 | all | common infrastructure for building and installing TeX |
+| texlive-base | 2019.20200218-1 | all | TeX Live: Essential programs and files |
+| texlive-binaries | 2019.20190605.51237-3build2 | amd64 | Binaries for TeX Live |
+| texlive-fonts-recommended | 2019.20200218-1 | all | TeX Live: Recommended fonts |
+| texlive-latex-base | 2019.20200218-1 | all | TeX Live: LaTeX fundamental packages |
+| texlive-latex-extra | 2019.202000218-1 | all | TeX Live: LaTeX additional packages |
+| texlive-latex-recommended | 2019.20200218-1 | all | TeX Live: LaTeX recommended packages |
+| texlive-pictures | 2019.20200218-1 | all | TeX Live: Graphics, pictures, diagrams |
+| texlive-plain-generic | 2019.202000218-1 | all | TeX Live: Plain (La)TeX packages |
+| texlive-xetex | 2019.20200218-1 | all | TeX Live: XeTeX and packages |
+| tini | 0.18.0-1 | amd64 | tiny but valid init for containers |
+| tipa | 2:1.3-20 | all | system for processing phonetic symbols in LaTeX |
+| tzdata | 2021e-0ubuntu0.20.04 | all | time zone and daylight-saving time data |
+| ubuntu-keyring | 2020.02.11.4 | all | GnuPG keys of the Ubuntu archive |
+| ubuntu-mono | 19.04-0ubuntu3 | all | Ubuntu Mono Icon theme |
+| ucf | 3.0038+nmu1 | all | Update Configuration File(s): preserve user changes to config files |
+| unzip | 6.0-25ubuntu1 | amd64 | De-archiver for .zip files |
+| util-linux | 2.34-0.1ubuntu9.1 | amd64 | miscellaneous system utilities |
+| vim-common | 2:8.1.2269-1ubuntu5.4 | all | Vi IMproved - Common files |
+| vim-tiny | 2:8.1.2269-1ubuntu5.4 | amd64 | Vi IMproved - enhanced vi editor - compact version |
+| wget | 1.20.3-1ubuntu2 | amd64 | retrieves files from the web |
+| x11-common | 1:7.7+19ubuntu14 | all | X Window System (X.Org) infrastructure |
+| x11proto-core-dev | 2019.2-1ubuntu1 | all | transitional dummy package |
+| x11proto-dev | 2019.2-1ubuntu1 | all | X11 extension protocols and auxiliary headers |
+| x11proto-xext-dev | 2019.2-1ubuntu1 | all | transitional dummy package |
+| xdg-utils | 1.1.3-2ubuntu1.20.04.2 | all | desktop integration utilities from freedesktop.org |
+| xfonts-encodings | 1:1.0.5-0ubuntu1 | all | Encodings for X.Org fonts |
+| xfonts-utils | 1:7.7+6 | amd64 | X Window System font utility programs |
+| xkb-data | 2.29-2 | all | X Keyboard Extension (XKB) configuration data |
+| xorg-sgml-doctools | 1:1.11-1 | all | Common tools for building X.Org SGML documentation |
+| xtrans-dev | 1.4.0-1 | all | X transport library (development files) |
+| xxd | 2:8.1.2269-1ubuntu5.4 | amd64 | tool to make (or reverse) a hex dump |
+ii  zlib1g:amd64                    1:1.2.11.dfsg-2ubuntu1.2          amd64        compression library - runtime
 </details>

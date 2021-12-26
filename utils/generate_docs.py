@@ -76,9 +76,28 @@ def add_conda_pkgs(container_name: str) -> str:
 
 
 def add_apt_pkgs(container_name: str) -> str:
-    content = get_installed_pkgs(container_name, 'apt list --installed')
+    content = get_installed_pkgs(container_name, 'dpkg -l')
 
+    logger.info('Formatting apt packages into tabular format ...')
+    lines = content.split('\n')
+    for i in range(len(lines)-1):
+        if i > 2: lines[i] = re.sub(r"\s{2,}", " | ", lines[i][4:])
+        lines[i] = "| " + lines[i] + " |"
 
+    # the first two line are comments, delete them
+    for _ in range(3): del lines[0]
+    del lines[1]
+        
+    lines.insert(0, '# 3. `apt` Packages')
+    lines.insert(1, '[Jump back to table of contents](#table-of-contents)')
+    lines.insert(2, "<details>")
+    lines.insert(3, '<summary> Click to show table </summary>\n')
+    lines.insert(5, '| --- | --- | --- | ---|')
+    lines.append('</details>\n')
+    logger.info('... complete')
+
+    write_content = '\n'.join(lines)
+    return write_content
     
 
 if __name__ == "__main__":
@@ -87,6 +106,7 @@ if __name__ == "__main__":
 
     pip_content = add_pip_pkgs(container_name)
     conda_content = add_conda_pkgs(container_name)
+    apt_content = add_apt_pkgs(container_name)
 
     tag = container_name.split(':')[1]
     image_type = tag.split('_')[0]
@@ -96,6 +116,7 @@ if __name__ == "__main__":
     toc.append('# Table of Contents')
     toc.append('1. [`pip` Packages](#1-pip-packages)')
     toc.append('2. [`conda` Packages](#2-conda-packages)')
+    toc.append('3. [`apt` Packages](#3-apt-packages')
     toc.append('---')
     toc.append('\n')
 
@@ -107,4 +128,8 @@ if __name__ == "__main__":
         w.write('---')
         w.write('\n')
         w.write(conda_content)
+        w.write('\n')
+        w.write('---')
+        w.write('\n')
+        w.write(apt_content)
     logger.info('...complete')
