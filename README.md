@@ -11,17 +11,17 @@
     <tr>
         <td>
             <a href="https://hub.docker.com/r/samuel62/machine_learning_lab"> 
-                <img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" alt="Dockerhub" width="75"/> 
+                <img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" alt="Dockerhub" height="40"/> 
             </a>
         </td>
         <td>
             <a href="docs">
-            <img src="assets/docs.png" alt="Documentation" width="35"/>
+            <img src="assets/docs.png" alt="Documentation" height="40"/>
             </a>
         </td>
         <td>
             <a href="https://gitlab.com/samuel.dalton.walker/MachineLearningLab">
-            <img src="https://about.gitlab.com/images/press/logo/svg/gitlab-logo-gray-rgb.svg" alt="Gitlab" width="75"/>
+            <img src="https://about.gitlab.com/images/press/logo/svg/gitlab-logo-gray-rgb.svg" alt="Gitlab" height="40"/>
             </a>
         </td>
     </tr>
