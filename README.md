@@ -53,4 +53,9 @@ please
 
 In this section we will discuss how we intend these images to be ran as well as how to install the required components on the host machine.
 
-The easiest way to use any of the images is to modify the included `docker-compose.yml` and run `docker-compose up`{:.bash} to start Jupyterlab.  
+The easiest way to use any of the images is to modify the included `docker-compose.yml` and run 
+```bash
+docker-compose up
+```
+
+ to start Jupyterlab.  
