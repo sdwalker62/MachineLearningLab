@@ -73,10 +73,17 @@ def add_conda_pkgs(container_name: str) -> str:
 
     write_content = '\n'.join(lines)
     return write_content
+
+
+def add_apt_pkgs(container_name: str) -> str:
+    content = get_installed_pkgs(container_name, 'apt list --installed')
+
+
     
 
 if __name__ == "__main__":
-    container_name = 'samuel62/machine_learning_lab:base_cuda_11.3.1'
+    # container_name = 'samuel62/machine_learning_lab:base_cuda_11.3.1'
+    container_name = sys.argv[1]
 
     pip_content = add_pip_pkgs(container_name)
     conda_content = add_conda_pkgs(container_name)
