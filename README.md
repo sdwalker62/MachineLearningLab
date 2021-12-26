@@ -34,7 +34,7 @@ Welcome to the Machine Learning Lab repository! This repository is based heavily
 
 1. [Image Hierarchy](#1-image-hierarchy)
 2. [Usage Instructions](#2-usage-instructions)
-    - 2.1 [Installation](##2.1-installation)
+    1. [Installation](#21-installation)
 
 # 1. Image Hierarchy
 
