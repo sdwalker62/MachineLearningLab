@@ -55,9 +55,6 @@ In this section we will discuss how we intend these images to be ran as well as 
 
 The easiest way to use any of the images is to modify the included docker-compose.yml and run `docker-compose up` to start Jupyterlab. For instance an example docker-compose.yml would be: 
 
-<details>
-<summary> click to reveal docker-compose.yml </summary>
-
 ```yaml
 version: "3.8"
 
@@ -85,8 +82,6 @@ In this example docker-compose.yml you would replace *IMAGE_NAME* with the name 
 Since most users of the images found in this repository are data scientist we recommend binding a volume from your host machine to the container in the volumes section. Typically, you would include a *data* and a *results* folder in this section as well as any other directories you want the container to be able to read/write from on your host machine. 
 
 If you are not using a machine with a dedicated Nvidia GPU then comment/remove the deploy section as it will cause an error. 
-
-</details>
 
 \
 It is not necessary to use `docker-compose` to run the containers. Instead you could run them with the `docker run` command, e.g.:
