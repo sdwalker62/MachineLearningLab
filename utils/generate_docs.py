@@ -31,7 +31,6 @@ def add_pip_pkgs(container_name: str) -> str:
         else:
             lines[i] = re.sub(r"\s{3,}", " | ", lines[i])
         lines[i] = "| " + lines[i] + " |"
-        # lines[i] = '    ' + lines[i]
 
     lines.insert(0, "# 1. `pip` Packages")
     lines.insert(1, '[Jump back to table of contents](#table-of-contents)')
