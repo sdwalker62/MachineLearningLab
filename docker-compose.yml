@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   machine_learning_lab:
-    image: samuel62/machine_learning_lab:datascience_cuda_11.3.1
+    image: samuel62/machine_learning_lab:mll_cuda_11.3.1
     deploy:
       resources:
         reservations:
