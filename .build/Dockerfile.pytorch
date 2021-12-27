@@ -1,0 +1,20 @@
+# Copyright (c) Jupyter Development Team.
+# Distributed under the terms of the Modified BSD License.
+
+# [0] Requirements
+#  - datascience-lab base image
+
+LABEL maintainer="Samuel Walker <dalton_walker@icloud.com>"
+
+# Fix DL4006
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+RUN mamba install --quiet --yes \
+    'pytorch' \
+    'torchvision' \
+    'torchaudio' \
+    'cudatoolkit=11.3' \
+    -c pytorch && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
