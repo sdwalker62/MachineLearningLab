@@ -1,0 +1,18 @@
+version: 2.1
+
+jobs:
+  test:
+    environment:
+      CUDA_VER: 11.3.1
+    docker:
+      - image: samuel62/machine_learning_lab:mll_cuda_$CUDA_VER # the primary container, where your job's commands are run
+        auth:
+          username: samuel62
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - run: ls -l /usr/local | grep cuda-$CUDA_VER
+
+workflows:
+  check_cuda:
+    jobs: 
+      - test  
