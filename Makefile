@@ -23,8 +23,16 @@ gpu-build:
 dev:
 	@pip3 install docker
 	@pip3 install tqdm
+	@pip3 install -U pytest
+	@pip3 install black
 
+test/%: ## run tests for each image
+
+test-all: $(foreach I, $(LAB_LIST), test/$(I)) ## generate all docs
 
 docs/%: ## generate documentation for each image
 	@python3 utils/generate_docs.py $(OWNER)/machine_learning_lab:$(notdir $@)_cuda_$(CUDA_VER)
 docs-all: $(foreach I, $(LAB_LIST), docs/$(I)) ## generate all docs
+
+format:
+	@black .
