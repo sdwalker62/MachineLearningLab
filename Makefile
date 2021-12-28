@@ -35,4 +35,4 @@ docs/%: ## generate documentation for each image
 docs-all: $(foreach I, $(LAB_LIST), docs/$(I)) ## generate all docs
 
 format:
-	@black .
+	@black --verbose --exclude=docker-stacks .
