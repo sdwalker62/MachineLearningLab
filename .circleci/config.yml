@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs: 
+  discord: antonioned/discord@0.1.0
+
 jobs:
   test:
     environment:
@@ -11,8 +14,18 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: ls -l /usr/local | grep cuda-11.3
+      - discord/status:
+          fail_only: false
+          failure_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** failed."
+          webhook: "${DISCORD_WEBHOOK}"
+          success_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** succeeded!"
 
 workflows:
   check_cuda:
     jobs: 
       - test  
+      - discord/status:
+          fail_only: false
+          failure_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** failed."
+          webhook: "${DISCORD_WEBHOOK}"
+          success_message: "**${CIRCLE_USERNAME}** build: **${CIRCLE_JOB}** succeeded!"
