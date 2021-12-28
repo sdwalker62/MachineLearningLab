@@ -7,7 +7,6 @@ jobs:
   test:
     environment:
       CUDA_VER: 11.3.1
-      DISCORD_WEBHOOK: https://discord.com/api/webhooks/925449691682988072/CnB9aJGUkw1RVcm6OoctFxuKnUxv04anB6Lxzn0-8HOWfAHw13d3VEkQ5l-ceuXsL7In
     docker:
       - image: samuel62/machine_learning_lab:mll_cuda_$CUDA_VER # the primary container, where your job's commands are run
         auth:
@@ -18,7 +17,7 @@ jobs:
       - discord/status:
           fail_only: false
           failure_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** failed."
-          webhook: "${DISCORD_WEBHOOK}"
+          webhook: $DISCORD_WEBHOOK
           success_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** succeeded!"
 
 workflows:
