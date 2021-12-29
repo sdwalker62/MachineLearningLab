@@ -13,7 +13,9 @@ jobs:
           username: samuel62
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - run: ls -l /usr/local | grep cuda-11.3
+      - run: 
+          name: pytest
+          command: make test-all
       - discord/status:
           fail_only: false
           failure_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** failed."

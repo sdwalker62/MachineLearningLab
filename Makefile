@@ -1,3 +1,5 @@
+# remember cat -e -t -v Makefile to check for hard tabs
+
 SOURCE_PATH='docker-stacks/base-notebook'
 CUDA_VER:=11.3.1
 DIST:=ubuntu20.04
@@ -6,10 +8,20 @@ NEW_BASE:=nvidia/cuda:$(CUDA_VER)-cudnn8-runtime-$(DIST)
 OWNER:=samuel62
 
 LAB_LIST:= \
-	base \
-	minimal \
-	scipy \
-	datascience
+base \
+minimal \
+scipy \
+datascience
+
+CUSTOM_LAB_LIST:= \
+mll
+
+ALL_LIST:= \
+base \
+minimal \
+scipy \
+datascience \
+mll
 
 gpu-build:
 	@git submodule update --recursive --remote
@@ -26,9 +38,11 @@ dev:
 	@pip3 install -U pytest
 	@pip3 install black
 
-test/%: ## run tests for each image
 
-test-all: $(foreach I, $(LAB_LIST), test/$(I)) ## generate all docs
+test/%: ## run tests for each image
+	@python3 tests/exec_tests.py $(notdir $@) $(OWNER) $(CUDA_VER)
+test-all: $(foreach I, $(ALL_LIST), test/$(I)) ## test all docker-stack images
+
 
 docs/%: ## generate documentation for each image
 	@python3 utils/generate_docs.py $(OWNER)/machine_learning_lab:$(notdir $@)_cuda_$(CUDA_VER)
