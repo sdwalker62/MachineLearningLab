@@ -8,6 +8,8 @@
 
 ```
 
+[![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main)
+
 <table border="1">
     <tr>
         <td>
