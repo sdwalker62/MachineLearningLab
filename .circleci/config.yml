@@ -12,10 +12,13 @@ jobs:
     steps:
       - checkout
       - run:
-          name: install dependencies
+          name: Install dependencies
           command: make install-dependencies
+      - run:
+          name: Pull docker-stacks
+          command: git submodule update --init --recursive
       - run: 
-          name: test all containers
+          name: Test all containers
           command: make test-all
       - discord/status:
           fail_only: false
