@@ -32,7 +32,7 @@ gpu-build:
 	@docker tag samuel62/scipy-notebook:latest samuel62/scipy-lab:cuda_$(CUDA_VER)
 	@docker tag samuel62/datascience-notebook:latest samuel62/datascience-lab:cuda_$(CUDA_VER)
 
-dev:
+install-dependencies:
 	@pip3 install docker
 	@pip3 install tqdm
 	@pip3 install -U pytest

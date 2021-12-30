@@ -11,8 +11,11 @@ jobs:
           image: ubuntu-2004:202010-01
     steps:
       - checkout
+      - run:
+          name: install dependencies
+          command: make install-dependencies
       - run: 
-          name: pytest
+          name: test all containers
           command: make test-all
       - discord/status:
           fail_only: false

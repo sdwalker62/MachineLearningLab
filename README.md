@@ -7,9 +7,6 @@
                                                                            |___/
 
 ```
-
-[![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main)
-
 <table border="1">
     <tr>
         <td>
@@ -49,7 +46,6 @@ The current heirarchy of images can be found below. A description of each image 
 
 </details>
 
-please
 
 # 2. Usage Instructions
 
