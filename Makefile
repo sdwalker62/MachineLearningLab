@@ -23,6 +23,7 @@ scipy \
 datascience \
 mll
 
+
 gpu-build:
 	@git submodule update --recursive --remote
 	@python3 replace_container.py $(SOURCE_PATH) $(NEW_BASE)
@@ -32,11 +33,13 @@ gpu-build:
 	@docker tag samuel62/scipy-notebook:latest samuel62/scipy-lab:cuda_$(CUDA_VER)
 	@docker tag samuel62/datascience-notebook:latest samuel62/datascience-lab:cuda_$(CUDA_VER)
 
+
 install-dependencies:
 	@pip3 install docker
 	@pip3 install tqdm
 	@pip3 install -U pytest
 	@pip3 install black
+	@pip3 install tabulate
 
 
 test/%: ## run tests for each image
@@ -47,6 +50,7 @@ test-all: $(foreach I, $(ALL_LIST), test/$(I)) ## test all docker-stack images
 docs/%: ## generate documentation for each image
 	@python3 utils/generate_docs.py $(OWNER)/machine_learning_lab:$(notdir $@)_cuda_$(CUDA_VER)
 docs-all: $(foreach I, $(LAB_LIST), docs/$(I)) ## generate all docs
+
 
 format:
 	@black --verbose --exclude=docker-stacks .
