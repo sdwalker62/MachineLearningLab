@@ -7,88 +7,10 @@
                                                                            |___/
 ```
 
-
----
-
-<h2>Status</h2><strong>
-
-<table summary="Build Statuses" class="table" frame="border" rules="all" cellspacing="0" cellpadding="4" border="1">
-  <thead class="thead">
-      <tr class="row">
-      <th class="entry" id="d117e166" rowspan="1" colspan="1" width="NaN%" valign="top">base</th>
-      <th class="entry" id="d117e169" rowspan="1" colspan="1" width="NaN%" valign="top">minimal</th>
-      <th class="entry" id="d117e174" rowspan="1" colspan="1" width="NaN%" valign="top">scipy</th>
-      <th class="entry" id="d117e177" rowspan="1" colspan="1" width="NaN%" valign="top">datascience</th>
-      <th class="entry" id="d117e180" rowspan="1" colspan="1" width="NaN%" valign="top">rll<sup class="ph sup">1</sup></th>
-      <th class="entry" id="d117e186" rowspan="1" colspan="1" width="NaN%" valign="top">mll<sup class="ph sup">2</sup></th>
-      </tr>
-  </thead>
-
-  <tr class="row" valign="middle">
-  <td>
-
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-
-  [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=for-the-badge&logo=appveyor)](https://img.shields.io/badge/version-1-blueviolet)
-
-  </td>
-
-  <td> 
   
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-
-  [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=for-the-badge&logo=appveyor)](https://img.shields.io/badge/version-1-blueviolet)
+[![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+[![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=shield&logo=nvidia)](https://img.shields.io/badge/version-1-blueviolet)
   
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-
-  [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=for-the-badge&logo=appveyor)](https://img.shields.io/badge/version-1-blueviolet)
-  
-  </td>
-
-  <td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-
-  [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=for-the-badge&logo=appveyor)](https://img.shields.io/badge/version-1-blueviolet)
-  
-  </td>
-
-  <td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-
-  [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=for-the-badge&logo=appveyor)](https://img.shields.io/badge/version-1-blueviolet)
-  
-  </td>
-
-  <td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-
-  [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=for-the-badge&logo=appveyor)](https://img.shields.io/badge/version-1-blueviolet)
-  
-  </td>
-
-  </tr>
-</table>
-
-<small>
-  <table>
-    
-  <tr>
-    <sup class="ph sup">1</sup>rll:= reinforcement learning lab
-  </tr>
-
-  <tr>
-    <sup class="ph sup">2</sup>mll:= machine learning lab
-  </tr>
-
-  </table>
-</small>
-
----
 
 <table border="1">
     <tr>
