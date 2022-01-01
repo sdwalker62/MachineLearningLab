@@ -10,6 +10,28 @@
   [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=svg&logo=nvidia)](https://img.shields.io/badge/version-1-blueviolet)
 ---
 
+<h1 align="center">Links</h1>
+
+<table border="1" align="center">
+    <tr>
+        <td>
+            <a href="https://hub.docker.com/r/samuel62/machine_learning_lab"> 
+                <img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" alt="Dockerhub" height="40"/> 
+            </a>
+        </td>
+        <td>
+            <a href="docs">
+            <img src="assets/docs.png" alt="Documentation" height="40"/>
+            </a>
+        </td>
+        <td>
+            <a href="https://gitlab.com/samuel.dalton.walker/MachineLearningLab">
+            <img src="https://about.gitlab.com/images/press/logo/svg/gitlab-logo-gray-rgb.svg" alt="Gitlab" height="40"/>
+            </a>
+        </td>
+    </tr>
+</table>
+
 <h1 align="center">Status</h1>
 
 <h2> Linux </h2>
@@ -127,40 +149,11 @@
 </table>
 
 <small>
-  <table>
-    
-  <tr>
-    <sup class="ph sup">1</sup>rll:= reinforcement learning lab
-  </tr>
-
-  <tr>
-    <sup class="ph sup">2</sup>mll:= machine learning lab
-  </tr>
-
-  </table>
+  <ol>
+    <li>rll:= reinforcement learning lab</li>
+    <li>mll:= machine learning lab</li>
+  </ol>
 </small>
-
-<h1 align="center">Links</h1>
-
-<table border="1" align="center">
-    <tr>
-        <td>
-            <a href="https://hub.docker.com/r/samuel62/machine_learning_lab"> 
-                <img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" alt="Dockerhub" height="40"/> 
-            </a>
-        </td>
-        <td>
-            <a href="docs">
-            <img src="assets/docs.png" alt="Documentation" height="40"/>
-            </a>
-        </td>
-        <td>
-            <a href="https://gitlab.com/samuel.dalton.walker/MachineLearningLab">
-            <img src="https://about.gitlab.com/images/press/logo/svg/gitlab-logo-gray-rgb.svg" alt="Gitlab" height="40"/>
-            </a>
-        </td>
-    </tr>
-</table>
 
 ---
 
