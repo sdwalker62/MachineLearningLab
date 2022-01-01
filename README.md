@@ -78,7 +78,7 @@
   <tfoot>
     <tr>
       <td colspan="3" tyle="word-wrap: break-all" width="20"> 
-      **`SYSTEM`** All automated tests are run on Linux (Ubuntu 20.04 Focal Fossa). Windows and Mac work with appropriate configurations, see installation section.
+      <code>SYSTEM</code> All automated tests are run on Linux (Ubuntu 20.04 Focal Fossa). Windows and Mac work with appropriate configurations, see installation section.
       </td>
       <td colspan="4"><small>
         <ol>
