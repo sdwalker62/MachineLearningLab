@@ -40,8 +40,7 @@
 
 <h1 align="center">Status</h1>
 
-<h2> Linux </h2>
-<table summary="Build Statuses" class="table" frame="border" rules="all" cellspacing="0" cellpadding="4" border="1">
+<table summary="Build Statuses" class="table" frame="border" rules="all" cellspacing="0" cellpadding="4" border="1" align="center">
   <thead class="thead">
       <tr class="row">
       <th class="entry" rowspan="1" colspan="1" valign="top">version</th>
@@ -53,6 +52,7 @@
       <th class="entry" rowspan="1" colspan="1" valign="top">mll<sup class="ph sup">2</sup></th>
       </tr>
   </thead>
+  <tbody>
   <tr class="row" valign="middle"><td frame="border" rules="all" cellspacing="0" border="1">
   CUDA <strong>11.3.1</strong>
   </td><td>
@@ -74,92 +74,23 @@
   
   [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
   </td></tr>
-    <tr class="row" valign="middle"><td frame="border" rules="all" cellspacing="0" border="1">
-  CUDA <strong>11.4.0</strong>
-  </td><td>
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main)
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-  </td></tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3" tyle="word-wrap: break-all" width="20"> 
+      **`SYSTEM`** All automated tests are run on Linux (Ubuntu 20.04 Focal Fossa). Windows and Mac work with appropriate configurations, see installation section.
+      </td>
+      <td colspan="4"><small>
+        <ol>
+          <li>rll:= reinforcement learning lab</li>
+          <li>mll:= machine learning lab</li>
+        </ol>
+      </small></td>
+    </tr>
+</tfoot>
 </table>
 
-<h2> Windows </h2>
-<table summary="Build Statuses" class="table" frame="border" rules="all" cellspacing="0" cellpadding="4" border="1">
-  <thead class="thead">
-      <tr class="row">
-      <th class="entry" rowspan="1" colspan="1" valign="top">version</th>
-      <th class="entry" rowspan="1" colspan="1" valign="top">base</th>
-      <th class="entry" rowspan="1" colspan="1" valign="top">minimal</th>
-      <th class="entry" rowspan="1" colspan="1" valign="top">scipy</th>
-      <th class="entry" rowspan="1" colspan="1" valign="top">datascience</th>
-      <th class="entry" rowspan="1" colspan="1" valign="top">rll<sup class="ph sup">1</sup></th>
-      <th class="entry" rowspan="1" colspan="1" valign="top">mll<sup class="ph sup">2</sup></th>
-      </tr>
-  </thead>
-  <tr class="row" valign="middle"><td frame="border" rules="all" cellspacing="0" border="1">
-  CUDA <strong>11.3.1</strong>
-  </td><td>
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main)
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-  </td></tr>
-    <tr class="row" valign="middle"><td frame="border" rules="all" cellspacing="0" border="1">
-  CUDA <strong>11.4.0</strong>
-  </td><td>
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main)
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-  </td><td> 
-  
-  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-  </td></tr>
-</table>
 
-<small>
-  <ol>
-    <li>rll:= reinforcement learning lab</li>
-    <li>mll:= machine learning lab</li>
-  </ol>
-</small>
 
 ---
 
