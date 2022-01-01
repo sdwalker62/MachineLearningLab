@@ -6,12 +6,13 @@
 |_|  |_|\__,_|\___|_| |_|_|_| |_|\___| |_____\___|\__,_|_|  |_| |_|_|_| |_|\__, | |_____\__,_|_.__/
                                                                            |___/
 ```
+<!-- <h1 align="center">Links</h1> -->
 
-  [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=svg&logo=nvidia)](https://img.shields.io/badge/version-1-blueviolet)
+| **`Docker`** | **`Documentation`** | **`GitLab`** |
+| --- | --- | --- |
+| [![DOCKER](https://img.shields.io/badge/DockerHub-blue?style=svg&logo=docker)](https://hub.docker.com/r/samuel62/machine_learning_lab) | [![DOCS](https://img.shields.io/badge/Documentation-yellow?style=svg&logo=book)](https://hub.docker.com/r/samuel62/machine_learning_lab) | [![DOCKER](https://img.shields.io/badge/GitLab-orange?style=svg&logo=gitlab)](https://hub.docker.com/r/samuel62/machine_learning_lab)
 
-
-<h1 align="center">Links</h1>
-
+<!-- 
 <table border="1" align="center">
     <tr>
         <td>
@@ -26,11 +27,11 @@
         </td>
         <td>
             <a href="https://gitlab.com/samuel.dalton.walker/MachineLearningLab">
-            <img src="https://about.gitlab.com/images/press/logo/svg/gitlab-logo-gray-rgb.svg" alt="Gitlab" height="40"/>
+            <img src="https://about.gitlab.com/images/press/logo/svg/gitlab-logo-gray-rgb.svg" alt="Gitlab" height="50"/>
             </a>
         </td>
     </tr>
-</table>
+</table> -->
 
 <h1 align="center">Status</h1>
 
