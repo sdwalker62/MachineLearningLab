@@ -5,8 +5,91 @@
 | |  | | (_| | (__| | | | | | | |  __/ | |__|  __/ (_| | |  | | | | | | | | (_| | | |__| (_| | |_) |
 |_|  |_|\__,_|\___|_| |_|_|_| |_|\___| |_____\___|\__,_|_|  |_| |_|_|_| |_|\__, | |_____\__,_|_.__/
                                                                            |___/
-
 ```
+
+
+---
+
+<h2>Status</h2><strong>
+
+<table summary="Build Statuses" class="table" frame="border" rules="all" cellspacing="0" cellpadding="4" border="1">
+  <thead class="thead">
+      <tr class="row">
+      <th class="entry" id="d117e166" rowspan="1" colspan="1" width="NaN%" valign="top">base</th>
+      <th class="entry" id="d117e169" rowspan="1" colspan="1" width="NaN%" valign="top">minimal</th>
+      <th class="entry" id="d117e174" rowspan="1" colspan="1" width="NaN%" valign="top">scipy</th>
+      <th class="entry" id="d117e177" rowspan="1" colspan="1" width="NaN%" valign="top">datascience</th>
+      <th class="entry" id="d117e180" rowspan="1" colspan="1" width="NaN%" valign="top">rll<sup class="ph sup">1</sup></th>
+      <th class="entry" id="d117e186" rowspan="1" colspan="1" width="NaN%" valign="top">mll<sup class="ph sup">2</sup></th>
+      </tr>
+  </thead>
+
+  <tr class="row" valign="middle">
+  <td>
+
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+
+  [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=for-the-badge&logo=appveyor)](https://img.shields.io/badge/version-1-blueviolet)
+
+  </td>
+
+  <td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+
+  [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=for-the-badge&logo=appveyor)](https://img.shields.io/badge/version-1-blueviolet)
+  
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+
+  [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=for-the-badge&logo=appveyor)](https://img.shields.io/badge/version-1-blueviolet)
+  
+  </td>
+
+  <td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+
+  [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=for-the-badge&logo=appveyor)](https://img.shields.io/badge/version-1-blueviolet)
+  
+  </td>
+
+  <td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+
+  [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=for-the-badge&logo=appveyor)](https://img.shields.io/badge/version-1-blueviolet)
+  
+  </td>
+
+  <td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+
+  [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=for-the-badge&logo=appveyor)](https://img.shields.io/badge/version-1-blueviolet)
+  
+  </td>
+
+  </tr>
+</table>
+
+<small>
+  <table>
+    
+  <tr>
+    <sup class="ph sup">1</sup>rll:= reinforcement learning lab
+  </tr>
+
+  <tr>
+    <sup class="ph sup">2</sup>mll:= machine learning lab
+  </tr>
+
+  </table>
+</small>
+
+---
+
 <table border="1">
     <tr>
         <td>
@@ -26,6 +109,11 @@
         </td>
     </tr>
 </table>
+
+---
+
+
+
 
 Welcome to the Machine Learning Lab repository! This repository is based heavily on the fantastic work being done at the [jupyter/docker-stacks](https://github.com/jupyter/docker-stacks) repository, if you haven't checked it out please do and support the work being done there. In this reposity we include both cuda-enabled versions of a select number of images from the docker-stacks repository as well as some custom images not found there. If you would like to add images to this repository we welcome that - just open a pull request! We plan to include a contribute.md soon that will outline how contributions should be made!
 

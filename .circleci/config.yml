@@ -20,13 +20,13 @@ jobs:
       - run: 
           name: Test all containers
           command: make test-all
-      - discord/status:
-          fail_only: false
-          failure_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** failed."
-          webhook: $DISCORD_WEBHOOK
-          success_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** succeeded!"
+      # - discord/status:
+      #     fail_only: false
+      #     failure_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** failed."
+      #     webhook: $DISCORD_WEBHOOK
+      #     success_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** succeeded!"
 
 workflows:
-  check_cuda:
+  test_all_containers:
     jobs: 
       - test
