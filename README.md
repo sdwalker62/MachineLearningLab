@@ -10,7 +10,7 @@
   
 [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
 &nbsp;
-[![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=shield&logo=nvidia)](https://img.shields.io/badge/version-1-blueviolet)
+[![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=shield&logo=nvidia)](https://developer.nvidia.com/cuda-11.3.0-download-archive)
 &nbsp;
 <a href="docs">
   <img src="assets/docs.png" alt="Documentation" height="25"/>
