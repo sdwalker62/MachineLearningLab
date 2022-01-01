@@ -8,7 +8,7 @@
 ```
 
   [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=svg&logo=nvidia)](https://img.shields.io/badge/version-1-blueviolet)
----
+
 
 <h1 align="center">Links</h1>
 
