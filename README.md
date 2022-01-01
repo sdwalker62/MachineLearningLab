@@ -7,40 +7,160 @@
                                                                            |___/
 ```
 
-  
-[![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
-&nbsp;
-[![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=shield&logo=nvidia)](https://developer.nvidia.com/cuda-11.3.0-download-archive)
-&nbsp;
-<a href="docs">
-  <img src="assets/docs.png" alt="Documentation" height="25"/>
-</a>
-&nbsp;
-<a href="https://hub.docker.com/r/samuel62/machine_learning_lab"> 
-  <img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" alt="Dockerhub" height="20"/> 
-</a>
-&nbsp;
-<!-- 
+  [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=svg&logo=nvidia)](https://img.shields.io/badge/version-1-blueviolet)
+---
 
-<table border="1">
+<h1 align="center">Status</h1>
+
+<h2> Linux </h2>
+<table summary="Build Statuses" class="table" frame="border" rules="all" cellspacing="0" cellpadding="4" border="1">
+  <thead class="thead">
+      <tr class="row">
+      <th class="entry" rowspan="1" colspan="1" valign="top">version</th>
+      <th class="entry" rowspan="1" colspan="1" valign="top">base</th>
+      <th class="entry" rowspan="1" colspan="1" valign="top">minimal</th>
+      <th class="entry" rowspan="1" colspan="1" valign="top">scipy</th>
+      <th class="entry" rowspan="1" colspan="1" valign="top">datascience</th>
+      <th class="entry" rowspan="1" colspan="1" valign="top">rll<sup class="ph sup">1</sup></th>
+      <th class="entry" rowspan="1" colspan="1" valign="top">mll<sup class="ph sup">2</sup></th>
+      </tr>
+  </thead>
+  <tr class="row" valign="middle"><td frame="border" rules="all" cellspacing="0" border="1">
+  CUDA <strong>11.3.1</strong>
+  </td><td>
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main)
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td></tr>
+    <tr class="row" valign="middle"><td frame="border" rules="all" cellspacing="0" border="1">
+  CUDA <strong>11.4.0</strong>
+  </td><td>
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main)
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td></tr>
+</table>
+
+<h2> Windows </h2>
+<table summary="Build Statuses" class="table" frame="border" rules="all" cellspacing="0" cellpadding="4" border="1">
+  <thead class="thead">
+      <tr class="row">
+      <th class="entry" rowspan="1" colspan="1" valign="top">version</th>
+      <th class="entry" rowspan="1" colspan="1" valign="top">base</th>
+      <th class="entry" rowspan="1" colspan="1" valign="top">minimal</th>
+      <th class="entry" rowspan="1" colspan="1" valign="top">scipy</th>
+      <th class="entry" rowspan="1" colspan="1" valign="top">datascience</th>
+      <th class="entry" rowspan="1" colspan="1" valign="top">rll<sup class="ph sup">1</sup></th>
+      <th class="entry" rowspan="1" colspan="1" valign="top">mll<sup class="ph sup">2</sup></th>
+      </tr>
+  </thead>
+  <tr class="row" valign="middle"><td frame="border" rules="all" cellspacing="0" border="1">
+  CUDA <strong>11.3.1</strong>
+  </td><td>
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main)
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td></tr>
+    <tr class="row" valign="middle"><td frame="border" rules="all" cellspacing="0" border="1">
+  CUDA <strong>11.4.0</strong>
+  </td><td>
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main)
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td><td> 
+  
+  [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+  </td></tr>
+</table>
+
+<small>
+  <table>
+    
+  <tr>
+    <sup class="ph sup">1</sup>rll:= reinforcement learning lab
+  </tr>
+
+  <tr>
+    <sup class="ph sup">2</sup>mll:= machine learning lab
+  </tr>
+
+  </table>
+</small>
+
+<h1 align="center">Links</h1>
+
+<table border="1" align="center">
     <tr>
         <td>
             <a href="https://hub.docker.com/r/samuel62/machine_learning_lab"> 
-                <img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" alt="Dockerhub" height="20"/> 
+                <img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" alt="Dockerhub" height="40"/> 
             </a>
         </td>
         <td>
             <a href="docs">
-              <img src="assets/docs.png" alt="Documentation" height="25"/>
+            <img src="assets/docs.png" alt="Documentation" height="40"/>
             </a>
         </td>
         <td>
             <a href="https://gitlab.com/samuel.dalton.walker/MachineLearningLab">
-            <img src="https://about.gitlab.com/images/press/logo/svg/gitlab-logo-gray-rgb.svg" alt="Gitlab" height="35"/>
+            <img src="https://about.gitlab.com/images/press/logo/svg/gitlab-logo-gray-rgb.svg" alt="Gitlab" height="40"/>
             </a>
         </td>
     </tr>
-</table> -->
+</table>
 
 ---
 
