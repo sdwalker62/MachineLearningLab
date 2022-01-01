@@ -9,28 +9,38 @@
 
   
 [![CircleCI](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main.svg?style=svg)](https://circleci.com/gh/sdwalker62/MachineLearningLab/tree/main) 
+&nbsp;
 [![VER](https://img.shields.io/badge/cuda-11.3.1-blue?style=shield&logo=nvidia)](https://img.shields.io/badge/version-1-blueviolet)
-  
+&nbsp;
+<a href="docs">
+  <img src="assets/docs.png" alt="Documentation" height="25"/>
+</a>
+&nbsp;
+<a href="https://hub.docker.com/r/samuel62/machine_learning_lab"> 
+  <img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" alt="Dockerhub" height="20"/> 
+</a>
+&nbsp;
+<!-- 
 
 <table border="1">
     <tr>
         <td>
             <a href="https://hub.docker.com/r/samuel62/machine_learning_lab"> 
-                <img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" alt="Dockerhub" height="40"/> 
+                <img src="https://www.docker.com/sites/default/files/d8/2019-07/horizontal-logo-monochromatic-white.png" alt="Dockerhub" height="20"/> 
             </a>
         </td>
         <td>
             <a href="docs">
-            <img src="assets/docs.png" alt="Documentation" height="40"/>
+              <img src="assets/docs.png" alt="Documentation" height="25"/>
             </a>
         </td>
         <td>
             <a href="https://gitlab.com/samuel.dalton.walker/MachineLearningLab">
-            <img src="https://about.gitlab.com/images/press/logo/svg/gitlab-logo-gray-rgb.svg" alt="Gitlab" height="40"/>
+            <img src="https://about.gitlab.com/images/press/logo/svg/gitlab-logo-gray-rgb.svg" alt="Gitlab" height="35"/>
             </a>
         </td>
     </tr>
-</table>
+</table> -->
 
 ---
 
