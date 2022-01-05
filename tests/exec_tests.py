@@ -26,7 +26,7 @@ def tag_docker_image(image: str, target: str, tag: str):
 if __name__ == "__main__":
     docker_stacks_path = Path('docker-stacks/')
 
-    custom_list = ['mll']
+    custom_list = ['mll', 'rll']
 
     image_prefix = sys.argv[1]
     owner = sys.argv[2]

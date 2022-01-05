@@ -14,24 +14,26 @@ scipy \
 datascience
 
 CUSTOM_LAB_LIST:= \
-mll
+mll \
+rll
 
 ALL_LIST:= \
 base \
 minimal \
 scipy \
 datascience \
-mll
+mll \
+rll
 
 
 gpu-build:
 	@git submodule update --recursive --remote
 	@python3 replace_container.py $(SOURCE_PATH) $(NEW_BASE)
 	@cd docker-stacks && make build-all OWNER=samuel62
-	@docker tag samuel62/base-notebook:latest samuel62/base-lab:cuda_$(CUDA_VER)
-	@docker tag samuel62/minimal-notebook:latest samuel62/minimal-lab:cuda_$(CUDA_VER)
-	@docker tag samuel62/scipy-notebook:latest samuel62/scipy-lab:cuda_$(CUDA_VER)
-	@docker tag samuel62/datascience-notebook:latest samuel62/datascience-lab:cuda_$(CUDA_VER)
+	@docker tag samuel62/base-notebook:latest samuel62/machine_learning_lab:base_cuda_$(CUDA_VER)
+	@docker tag samuel62/minimal-notebook:latest samuel62/machine_learning_lab:minimal_cuda_$(CUDA_VER)
+	@docker tag samuel62/scipy-notebook:latest samuel62/machine_learning_lab:scipy_cuda_$(CUDA_VER)
+	@docker tag samuel62/datascience-notebook:latest samuel62/machine_learning_lab:data_science_cuda_$(CUDA_VER)
 
 
 install-dependencies:
