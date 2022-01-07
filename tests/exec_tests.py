@@ -24,16 +24,16 @@ def tag_docker_image(image: str, target: str, tag: str):
 
 
 if __name__ == "__main__":
-    docker_stacks_path = Path('docker-stacks/')
+    docker_stacks_path = Path("docker-stacks/")
 
-    custom_list = ['mll', 'rll']
+    custom_list = ["mll", "rll"]
 
     image_prefix = sys.argv[1]
     owner = sys.argv[2]
     cuda_ver = sys.argv[3]
 
     if image_prefix not in custom_list:
-        query_dir = image_prefix + '-notebook'
+        query_dir = image_prefix + "-notebook"
         test_dir = docker_stacks_path / query_dir
         cmd = f"""TEST_IMAGE="{owner}/machine_learning_lab:{image_prefix}_cuda_{cuda_ver}" """
         if test_dir.is_dir():
@@ -42,6 +42,9 @@ if __name__ == "__main__":
             cmd += f"""pytest -m "not info" docker-stacks/test"""
 
         run_cmd(cmd)
+    else:
+        cmd = f"pytest {image_prefix}_lab/test"
+        run_cmd(cmd)
 
     # if image_prefix in custom_list:
     #     print(image_prefix)
@@ -49,11 +52,11 @@ if __name__ == "__main__":
     #     owner = "samuel62"
     #     cmd = f"make -C docker-stacks OWNER={owner} "
     #     run_cmd
-	# @echo "::group::test/$(OWNER)/$(notdir $@)"
-	# @if [ ! -d "$(notdir $@)/test" ]; then TEST_IMAGE="$(OWNER)/$(notdir $@)" pytest -m "not info" test; \
-	# else TEST_IMAGE="$(OWNER)/$(notdir $@)" pytest -m "not info" test $(notdir $@)/test; fi
-	# @echo "::endgroup::"
-    # image = "samuel62/machine_learning_lab:base_cuda_11.3.1"
-    # target = "samuel62/machine_learning_lab"
-    # tag = "base_cuda_11.3.1"
-    # tag_docker_image(image, target, tag)
+# @echo "::group::test/$(OWNER)/$(notdir $@)"
+# @if [ ! -d "$(notdir $@)/test" ]; then TEST_IMAGE="$(OWNER)/$(notdir $@)" pytest -m "not info" test; \
+# else TEST_IMAGE="$(OWNER)/$(notdir $@)" pytest -m "not info" test $(notdir $@)/test; fi
+# @echo "::endgroup::"
+# image = "samuel62/machine_learning_lab:base_cuda_11.3.1"
+# target = "samuel62/machine_learning_lab"
+# tag = "base_cuda_11.3.1"
+# tag_docker_image(image, target, tag)
