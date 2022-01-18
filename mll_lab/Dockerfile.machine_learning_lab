@@ -66,14 +66,16 @@ RUN pip install --upgrade \
     gym \
     garage \
     ipyleaflet && \
+    build0e
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
 
 RUN sudo apt-get update && \
     sudo apt-get install -y \
+    build-essentials \
     freeglut3-dev && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* 
 
 RUN git clone https://github.com/PAIR-code/facets.git && \
     jupyter nbextension install facets/facets-dist/ --sys-prefix && \
