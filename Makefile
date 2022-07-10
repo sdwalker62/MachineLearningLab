@@ -34,7 +34,7 @@ tag-all:
 	@docker tag $(OWNER)/minimal-notebook:latest $(OWNER)/machine_learning_lab:minimal_cuda_$(CUDA_VER)
 	@docker tag $(OWNER)/scipy-notebook:latest $(OWNER)/machine_learning_lab:scipy_cuda_$(CUDA_VER)
 	@docker tag $(OWNER)/datascience-notebook:latest $(OWNER)/machine_learning_lab:datascience_cuda_$(CUDA_VER)
-	@docker tag $(OWNER)/all-spark-notebook:latest $(OWNER)/machine_learning_lab:all_spark_cuda_$(CUDA_VER)
+	@docker tag $(OWNER)/all-spark-notebook:latest $(OWNER)/machine_learning_lab:all-spark_cuda_$(CUDA_VER)
 	@docker tag $(OWNER)/pyspark-notebook:latest $(OWNER)/machine_learning_lab:pyspark_cuda_$(CUDA_VER)
 	@docker tag $(OWNER)/r-notebook:latest $(OWNER)/machine_learning_lab:r_cuda_$(CUDA_VER)
 	@docker tag $(OWNER)/tensorflow-notebook:latest $(OWNER)/machine_learning_lab:tensorflow_cuda_$(CUDA_VER)
@@ -48,10 +48,6 @@ push-all:
 	@docker push $(OWNER)/machine_learning_lab:pyspark_cuda_$(CUDA_VER)
 	@docker push $(OWNER)/machine_learning_lab:r_cuda_$(CUDA_VER)
 	@docker push $(OWNER)/machine_learning_lab:tensorflow_cuda_$(CUDA_VER)
-
-
-install-dependencies:
-	@pip3 install -r requirements.txt
 
 
 test/%: ## run tests for each image
