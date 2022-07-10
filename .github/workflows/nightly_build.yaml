@@ -9,14 +9,14 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
+      - name: Clone Repository
+        uses: actions/checkout@v3
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
       - name: Install Python Dependencies
         run: pip3 install -r requirements.txt
-      - name: Clone Repository
-        uses: actions/checkout@v3
       - name: Pull From Docker-Stacks
         run: | 
           git pull --recurse-submodules
