@@ -16,6 +16,19 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 USER root
 
+# Fix Nvidia public key 
+# For more information see here: https://forums.developer.nvidia.com/t/notice-cuda-linux-repository-key-rotation/212772
+ADD scripts/fix_nvidia_key.sh .
+RUN sh fix_nvidia_key.sh
+
+
+RUN apt-get update && \
+    apt-get install -y \
+    build-essential \
+    freeglut3-dev \
+    graphviz && \
+    rm -rf /var/lib/apt/lists/*
+
 # Install Tensorflow
 RUN mamba install --quiet --yes \
     'tensorflow' && \
@@ -24,37 +37,9 @@ RUN mamba install --quiet --yes \
     fix-permissions "/home/${NB_USER}"
 
 
-RUN conda install --quiet --yes \
-    'pytorch' \
-    'torchvision' \
-    'torchaudio' \
-    'cudatoolkit=11.3' \
-    -c pytorch && \
-    conda clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-RUN python -m pip install detectron2 -f \
-  https://dl.fbaipublicfiles.com/detectron2/wheels/cu113/torch1.10/index.html
-
-
-RUN mamba install --quiet --yes \
-    'spacy' \
-    'cupy' \
-    -c conda-forge && \
-    mamba clean --all -f -y && \
-    python -m spacy download en_core_web_sm && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-
 RUN pip install --upgrade \
     tensorflow-addons \
     tensorflow-hub \
-    drain3 \
-    spacy-transformers \
-    spacy-lookups-data \
-    sentencepiece \
-    gensim \
     jupyterlab-drawio \
     jupyter_contrib_nbextensions \
     jupyter_nbextensions_configurator \
@@ -62,33 +47,21 @@ RUN pip install --upgrade \
     graphviz==0.11 \
     wandb \
     kaggle \
-    pyglet \
-    gym \
-    garage \
+    jupyter-dash \
     ipyleaflet && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-
-RUN sudo apt-get update && \
-    sudo apt-get install -y \
-    freeglut3-dev && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN git clone https://github.com/PAIR-code/facets.git && \
-    jupyter nbextension install facets/facets-dist/ --sys-prefix && \
-    rm -rf /tmp/facets && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
 
 RUN jupyter nbextension enable --py --sys-prefix ipyleaflet && \
     jupyter labextension install \
     jupyterlab-plotly \
     @jupyter-widgets/jupyterlab-manager \
     plotlywidget \
-    @ijmbarr/jupyterlab_spellchecker && \
+    @ijmbarr/jupyterlab_spellchecker \
+    jupyterlab-tailwind-theme \
+    jupyterlab-theme-solarized-dark && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
-
 
 USER $NB_UID

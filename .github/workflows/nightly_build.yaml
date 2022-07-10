@@ -1,0 +1,40 @@
+name: nightly-build
+
+on:
+  schedule:
+    - cron: 0 0 * * *       # run at 12AM UTC
+    - branches:
+      - main
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Python
+        - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install Python Dependencies
+        run: pip3 install -r requirements.txt
+      - name: Clone Repository
+        uses: actions/checkout@v3
+      - name: Pull From Docker-Stacks
+        run: | 
+          git pull --recurse-submodules
+          git submodule update --remote --recursive
+      - name: Format Python Code
+        run: black --verbose --exclude=docker-stacks .
+      - name: Build Containers
+        run: make gpu-build
+      - name: Tag Containers
+        run: make tag-all
+      - name: Log Into Container Registry
+        run: docker login -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Push To Container Registry
+        run: make push-all
+      - name: Notify Channels
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'Build and push complete!'
