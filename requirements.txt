@@ -3,3 +3,4 @@ tqdm
 pytest
 black
 tabulate
+pyyaml
