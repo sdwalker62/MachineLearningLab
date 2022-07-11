@@ -62,7 +62,7 @@
 
 ---
 
-Welcome to the Machine Learning Lab repository! This repository is based heavily on the fantastic work being done at the [jupyter/docker-stacks](https://github.com/jupyter/docker-stacks) repository, if you haven't checked it out please do and support the work being done there. In this reposity we include both cuda-enabled versions of a select number of images from the docker-stacks repository as well as some custom images not found there. If you would like to add images to this repository we welcome that - just open a pull request! We plan to include a contribute.md soon that will outline how contributions should be made!
+Welcome to the Machine Learning Lab repository! This repository is based heavily on the fantastic work being done at the [jupyter/docker-stacks](https://github.com/jupyter/docker-stacks) repository, if you haven't checked it out please do and support the work being done there. In this repository we include both cuda-enabled versions of a select number of images from the docker-stacks repository as well as some custom images not found there. If you would like to add images to this repository, we welcome that - just open a pull request! We plan to include a contribute.md soon that will outline how contributions should be made!
 
 # 0. Table of Contents
 
@@ -72,7 +72,7 @@ Welcome to the Machine Learning Lab repository! This repository is based heavily
 
 # 1. Image Hierarchy
 
-The current heirarchy of images can be found below. A description of each image can be found in the docs folder. The docs folder contains auto-generated documentation that is updated on every build to insure always up-to-date information about each image. Feel free to use any of the images found in this repository as a base for your own custom images. I will keep these images updated regularly from the upstream repositories.
+The current heirarchy of images can be found below. A description of each image can be found in the docs folder. The docs folder contains auto-generated documentation that is updated on every build to ensure always up-to-date information about each image. Feel free to use any of the images found in this repository as a base for your own custom images. I will keep these images updated regularly from the upstream repositories.
 
 <details>
 <summary> click to reveal image hierachy diagram </summary>
@@ -110,9 +110,9 @@ services:
       - results:results:rw
 ```
 
-In this example docker-compose.yml you would replace *IMAGE_NAME* with the name of whatever image you wish to run, for instance: `samuel62/machine_learning_lab:datascience_cuda_11.3.1`
+In this example docker-compose.yml, you would replace *IMAGE_NAME* with the name of whatever image you wish to run. For instance: `samuel62/machine_learning_lab:datascience_cuda_11.3.1`
 
-Since most users of the images found in this repository are data scientist we recommend binding a volume from your host machine to the container in the volumes section. Typically, you would include a *data* and a *results* folder in this section as well as any other directories you want the container to be able to read/write from on your host machine. 
+Since most users of the images found in this repository are data scientists, we recommend binding a volume from your host machine to the container in the volumes section. Typically, you would include a *data* and a *results* folder in this section as well as any other directories you want the container to be able to read/write from on your host machine. 
 
 If you are not using a machine with a dedicated Nvidia GPU then comment/remove the deploy section as it will cause an error. 
 
@@ -154,9 +154,9 @@ There are two requirements on Linux and one optional command. The first is docke
                            
 ```
 
-If you don't know what docker is please read this for more information: [Docker overview](https://docs.docker.com/get-started/overview/)
+If you don't know what docker is, please read this for more information: [Docker overview](https://docs.docker.com/get-started/overview/)
 
-There are two ways to install Docker on Linux, one is from a convenience script and the other is manually. We will demonstrate both. 
+There are two ways to install Docker on Linux: one is from a convenience script and the other is manually. We will demonstrate both. 
 
 \
 ***Convenience Scipt***
@@ -175,13 +175,13 @@ The instructions below come from the official Docker installation instructions f
 \
 ***Check for old installations***
 \
-First we need to check for any current docker installations and remove them. If you are installing on a new Linux install then skip this section, otherwise it is recommended to run the following command: 
+First we need to check for any current docker installations and remove them. If you are installing on a new Linux install, then skip this section. Otherwise it is recommended to run the following command: 
 
 ```bash
 sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
-If `apt-get` reports that none of those packages are installed that is OK and you can continue.
+If `apt-get` reports that none of those packages are installed, that is OK and you can continue.
 
 \
 ***Pre-requisites***
@@ -272,7 +272,7 @@ To verify that the system has a CUDA-capable GPU run
 ```bash
 lspci | grep -i nvidia
 ```
-Make sure a CUDA-capable GPU is listed in the output. If not stop. If you believe there is an error and your GPU is not found then update the PCI hardware database using `update-pciids` and try the above command again. 
+Make sure a CUDA-capable GPU is listed in the output. If not stop. If you believe there is an error and your GPU is not found then, update the PCI hardware database using `update-pciids` and try the above command again. 
 
 To verify that the system is running a support distribution run
 
@@ -434,7 +434,7 @@ and check the below table to make sure your distribution is supported. If it isn
 
 ---
 
-To verify that your system has `gcc` installed run 
+To verify that your system has `gcc` installed, run 
 ```bash
 gcc --version
 ```
@@ -443,7 +443,7 @@ If an error message is returned then please install `gcc` and its accompanying t
 ```bash
 sudo apt install build-essential
 ```
-To check what verion of the kernel headers you have run 
+To check what verion of the kernel headers you have, run 
 
 ```bash
 uname -r
@@ -451,7 +451,7 @@ uname -r
 
 Cross reference the returned value with the one listed for your distribution in the above table. If you need to update your kernel headers follow the below instructions:
 
-If you are running Ubuntu and need to install the newest kernel headers run 
+If you are running Ubuntu and need to install the newest kernel headers, run 
 
 ```bash
 sudo apt-get install linux-headers-$(uname -r)
@@ -461,7 +461,7 @@ for all other distributions refer to official guide for the appropriate commands
 
 *** Install CTK ***
 
-Now we can install the NVIDIA CUDA Toolkit. The toolkit come with everything needed to run CUDA applications including drivers, header files, etc.. We will need this to run cuda-enabled images. 
+Now we can install the NVIDIA CUDA Toolkit. The toolkit comes with everything needed to run CUDA applications, including drivers, header files, etc.. We will need this to run cuda-enabled images. 
 
 Follow the instructions here for your platform: https://developer.nvidia.com/cuda-downloads
 
