@@ -9,6 +9,7 @@ on:
 env:
   DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  BUILD_FAILED: 0
 
 
 jobs:
@@ -31,9 +32,8 @@ jobs:
           python-version: '4.9'
       - name: Python Setup Failure
         if: ${{ failure() }}
-        run: |
-          LOGS=$(gh run view $GITHUB_RUN_ID --log)
-          curl -X POST --data '{"content": $LOGS}' --header "Content-Type:application/json" $DISCORD_WEBHOOK
+        run: BUILD_FAILED=1
+
 
       - name: Install Python Dependencies
         run: pip3 install -r requirements.txt
@@ -57,3 +57,13 @@ jobs:
         uses: Ilshidur/action-discord@master
         with:
           args: 'Build and push complete!'
+
+  Notify:
+    runs-on: ubuntu-latest
+    needs: Build
+    steps:
+      - name: Build-Failure
+      if: ${{ BUILD_FAILED=1 }}
+      run: |
+          LOGS=$(gh run view $GITHUB_RUN_ID --log)
+          curl -X POST --data '{"content": $LOGS}' --header "Content-Type:application/json" $DISCORD_WEBHOOK
