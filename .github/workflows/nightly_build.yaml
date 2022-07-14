@@ -25,7 +25,7 @@ jobs:
         if: ${{ failure() }}
         uses: Ilshidur/action-discord@master
         with:
-          args: f'Checkout step failed!. ${{join(steps.checkout.outputs.*, '\n')}}'
+          args: gh run view --job checkout --log
 
       # Python Setup Step
       - name: Setup Python
