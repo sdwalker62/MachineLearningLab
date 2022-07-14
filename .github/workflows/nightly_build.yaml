@@ -18,11 +18,11 @@ jobs:
       # Checkout Step
       - name: Clone Repository
         id: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: Checkout Failure
-        if: {{ failure() }}
+        if: ${{ failure() }}
         uses: Ilshidur/action-discord@master
         with:
           args: f'Checkout step failed!. ${{join(steps.checkout.outputs.*, '\n')}}'
