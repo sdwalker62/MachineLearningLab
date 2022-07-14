@@ -8,6 +8,7 @@ on:
 
 env:
   DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
 jobs:
