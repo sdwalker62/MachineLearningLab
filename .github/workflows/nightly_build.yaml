@@ -18,7 +18,7 @@ jobs:
       # Checkout Step
       - name: Clone Repository
         id: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           submodules: recursive
       - name: Checkout Failure
@@ -27,10 +27,18 @@ jobs:
         with:
           args: f'Checkout step failed!. ${{join(steps.checkout.outputs.*, '\n')}}'
 
+      # Python Setup Step
       - name: Setup Python
+        id: python-setup
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '4.9'
+      - name: Python Setup Failure
+        if: ${{ failure() }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: f'Python step failed!. ${{join(steps.python-setup.outputs.*, '\n')}}'
+
       - name: Install Python Dependencies
         run: pip3 install -r requirements.txt
       - name: Format Python Code
