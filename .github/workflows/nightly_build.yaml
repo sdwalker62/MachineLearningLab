@@ -21,11 +21,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: recursive
-      - name: Checkout Failure
-        if: ${{ failure() }}
-        uses: Ilshidur/action-discord@master
-        with:
-          args: gh run view --job checkout --log
 
       # Python Setup Step
       - name: Setup Python
@@ -37,7 +32,7 @@ jobs:
         if: ${{ failure() }}
         uses: Ilshidur/action-discord@master
         with:
-          args: f'Python step failed!. ${{join(steps.python-setup.outputs.*, '\n')}}'
+          args: gh run view --job checkout --log
 
       - name: Install Python Dependencies
         run: pip3 install -r requirements.txt
