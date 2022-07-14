@@ -63,7 +63,6 @@ jobs:
     needs: Build
     steps:
       - name: Build-Failure
-        if: ${{ $BUILD_FAILED=1 }}
         run: |
           LOGS=$(gh run view $GITHUB_RUN_ID --log)
           curl -X POST --data '{"content": $LOGS}' --header "Content-Type:application/json" $DISCORD_WEBHOOK
