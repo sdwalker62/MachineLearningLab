@@ -2,17 +2,31 @@ name: nightly-build
 
 on:
   schedule:
-  - cron: '0 17 * * *'
+  - cron: '0 3 * * *'  # 12 AM EST
   push:  
+
+
+env:
+  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+
 
 jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
+
+      # Checkout Step
       - name: Clone Repository
+        id: checkout
         uses: actions/checkout@v3
         with:
           submodules: recursive
+      - name: Checkout Failure
+        if: {{ failure() }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: f'Checkout step failed!. ${{join(steps.checkout.outputs.*, '\n')}}'
+
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
