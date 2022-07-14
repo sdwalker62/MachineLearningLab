@@ -32,7 +32,7 @@ jobs:
       - name: Python Setup Failure
         if: ${{ failure() }}
         run: |
-          LOGS=$(gh run view --job python-setup --log)
+          LOGS=$(gh run view --job Build --log)
           curl -X POST --data '{"content": $LOGS}' --header "Content-Type:application/json" $DISCORD_WEBHOOK
 
       - name: Install Python Dependencies
