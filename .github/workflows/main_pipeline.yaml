@@ -59,7 +59,6 @@ jobs:
   Notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Build-Failure
+      - name: Build-Complete
         run: |
-          LOGS=$(gh run view $GITHUB_RUN_ID --log)
-          curl -X POST --data '{"content": $LOGS}' --header "Content-Type:application/json" $DISCORD_WEBHOOK
+          curl -X POST --data '{"content": Pipeline finished}' --header "Content-Type:application/json" $DISCORD_WEBHOOK
