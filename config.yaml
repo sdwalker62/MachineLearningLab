@@ -1,5 +1,5 @@
 meta:
-  cuda_ver: 11.3.1
+  cuda_ver: 11.7.0
   containers:
     - base
     - minimal
