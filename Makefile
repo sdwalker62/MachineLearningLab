@@ -1,7 +1,7 @@
 # remember cat -e -t -v Makefile to check for hard tabs
 
 SOURCE_PATH='docker-stacks/base-notebook'
-CUDA_VER:=11.3.1
+CUDA_VER:=11.7.0
 DIST:=ubuntu20.04
 NEW_BASE:=nvidia/cuda:$(CUDA_VER)-cudnn8-runtime-$(DIST)
 
