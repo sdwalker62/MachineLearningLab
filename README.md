@@ -491,6 +491,6 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 ---
 
-This completes the pre-requisites to run the images in this repository. Next we will talk about how to run the images.
+This completes the pre-requisites to run the images in this repository.
 
 ---
