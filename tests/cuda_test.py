@@ -1,33 +1,41 @@
 import sys
-import os
-import yaml
+import argparse
 
-
-sys.path.append(os.path.join(os.path.dirname(sys.path[0]), "docker-stacks"))
+from pathlib import Path
+cwd = str(Path.cwd())
+sys.path.insert(0, cwd)
+sys.path.insert(0, cwd + "/docker-stacks")
+from utils.docker_utils import get_containers_by_author
 from tagging.docker_runner import DockerRunner
 
-sys.path.append("..")
-with open("config.yaml") as f:
-    cfg = yaml.safe_load(f.read())
 
-cuda_ver = cfg["meta"]["cuda_ver"]
-containers = cfg["meta"]["containers"]
-
-
-def drop_minor_ver(cuda_ver: str) -> str:
-    subtokens = cuda_ver.split(".")
-    return subtokens[0][1]
+def drop_minor_ver(ver: str) -> str:
+    sub_tokens = ver.split(".")
+    return sub_tokens[0][1]
 
 
 def test_containers_for_cuda():
+    parser = argparse.ArgumentParser(
+        description="Recursively call the cuda tests"
+    )
+    parser.add_argument("--cuda_ver", default="11.8.0", type=str)
+    parser.add_argument("--containers", default="all", type=str)
+    args = parser.parse_args()
+
+    if args.containers == "all":
+        containers = get_containers_by_author('samuel62')
+    else:
+        containers = args.containers.split(',')
+
+    usr = "samuel62"
+    repo = "machine_learning_lab"
     cmd = "ls -l /usr/local"
     for container in containers:
-        container_name = f"samuel62/machine_learning_lab:{container}_cuda_{cuda_ver}"
-        with DockerRunner(container_name) as container:
+        with DockerRunner(f"{usr}/{repo}:{container}_cuda_{args.cuda_ver}") as c:
             content = DockerRunner.run_simple_command(
-                container, cmd=cmd, print_result=True
+                c, cmd=cmd, print_result=True
             )
-            assert f"cuda-{drop_minor_ver(cuda_ver)}" in content
+            assert f"cuda-{drop_minor_ver(args.cuda_ver)}" in content
 
 
 if __name__ == "__main__":

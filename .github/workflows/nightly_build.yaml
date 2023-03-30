@@ -29,7 +29,7 @@ jobs:
         id: python-setup
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.9'
       - name: Python Setup Failure
         if: ${{ failure() }}
         run: BUILD_FAILED=1
@@ -58,10 +58,10 @@ jobs:
         with:
           args: 'Build and push complete!'
 
-  Notify:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Build-Failure
-        run: |
-          LOGS=$(gh run view $GITHUB_RUN_ID --log)
-          curl -X POST --data '{"content": $LOGS}' --header "Content-Type:application/json" $DISCORD_WEBHOOK
+#  Notify:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Build-Failure
+#        run: |
+#          LOGS=$(gh run view $GITHUB_RUN_ID --log)
+#          curl -X POST --data '{"content": $LOGS}' --header "Content-Type:application/json" $DISCORD_WEBHOOK
