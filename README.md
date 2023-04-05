@@ -3,7 +3,6 @@
 </div>
 
 ```mermaid
-%%{ init: { 'theme': 'base', 'themeVariables': { 'primaryColor': '#0d111700', 'primaryTextColor': '#e0e0e0', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#F8B229'} } }%%
 flowchart TD
   subgraph Jupyter
   CUDA_VER-cudnn8-runtime-ubuntu_UBUNTU_VER ---> docker-stacks-foundation
