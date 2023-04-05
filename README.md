@@ -2,6 +2,15 @@
   <img src="assets/mll_logo.svg" width=750>
 </div>
 
+```mermaid
+graph LR
+  a ---> |0| b
+  b ---> |1| c
+  c ---> |2| a
+```
+
+
+
 
 | **`Docker`** | **`Documentation`** | **`GitLab`** |
 | --- | --- | --- |
