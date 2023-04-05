@@ -3,10 +3,22 @@
 </div>
 
 ```mermaid
-graph LR
-  a ---> |0| b
-  b ---> |1| c
-  c ---> |2| a
+%%{ init: { 'theme': 'base', 'themeVariables': { 'primaryColor': '#0d111700', 'primaryTextColor': '#e0e0e0', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#F8B229'} } }%%
+flowchart TD
+  subgraph Jupyter
+  CUDA_VER-cudnn8-runtime-ubuntu_UBUNTU_VER ---> docker-stacks-foundation
+  docker-stacks-foundation ---> base-notebook
+  base-notebook ---> minimal-notebook
+  minimal-notebook ---> scipy-notebook
+  minimal-notebook ---> r-notebook
+  scipy-notebook ---> tensorflow-notebook
+  scipy-notebook ---> datascience-notebook
+  scipy-notebook ---> pyspark-notebook 
+  pyspark-notebook ---> all-spark-notebook
+  end
+  datascience-notebook ---> |+pytorch| pytorch-notebook
+  pytorch-notebook ---> |+ray| ray-notebook
+  ray-notebook ---> |+gymnasium| rl-gym-notebook
 ```
 
 
